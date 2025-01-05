@@ -1,0 +1,7 @@
+1. completar el header: 
+    1.1 agregar logo de la pagina
+    1.2 completar el nav con los links de la pagina
+    1.3 agregar el boton de tema 
+2. completar el footer: 
+    2.1 agregar copyright año actual y derechos reservados
+    
