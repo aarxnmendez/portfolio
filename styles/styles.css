@@ -27,8 +27,47 @@ body.light-mode {
     --accent-color: rgba(0, 0, 0, 0.1);
 }
 
+/* Header y navegación */
+.header {
+    position: fixed;
+    top: 16px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 0 1rem;
+    border-radius: 15px;
+    border: 1px solid var(--text-color);
+    height: 30px;
+    width: fit-content;
+}
+
+/* Estilos para los enlaces */
+.nav-container a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.nav-container a:hover {
+    color: #00bf85;
+}
+
 /* Contenedor principal */
-#content {
+.main {
     max-width: 800px;        
     width: 90%;
     margin: 0 auto;           
@@ -38,47 +77,20 @@ body.light-mode {
     flex-direction: column;
 }
 
-.header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; /* Cambiado de space-evenly a space-between */
-    align-items: center;
-    background-color: var(--bg-color);
-    border: 1px solid var(--text-color);
-    border-radius: 25px;
-    padding: 0 2rem;
-    position: fixed;
-    top: 1em;                    
-    left: 50%;                 
-    transform: translateX(-50%); 
-    max-width: 800px;        
-    width: 90%;              
-    height: 50px;            
-    z-index: 1000;
-}
-
-.logo {
-    height: 30px;          /* Tamaño fijo para el logo */
-    width: auto;
-}
-
-/* Secciones principales */
-.inicio, .proyectos, .contacto, .footer {
-    width: calc(100% + 4rem);  /* Compensamos el padding del contenedor padre */
-    margin-left: -2rem;        /* Alineamos con el borde del contenedor */
-    margin-bottom: 4rem;
-}
-
-/* Sección de inicio */
+/* Ajuste de la sección inicio para el nuevo header */
 .inicio {
-    display: flex;
-    flex-direction: column;
-    padding-top: 8rem;
-    min-height: 80vh;
+    position: absolute;
+    top: 16px;
 }
 
 .container-inicio {
-    max-width: 36em;
+    max-width: 36rem;
+}
+
+.logo {
+    height: 30px;
+    width: 30px;
+    margin-bottom: 6rem;  /* Espacio entre el logo y el contenido siguiente */
 }
 
 .perfil {
@@ -112,47 +124,19 @@ body.light-mode {
     font-weight: 500;
 }
 
-/* Estilos para la navegación */
-nav {
-    flex: 1;                /* Ocupa todo el espacio disponible */
-    display: flex;
-    justify-content: center; /* Centra el contenido del nav */
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 0;             /* Espacio entre los elementos de la lista */
-    font-weight: 400;
-}
-
-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1rem;
-    transition: opacity 0.3s;
-    position: relative;    /* Para el efecto hover */
-    padding: 0.5rem;     /* Área de click más grande */
-}
-
-nav a:hover {
-    color: #00bf85;
-}
-
 /* Botón de tema */
 #theme-toggle {
-    position: static;        /* Cambiado de fixed a static */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
     color: var(--text-color);
     cursor: pointer;
-    padding: 8px;
     border-radius: 50%;     
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
     transition: transform 0.3s ease;
 }
 
@@ -162,25 +146,17 @@ nav a:hover {
 }
 
 .material-icons-round {
-    font-size: 24px;
+    font-size: 14px;
 }
 
-/* Media queries para responsividad */
+/* Media queries */
 @media (max-width: 768px) {
-    #content {
-        padding: 2rem;  /* Menos padding en móviles */
-    }
-    
-    .header {
-        padding: 0 1rem;    /* Menos padding en móviles */
+    .nav-container {
+        padding: 0 0.75rem;
     }
 
-    .inicio {
-        padding-top: 3rem;
-    }
-    
-    nav a {
-        font-size: 0.9rem; /* Texto más pequeño en móviles */
+    .logo {
+        display: none;
     }
 }
 
