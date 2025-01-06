@@ -28,7 +28,7 @@ body.light-mode {
 
 /* Contenedor principal */
 #content {
-    max-width: 1000px;        
+    max-width: 800px;        
     width: 90%;
     margin: 0 auto;           
     padding: 2rem;
@@ -37,9 +37,33 @@ body.light-mode {
     flex-direction: column;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between; /* Cambiado de space-evenly a space-between */
+    align-items: center;
+    background-color: var(--bg-color);
+    border: 1px solid var(--text-color);
+    border-radius: 25px;
+    padding: 0 2rem;
+    position: fixed;
+    top: 1em;                    
+    left: 50%;                 
+    transform: translateX(-50%); 
+    max-width: 800px;        
+    width: 90%;              
+    height: 50px;            
+    z-index: 1000;
+}
+
+.logo {
+    height: 30px;          /* Tamaño fijo para el logo */
+    width: auto;
+}
+
 /* Secciones principales */
 .inicio, .proyectos, .contacto, .footer {
-    width: 100%;
+    width: calc(100% + 4rem);  /* Compensamos el padding del contenedor padre */
+    margin-left: -2rem;        /* Alineamos con el borde del contenedor */
     margin-bottom: 4rem;
 }
 
@@ -63,22 +87,52 @@ body.light-mode {
     opacity: 0.8;
 }
 
+/* Estilos para la navegación */
+nav {
+    flex: 1;                /* Ocupa todo el espacio disponible */
+    display: flex;
+    justify-content: center; /* Centra el contenido del nav */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;             /* Espacio entre los elementos de la lista */
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: opacity 0.3s;
+    position: relative;    /* Para el efecto hover */
+    padding: 0.5rem 0;     /* Área de click más grande */
+}
+
+nav a:hover {
+    color: #ef4848;
+}
+
 /* Botón de tema */
 #theme-toggle {
-    position: fixed;          /* Siempre visible */
-    top: 20px;
-    right: 5%;
+    position: static;        /* Cambiado de fixed a static */
     background: none;
     border: none;
     color: var(--text-color);
     cursor: pointer;
     padding: 8px;
     border-radius: 50%;     
-    z-index: 1000;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
 }
 
 #theme-toggle:hover {
     background-color: var(--accent-color);
+    transform: rotate(45deg);
 }
 
 .material-icons-round {
@@ -88,6 +142,18 @@ body.light-mode {
 /* Media queries para responsividad */
 @media (max-width: 768px) {
     #content {
-        padding: 1rem;  /* Menos padding en móviles */
+        padding: 2rem;  /* Menos padding en móviles */
+    }
+    
+    .header {
+        padding: 0 1rem;    /* Menos padding en móviles */
+    }
+    
+    nav ul {
+        gap: 1.5rem;       /* Menos espacio entre elementos en móviles */
+    }
+    
+    nav a {
+        font-size: 0.9rem; /* Texto más pequeño en móviles */
     }
 }
