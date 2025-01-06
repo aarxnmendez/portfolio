@@ -2,10 +2,10 @@
     1.1 agregar logo de la pagina ✅
     1.2 completar el nav con los links de la pagina ✅
     1.3 agregar el boton de tema ✅
-    1.4 centrar verticalmente los links del nav
+    1.4 centrar verticalmente los links del nav ✅
     1.5 agregar logo tema claro
-    1.6 completar efecto hover a los links del nav
+    1.6 completar efecto hover a los links del nav ⏳
     1.7 agregar animacion al header para añadir borde al hacer scroll
-    1.8 optimizar el header para que se vea bien en moviles
+    1.8 optimizar el header para que se vea bien en moviles ⏳
 
     

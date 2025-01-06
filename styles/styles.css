@@ -42,6 +42,7 @@ body.light-mode {
 .nav-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     padding: 0 1rem;
@@ -57,9 +58,9 @@ body.light-mode {
     text-decoration: none;
     font-size: 1rem;
     height: 100%;
-    display: flex;
-    align-items: center;
     padding: 0 0.5rem;
+    line-height: 1.65;
+    margin: 0;
 }
 
 .nav-container a:hover {
@@ -150,9 +151,101 @@ body.light-mode {
 }
 
 /* Media queries */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+    .main {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .nav-container {
+        padding: 0 0.875rem;
+    }
+
+    .nav-container a {
+        font-size: 0.95rem;
+    }
+
+    .header {
+        top: 12px;
+    }
+}
+
+/* Tablets pequeñas y móviles grandes (480px a 767px) */
+@media (max-width: 767px) {
+    .main {
+        width: 100%;
+        padding: 1rem;
+    }
+
     .nav-container {
         padding: 0 0.75rem;
+        height: 28px;
+    }
+
+    .nav-container a {
+        font-size: 0.9rem;
+        padding: 0 0.25rem;
+    }
+
+    #theme-toggle {
+        width: 20px;
+        height: 20px;
+    }
+
+    .material-icons-round {
+        font-size: 12px;
+    }
+
+    .header {
+        top: 8px;
+    }
+
+    .perfil {
+        height: 50px;
+    }
+
+    .perfil img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .container-inicio {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+}
+
+/* Móviles pequeños (hasta 479px) */
+@media (max-width: 479px) {
+    .main {
+        padding: 0.75rem;
+    }
+
+    .nav-container {
+        padding: 0 0.5rem;
+        height: 26px;
+    }
+
+    .nav-container a {
+        font-size: 0.8rem;
+        padding: 0 0.2rem;
+    }
+
+    .header {
+        top: 6px;
+    }
+
+    .container-inicio {
+        padding: 0 0.5rem;
+    }
+
+    .perfil {
+        height: 45px;
+    }
+
+    .perfil img {
+        width: 45px;
+        height: 45px;
     }
 
     .logo {
