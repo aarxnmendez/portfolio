@@ -9,7 +9,8 @@
     --bg-color: #121212;       /* Color de fondo oscuro */
     --text-color: white;       /* Color de texto claro */
     --accent-color: rgba(255, 255, 255, 0.1);  /* Color de acento semi-transparente al hacer hover sobre el botón de tema*/
-}
+    --destacado: #ef4848;
+}   
 
 body {
     min-height: 100vh;
@@ -39,6 +40,7 @@ body.light-mode {
 
 .header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between; /* Cambiado de space-evenly a space-between */
     align-items: center;
     background-color: var(--bg-color);
@@ -71,20 +73,43 @@ body.light-mode {
 .inicio {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding-top: 8rem;
     min-height: 80vh;
 }
 
+.container-inicio {
+    max-width: 36em;
+}
+
+.perfil {
+    height: 60px;          /* Altura fija */
+    display: flex;         /* Para alinear elementos internos */
+    align-items: center;   /* Centra verticalmente los elementos */
+    gap: 0.5rem;          /* Espacio entre la imagen y otros elementos (como el botón) */
+}
+
+.perfil img {
+    width: 60px;          /* Ancho fijo */
+    height: 60px;         /* Alto fijo */
+    border-radius: 50%;   /* Hace la imagen redonda */
+    object-fit: cover;    /* Asegura que la imagen cubra todo el espacio sin deformarse */
+    object-position: center; /* Centra la imagen */
+}
+
 .nombre {
-    font-size: clamp(2rem, 6vw, 4rem);  /* Tamaño que se ajusta entre 3rem y 6rem */
-    font-weight: 500;
+    font-size: clamp(2rem, 6vw, 3rem);  /* Tamaño que se ajusta entre 3rem y 6rem */
+    font-weight: 700;
     margin-bottom: 1rem;
 }
 
 .profesion {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    font-weight: 300;
-    opacity: 0.8;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 400;
+}
+
+.profesion strong {
+    color: var(--destacado);
+    font-weight: 500;
 }
 
 /* Estilos para la navegación */
@@ -97,7 +122,8 @@ nav {
 nav ul {
     display: flex;
     list-style: none;
-    gap: 2rem;             /* Espacio entre los elementos de la lista */
+    gap: 0;             /* Espacio entre los elementos de la lista */
+    font-weight: 400;
 }
 
 nav a {
@@ -106,11 +132,11 @@ nav a {
     font-size: 1rem;
     transition: opacity 0.3s;
     position: relative;    /* Para el efecto hover */
-    padding: 0.5rem 0;     /* Área de click más grande */
+    padding: 0.5rem;     /* Área de click más grande */
 }
 
 nav a:hover {
-    color: #ef4848;
+    color: #00bf85;
 }
 
 /* Botón de tema */
@@ -148,12 +174,13 @@ nav a:hover {
     .header {
         padding: 0 1rem;    /* Menos padding en móviles */
     }
-    
-    nav ul {
-        gap: 1.5rem;       /* Menos espacio entre elementos en móviles */
+
+    .inicio {
+        padding-top: 3rem;
     }
     
     nav a {
         font-size: 0.9rem; /* Texto más pequeño en móviles */
     }
 }
+
