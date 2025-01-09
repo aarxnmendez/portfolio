@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Obtener el botón de cambio de tema
+    // Get theme toggle button
     const themeToggle = document.getElementById('theme-toggle')
-    // Obtener el icono del botón
+    // Get button icon
     const themeIcon = themeToggle.querySelector('.material-icons-round')
-    // Obtener el logo
+    // Get logo
     const logo = document.querySelector('.logo')
 
-    // Evento de clic para cambiar el tema
+    // Click event to change theme
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('light-mode')
 
-        // Cambiar el icono según el tema
+        // Change icon based on theme
         if (document.body.classList.contains('light-mode')) {
             themeIcon.textContent = 'dark_mode'
             logo.src = 'images/logo_dark.png'
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    // Comprobar el tema inicial al cargar la página
+    // Check initial theme when loading the page
     if (document.body.classList.contains('light-mode')) {
         themeIcon.textContent = 'dark_mode'
         logo.src = 'images/logo_dark.png'
