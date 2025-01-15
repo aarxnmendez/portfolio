@@ -12,11 +12,20 @@
     --primary-foreground: #fafafa;
     --muted: #f4f4f5;
     --muted-foreground: #71717a;
-    --border: #e4e4e7;
+    --border: #d4d4d8;
     --radius: 1rem;
     --max-width: 64rem;
     --nav-bg: rgba(255, 255, 255, 0.95);
     --nav-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --nav-border: rgba(0, 0, 0, 0.25);
+    --theme-toggle-bg: var(--muted);
+    --dark-bg: #09090b;
+    --dark-fg: #ffffff;
+    --dark-border: #27272a;
+    --dark-muted: #18181b;
+    --nav-gradient: linear-gradient(to right, rgba(255, 255, 255, 0.98), rgba(249, 250, 251, 0.98));
+    --hover-color: #3b82f6;
+    --dark-hover: #60a5fa;
   }
   
   html {
@@ -48,44 +57,38 @@
   }
   
   .nav-container {
-    max-width: var(--max-width);
+    max-width: fit-content;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
   
   .nav-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 3rem;
+    height: 2rem;
     transition: all 0.3s ease;
     border-radius: 9999px;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
+    border: 1px solid transparent;
   }
   
   #navbar.scrolled .nav-content {
-    border: 1px solid var(--border);
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.9), rgba(249, 250, 251, 0.9));
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1.5px solid var(--nav-border);
+    background: var(--nav-gradient);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
   
-  .logo {
-    font-size: 1.25rem;
-    font-weight: bold;
-    background: linear-gradient(to right, var(--primary), #3b82f6);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    transition: opacity 0.3s ease;
-  }
-  
-  #navbar.scrolled .logo {
-    opacity: 0.9;
+  .logo,
+  .logo-dark,
+  .logo-light,
+  [data-theme="dark"] .logo,
+  [data-theme="dark"] #navbar.scrolled .logo {
+    display: none;
   }
   
   .nav-links {
     display: flex;
-    gap: 2rem;
+    align-items: center;
   }
   
   .nav-link {
@@ -94,8 +97,8 @@
     gap: 0.5rem;
     color: var(--foreground);
     text-decoration: none;
-    transition: all 0.2s ease;
-    padding: 0.5rem 1rem;
+    transition: color 0.2s ease;
+    padding: 0 1rem;
     border-radius: 9999px;
   }
   
@@ -104,8 +107,8 @@
   }
   
   .nav-link:hover {
-    color: var(--primary);
-    background-color: var(--muted);
+    color: var(--hover-color);
+    background-color: transparent;
   }
   
   /* Main content */
@@ -225,4 +228,67 @@
   
   ::-webkit-scrollbar-thumb:hover {
     background: var(--muted-foreground);
+  }
+  
+  /* Añadir clase para tema oscuro */
+  [data-theme="dark"] {
+    --background: var(--dark-bg);
+    --foreground: var(--dark-fg);
+    --border: var(--dark-border);
+    --muted: var(--dark-muted);
+    --nav-bg: rgba(9, 9, 11, 0.95);
+    --nav-border: rgba(255, 255, 255, 0.15);
+    --nav-gradient: linear-gradient(to right, rgba(9, 9, 11, 0.98), rgba(13, 13, 15, 0.98));
+    --primary: #ffffff;
+    --primary-foreground: #09090b;
+    --muted-foreground: #a1a1aa;
+    --hover-color: var(--dark-hover);
+  }
+  
+  /* Estilos para el botón de tema */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0 1rem;
+    cursor: pointer;
+    color: var(--foreground);
+  }
+  
+  /* Eliminar el hover effect del botón */
+  .theme-toggle:hover {
+    color: var(--hover-color);
+  }
+  
+  /* Controlar visibilidad de los iconos */
+  .theme-toggle .sun-icon,
+  .theme-toggle .moon-icon {
+    transition: transform 0.2s ease;
+  }
+  
+  [data-theme="dark"] .sun-icon,
+  [data-theme="light"] .moon-icon {
+    display: none;
+  }
+  
+  /* Ajustar el color en modo scroll */
+  #navbar.scrolled .theme-toggle {
+    color: var(--primary);
+  }
+  
+  /* Ajustar el color en modo oscuro */
+  [data-theme="dark"] #navbar.scrolled .theme-toggle {
+    color: var(--dark-fg);
+  }
+  
+  /* Ajustar el logo en modo oscuro */
+  [data-theme="dark"] #navbar.scrolled .logo {
+    opacity: 0.9;
+  }
+  
+  /* Ajustar colores cuando hay scroll */
+  #navbar.scrolled .nav-link:hover,
+  #navbar.scrolled .theme-toggle:hover {
+    color: var(--hover-color);
   }
