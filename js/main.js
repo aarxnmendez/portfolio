@@ -1,31 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Get theme toggle button
-    const themeToggle = document.getElementById('theme-toggle')
-    // Get button icon
-    const themeIcon = themeToggle.querySelector('.material-icons-round')
-    // Get logo
-    const logo = document.querySelector('.logo')
-
-    // Click event to change theme
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-mode')
-
-        // Change icon based on theme
-        if (document.body.classList.contains('light-mode')) {
-            themeIcon.textContent = 'dark_mode'
-            logo.src = 'images/logo_dark.png'
-        } else {
-            themeIcon.textContent = 'light_mode'
-            logo.src = 'images/logo.png'
+    const navbar = document.getElementById('navbar');
+    
+    // Handle scroll events for navbar styling
+    const handleScroll = () => {
+      if (window.scrollY > 0) { // Cambiado de 20 a 0 para que aparezca inmediatamente al hacer scroll
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    };
+  
+    // Llamar a handleScroll inicialmente para establecer el estado correcto
+    handleScroll();
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
         }
-    })
-
-    // Check initial theme when loading the page
-    if (document.body.classList.contains('light-mode')) {
-        themeIcon.textContent = 'dark_mode'
-        logo.src = 'images/logo_dark.png'
-    } else {
-        themeIcon.textContent = 'light_mode'
-        logo.src = 'images/logo.png'
-    }
-})
+      });
+    });
+  });
