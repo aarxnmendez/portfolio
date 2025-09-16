@@ -20,3 +20,21 @@
     height: 100%;
   }
 </style>
+
+<script>
+  if (localStorage.getItem("language") === null) {
+    if (navigator.language.startsWith("es")) {
+      localStorage.setItem("language", "es");
+      window.location.href = "/es";
+    } else {
+      localStorage.setItem("language", "en");
+    }
+  } else {
+    if (
+      localStorage.getItem("language") === "es" &&
+      !window.location.pathname.startsWith("/es")
+    ) {
+      window.location.href = "/es";
+    }
+  }
+</script>
