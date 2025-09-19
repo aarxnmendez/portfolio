@@ -1,5 +1,11 @@
 ---
-const { lang } = Astro.props;
+interface Props {
+  lang?: "en" | "es";
+}
+
+const { lang = "en" }: Props = Astro.props;
+
+const siteUrl: string = "http://localhost:4321";
 ---
 
 <!doctype html>
@@ -9,6 +15,7 @@ const { lang } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
     <title>Aaron Mendez</title>
   </head>
   <body>
@@ -26,19 +33,33 @@ const { lang } = Astro.props;
 </style>
 
 <script>
-  if (localStorage.getItem("language") === null) {
-    if (navigator.language.startsWith("es")) {
-      localStorage.setItem("language", "es");
-      window.location.href = "/es";
-    } else {
-      localStorage.setItem("language", "en");
+  // Get stored language preference
+  const storedLang = localStorage.getItem("language");
+  const currentPath = window.location.pathname;
+  const isInSpanishPath = currentPath.startsWith("/es");
+  const currentLang = isInSpanishPath ? "es" : "en";
+
+  if (storedLang === null) {
+    // First visit - detect browser language
+    const preferredLang = navigator.language.startsWith("es") ? "es" : "en";
+    localStorage.setItem("language", preferredLang);
+
+    // Only redirect if we're on the wrong URL
+    if (preferredLang !== currentLang) {
+      if (preferredLang === "es") {
+        window.location.href = "/es";
+      } else {
+        window.location.href = "/";
+      }
     }
   } else {
-    if (
-      localStorage.getItem("language") === "es" &&
-      !window.location.pathname.startsWith("/es")
-    ) {
-      window.location.href = "/es";
+    // Subsequent visit - use stored preference
+    if (storedLang !== currentLang) {
+      if (storedLang === "es") {
+        window.location.href = "/es";
+      } else {
+        window.location.href = "/";
+      }
     }
   }
 </script>
