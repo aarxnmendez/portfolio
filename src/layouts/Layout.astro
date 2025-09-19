@@ -6,6 +6,36 @@ interface Props {
 const { lang = "en" }: Props = Astro.props;
 
 const siteUrl: string = "http://localhost:4321";
+
+// Dynamic SEO content
+interface SeoData {
+  title: string;
+  description: string;
+  keywords: string;
+  canonical: string;
+}
+
+// Record<K, V> creates an object type with keys "en"|"es" and values of type SeoData
+const seoData: Record<"en" | "es", SeoData> = {
+  en: {
+    title: "Aaron Mendez - Web Developer",
+    description:
+      "Web Developer with expertise in PHP, JavaScript, React, and modern web technologies. Currently studying Computer Engineering and building innovative web solutions.",
+    keywords:
+      "web developer, javascript, php, react, html, css, mysql, tailwind, astro, typescript, wordpress, git, portfolio",
+    canonical: siteUrl,
+  },
+  es: {
+    title: "Aaron Mendez - Desarrollador Web",
+    description:
+      "Desarrollador Web con experiencia en PHP, JavaScript, React y tecnologías web modernas. Estudiante de Ingeniería Informática creando soluciones web innovadoras.",
+    keywords:
+      "desarrollador web, javascript, php, react, html, css, mysql, tailwind, astro, typescript, wordpress, git, portfolio",
+    canonical: siteUrl + "/es",
+  },
+};
+
+const currentSeo: SeoData = seoData[lang];
 ---
 
 <!doctype html>
@@ -16,7 +46,20 @@ const siteUrl: string = "http://localhost:4321";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>Aaron Mendez</title>
+    <!-- Dynamic SEO Meta Tags -->
+    <title>{currentSeo.title}</title>
+    <meta name="description" content={currentSeo.description} />
+    <meta name="keywords" content={currentSeo.keywords} />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="Aaron Mendez" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={currentSeo.canonical} />
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href={siteUrl} />
+    <link rel="alternate" hreflang="es" href={siteUrl + "/es"} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
   </head>
   <body>
     <slot />
