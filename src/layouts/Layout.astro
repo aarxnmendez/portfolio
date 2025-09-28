@@ -1,4 +1,7 @@
 ---
+import "@/styles/global.css";
+import Icons from "@/components/Icons.astro";
+
 interface Props {
   lang?: "en" | "es";
 }
@@ -6,6 +9,26 @@ interface Props {
 const { lang = "en" }: Props = Astro.props;
 
 const siteUrl: string = "http://localhost:4321";
+
+// Translations for layout content
+const t = {
+  en: {
+    header: "This is the header",
+    footer: "This is the footer",
+    profileAlt: "Aaron Mendez - Web Developer",
+    name: "Aaron Mendez",
+    description: "Web Developer focused on clean and functional interfaces.",
+    cvFile: "/Aaron_Mendez_CV_EN.pdf"
+  },
+  es: {
+    header: "Este es el header", 
+    footer: "Este es el footer",
+    profileAlt: "Aarón Méndez - Desarrollador Web",
+    name: "Aarón Méndez",
+    description: "Desarrollador web enfocado en interfaces limpias y funcionales.",
+    cvFile: "/Aaron_Mendez_CV_ES.pdf"
+  }
+}[lang];
 
 // Dynamic SEO content
 interface SeoData {
@@ -39,11 +62,17 @@ const currentSeo: SeoData = seoData[lang];
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="h-full bg-background text-surface">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Fonts - Inter Variable and Alan Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&family=Alan+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <meta name="generator" content={Astro.generator} />
 
     <!-- Dynamic SEO Meta Tags -->
@@ -75,20 +104,68 @@ const currentSeo: SeoData = seoData[lang];
     <meta property="twitter:description" content={currentSeo.description} />
     <!-- <meta property="twitter:image" content={siteUrl + "/og-image.jpg"} /> -->
   </head>
-  <body>
-    <slot />
+
+  <body class="flex flex-col h-full">
+    <header class="bg-warning">
+      <p>{t.header}</p>
+    </header>
+
+    <main class="flex flex-1 flex-nowrap justify-center items-center px-10">
+      <div class="flex flex-nowrap pt-20 gap-12.5 xl:gap-25 w-full max-w-[1140px] h-full">
+        <section class="flex w-min">
+          <div class="flex flex-1 flex-col justify-between gap-5 py-7 px-5 h-fit w-85 bg-surface rounded-2xl card-pattern-overlay">
+            <div class="flex flex-col justify-center items-center gap-5">
+              <img 
+                src="/aaron-profile.webp" 
+                alt={t.profileAlt}
+                class="w-60 h-70 rounded-2xl object-cover"
+                loading="lazy"
+              />
+              <h2 class="text-background text-center !text-4xl">{t.name}</h2>
+              <p class="text-background/70 text-center !font-medium">{t.description}</p>
+              <div class="flex flex-row justify-center gap-5">
+                <a 
+                  href="https://linkedin.com/in/aaron-mendez" 
+                  target="_blank" 
+                  class="text-primary p-1 hover:bg-background/10 rounded-lg transition-colors duration-200" 
+                  aria-label="LinkedIn"
+                >
+                  <Icons name="linkedin" size={24} color="#207bff" />
+                </a>
+                <a 
+                  href="mailto:aarxnmendezz@gmail.com" 
+                  class="text-primary p-1 hover:bg-background/10 rounded-lg transition-colors duration-200" 
+                  aria-label="Email"
+                >
+                  <Icons name="mail" size={24} color="#207bff" />
+                </a>
+                <a 
+                  href={t.cvFile} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="text-primary p-1 hover:bg-background/10 rounded-lg transition-colors duration-200" 
+                  aria-label="Open CV in new tab"
+                >
+                  <Icons name="cv" size={24} color="#207bff" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="flex-1">
+          <slot />
+        </section>
+      </div>
+    </main>
+
+    <footer class="bg-warning">
+      <p>{t.footer}</p>
+    </footer>
   </body>
 </html>
 
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
-
+<!-- Language Switcher -->
 <script>
   // Get stored language preference
   const storedLang = localStorage.getItem("language");
