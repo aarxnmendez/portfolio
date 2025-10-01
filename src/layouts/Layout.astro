@@ -10,6 +10,30 @@ const { lang = "en" }: Props = Astro.props;
 
 const siteUrl: string = "http://localhost:4321";
 
+// Availability status - Change this to control your current availability
+const availabilityStatus: "available" | "listening" | "unavailable" = "listening";
+
+// Availability styles configuration
+const availabilityStyles = {
+  available: {
+    text: "text-green-800",
+    bg: "bg-green-100",
+    border: "border-green-800"
+  },
+  listening: {
+    text: "text-amber-800", 
+    bg: "bg-amber-100",
+    border: "border-amber-800"
+  },
+  unavailable: {
+    text: "text-red-800",
+    bg: "bg-red-100", 
+    border: "border-red-800"
+  }
+};
+
+const currentStyles = availabilityStyles[availabilityStatus];
+
 // Translations for layout content
 const t = {
   en: {
@@ -17,16 +41,26 @@ const t = {
     footer: "This is the footer",
     profileAlt: "Aaron Mendez - Web Developer",
     name: "Aaron Mendez",
-    description: "Web Developer focused on clean and functional interfaces.",
-    cvFile: "/Aaron_Mendez_CV_EN.pdf"
+    cardDescription: "Obsessed with details that make the difference.",
+    cvFile: "/Aaron_Mendez_CV_EN.pdf",
+    availability: {
+      available: "Available for work",
+      listening: "Open to opportunities", 
+      unavailable: "Not available"
+    }
   },
   es: {
     header: "Este es el header", 
     footer: "Este es el footer",
     profileAlt: "Aarón Méndez - Desarrollador Web",
     name: "Aarón Méndez",
-    description: "Desarrollador web enfocado en interfaces limpias y funcionales.",
-    cvFile: "/Aaron_Mendez_CV_ES.pdf"
+    cardDescription: "Obsesionado con los detalles que marcan la diferencia.",
+    cvFile: "/Aaron_Mendez_CV_ES.pdf",
+    availability: {
+      available: "Disponible para trabajar",
+      listening: "Escucho ofertas",
+      unavailable: "No disponible"
+    }
   }
 }[lang];
 
@@ -111,7 +145,7 @@ const currentSeo: SeoData = seoData[lang];
     </header>
 
     <main class="flex flex-1 flex-nowrap justify-center items-center px-10">
-      <div class="flex flex-nowrap pt-20 gap-12.5 xl:gap-25 w-full max-w-[1140px] h-full">
+      <div class="flex flex-nowrap py-20 gap-12.5 xl:gap-25 w-full max-w-[1140px] h-full">
         <section class="flex w-min">
           <div class="flex flex-1 flex-col justify-between gap-5 py-7 px-5 h-fit w-85 bg-surface rounded-2xl card-pattern-overlay">
             <div class="flex flex-col justify-center items-center gap-5">
@@ -121,8 +155,15 @@ const currentSeo: SeoData = seoData[lang];
                 class="w-60 h-70 rounded-2xl object-cover"
                 loading="lazy"
               />
-              <h2 class="text-background text-center !text-4xl">{t.name}</h2>
-              <p class="text-background/70 text-center !font-medium">{t.description}</p>
+              <h2 class="!text-background text-center !text-4xl">
+                {t.name}
+              </h2>
+              <p class="!text-background/70 !opacity-100 text-center !font-medium">
+                {t.cardDescription}
+              </p>
+              <div class={`inline-flex items-center justify-center px-3 py-1 w-full max-w-max text-sm rounded-full whitespace-nowrap ${currentStyles.text} ${currentStyles.bg} border ${currentStyles.border}`}>
+                {t.availability[availabilityStatus]}
+              </div>
               <div class="flex flex-row justify-center gap-5">
                 <a 
                   href="https://linkedin.com/in/aaron-mendez" 
