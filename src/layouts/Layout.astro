@@ -42,12 +42,13 @@ const t = {
     profileAlt: "Aaron Mendez - Web Developer",
     name: "Aaron Mendez",
     cardDescription: "Obsessed with details that make the difference.",
-    cvFile: "/Aaron_Mendez_CV_EN.pdf",
     availability: {
       available: "Available for work",
       listening: "Open to opportunities", 
       unavailable: "Not available"
-    }
+    },
+    mailTitle: "Send email to Aaron Mendez",
+    mailLabel: "Send email to Aaron Mendez"
   },
   es: {
     header: "Este es el header", 
@@ -55,12 +56,13 @@ const t = {
     profileAlt: "Aarón Méndez - Desarrollador Web",
     name: "Aarón Méndez",
     cardDescription: "Obsesionado con los detalles que marcan la diferencia.",
-    cvFile: "/Aaron_Mendez_CV_ES.pdf",
     availability: {
       available: "Disponible para trabajar",
       listening: "Escucho ofertas",
       unavailable: "No disponible"
-    }
+    },
+    mailTitle: "Enviar correo a Aarón Méndez",
+    mailLabel: "Enviar correo a Aarón Méndez"
   }
 }[lang];
 
@@ -83,7 +85,7 @@ const seoData: Record<"en" | "es", SeoData> = {
     canonical: siteUrl,
   },
   es: {
-    title: "Aaron Mendez - Desarrollador Web",
+    title: "Aarón Méndez - Desarrollador Web",
     description:
       "Desarrollador Web con experiencia en PHP, JavaScript, React y tecnologías web modernas. Estudiante de Ingeniería Informática creando soluciones web innovadoras.",
     keywords:
@@ -158,38 +160,20 @@ const currentSeo: SeoData = seoData[lang];
               <h2 class="!text-background text-center !text-4xl">
                 {t.name}
               </h2>
-              <p class="!text-background/70 !opacity-100 text-center !font-medium">
+              <p class="!text-background/70 !opacity-100 !text-lg text-center !font-medium">
                 {t.cardDescription}
               </p>
               <div class={`inline-flex items-center justify-center px-3 py-1 w-full max-w-max text-sm rounded-full whitespace-nowrap ${currentStyles.text} ${currentStyles.bg} border ${currentStyles.border}`}>
                 {t.availability[availabilityStatus]}
               </div>
-              <div class="flex flex-row justify-center gap-5">
-                <a 
-                  href="https://linkedin.com/in/aaron-mendez" 
-                  target="_blank" 
-                  class="text-primary p-1 hover:bg-background/10 rounded-lg transition-colors duration-200" 
-                  aria-label="LinkedIn"
-                >
-                  <Icons name="linkedin" size={24} color="#207bff" />
-                </a>
-                <a 
-                  href="mailto:aarxnmendezz@gmail.com" 
-                  class="text-primary p-1 hover:bg-background/10 rounded-lg transition-colors duration-200" 
-                  aria-label="Email"
-                >
-                  <Icons name="mail" size={24} color="#207bff" />
-                </a>
-                <a 
-                  href={t.cvFile} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  class="text-primary p-1 hover:bg-background/10 rounded-lg transition-colors duration-200" 
-                  aria-label="Open CV in new tab"
-                >
-                  <Icons name="cv" size={24} color="#207bff" />
-                </a>
-              </div>
+              <a 
+                href="mailto:aarxnmendezz@gmail.com" 
+                title={t.mailTitle}
+                class="text-background hover:underline"
+                aria-label={t.mailLabel}
+              >
+                aarxnmendezz@gmail.com
+              </a>
             </div>
           </div>
         </section>

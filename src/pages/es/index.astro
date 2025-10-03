@@ -1,7 +1,37 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Icons from "@/components/Icons.astro";
 ---
 
 <Layout lang="es">
-  <main></main>
+  <article class="flex flex-col">
+    <h1>FRONTEND<br /><span class="opacity-15">DEVELOPER</span></h1>
+    <p class="mt-5 max-w-lg !text-lg">
+      Desarrollo aplicaciones web con enfoque en diseño limpio y experiencias de
+      usuario. Priorizo soluciones útiles, código sencillo y colaboración
+      eficiente.
+    </p>
+    <nav class="flex flex-row flex-wrap mt-8 gap-4">
+      <a
+        href="https://www.linkedin.com/in/aaronmendezz/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visitar perfil de LinkedIn"
+        class="flex flex-row gap-2 justify-center items-center px-4 py-1 text-surface hover:text-background bg-none hover:bg-surface rounded-full border border-surface/50"
+      >
+        <Icons name="linkedin" size={18} />
+        LinkedIn
+      </a>
+      <a
+        href="/Aaron_Mendez_CV_ES.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex flex-row gap-2 justify-center items-center px-4 py-1 text-surface hover:text-background bg-none hover:bg-surface rounded-full border border-surface/50"
+        aria-label="Abrir currículum en PDF"
+      >
+        <Icons name="cv" size={18} />
+        Currículum
+      </a>
+    </nav>
+  </article>
 </Layout>
