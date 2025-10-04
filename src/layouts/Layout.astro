@@ -10,30 +10,6 @@ const { lang = "en" }: Props = Astro.props;
 
 const siteUrl: string = "http://localhost:4321";
 
-// Availability status - Change this to control your current availability
-const availabilityStatus: "available" | "listening" | "unavailable" = "listening";
-
-// Availability styles configuration
-const availabilityStyles = {
-  available: {
-    text: "text-green-800",
-    bg: "bg-green-100",
-    border: "border-green-800"
-  },
-  listening: {
-    text: "text-amber-800", 
-    bg: "bg-amber-100",
-    border: "border-amber-800"
-  },
-  unavailable: {
-    text: "text-red-800",
-    bg: "bg-red-100", 
-    border: "border-red-800"
-  }
-};
-
-const currentStyles = availabilityStyles[availabilityStatus];
-
 // Translations for layout content
 const t = {
   en: {
@@ -42,11 +18,7 @@ const t = {
     profileAlt: "Aaron Mendez - Web Developer",
     name: "Aaron Mendez",
     cardDescription: "Obsessed with details that make the difference.",
-    availability: {
-      available: "Available for work",
-      listening: "Open to opportunities", 
-      unavailable: "Not available"
-    },
+    location: "A Coruña, Spain",
     mailTitle: "Send email to Aaron Mendez",
     mailLabel: "Send email to Aaron Mendez"
   },
@@ -56,11 +28,7 @@ const t = {
     profileAlt: "Aarón Méndez - Desarrollador Web",
     name: "Aarón Méndez",
     cardDescription: "Obsesionado con los detalles que marcan la diferencia.",
-    availability: {
-      available: "Disponible para trabajar",
-      listening: "Escucho ofertas",
-      unavailable: "No disponible"
-    },
+    location: "A Coruña, España",
     mailTitle: "Enviar correo a Aarón Méndez",
     mailLabel: "Enviar correo a Aarón Méndez"
   }
@@ -157,23 +125,33 @@ const currentSeo: SeoData = seoData[lang];
                 class="w-60 h-70 rounded-2xl object-cover"
                 loading="lazy"
               />
+              <div class="flex flex-col justify-center items-center gap-2">
               <h2 class="!text-background text-center !text-4xl">
                 {t.name}
               </h2>
               <p class="!text-background/70 !opacity-100 !text-lg text-center !font-medium">
                 {t.cardDescription}
               </p>
-              <div class={`inline-flex items-center justify-center px-3 py-1 w-full max-w-max text-sm rounded-full whitespace-nowrap ${currentStyles.text} ${currentStyles.bg} border ${currentStyles.border}`}>
-                {t.availability[availabilityStatus]}
               </div>
-              <a 
-                href="mailto:aarxnmendezz@gmail.com" 
-                title={t.mailTitle}
-                class="text-background hover:underline"
-                aria-label={t.mailLabel}
-              >
-                aarxnmendezz@gmail.com
-              </a>
+              
+              <!-- Separator -->
+              <div class="w-20 h-px bg-background/30"></div>
+                            
+              <div class="flex flex-col justify-center items-center gap-2">
+                <p class="flex flex-row gap-2 justify-center items-center !text-background !opacity-100">
+                  <Icons name="map-pin" size={20} />
+                  {t.location}
+                </p>
+                <a 
+                  href="mailto:aarxnmendezz@gmail.com" 
+                  title={t.mailTitle}
+                  class="flex flex-row gap-2 justify-center items-center !text-background hover:underline"
+                  aria-label={t.mailLabel}
+                >
+                  <Icons name="mail" size={20} />
+                  aarxnmendezz@gmail.com
+                </a>
+              </div>
             </div>
           </div>
         </section>
