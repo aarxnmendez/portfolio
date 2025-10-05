@@ -14,7 +14,10 @@ const siteUrl: string = "http://localhost:4321";
 const t = {
   en: {
     header: "This is the header",
-    footer: "This is the footer",
+    footerMadeBy: "Made by",
+    footerName: "Aaron Mendez",
+    footerPoweredBy: "Powered by",
+    footerTech: "Astro",
     profileAlt: "Aaron Mendez - Web Developer",
     name: "Aaron Mendez",
     cardDescription: "Obsessed with details that make the difference.",
@@ -24,7 +27,10 @@ const t = {
   },
   es: {
     header: "Este es el header", 
-    footer: "Este es el footer",
+    footerMadeBy: "Hecho por",
+    footerName: "Aarón Méndez",
+    footerPoweredBy: "Desarrollado con",
+    footerTech: "Astro",
     profileAlt: "Aarón Méndez - Desarrollador Web",
     name: "Aarón Méndez",
     cardDescription: "Obsesionado con los detalles que marcan la diferencia.",
@@ -162,8 +168,18 @@ const currentSeo: SeoData = seoData[lang];
       </div>
     </main>
 
-    <footer class="bg-warning">
-      <p>{t.footer}</p>
+    <footer class="flex justify-center items-center py-20">
+      <small class="text-[1rem]">
+        <span class="opacity-50">2025 | {t.footerPoweredBy}</span>
+        <a 
+          href="https://astro.build/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="text-primary hover:underline"
+        >
+          Astro
+        </a>
+      </small>
     </footer>
   </body>
 </html>
