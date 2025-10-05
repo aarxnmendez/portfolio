@@ -114,9 +114,9 @@ const currentSeo: SeoData = seoData[lang];
       <p>{t.header}</p>
     </header>
 
-    <main class="flex flex-1 flex-nowrap justify-center items-center px-10">
-      <div class="flex flex-nowrap py-20 gap-12.5 xl:gap-25 w-full max-w-[1140px] h-full">
-        <section class="flex w-min">
+    <main class="flex flex-1 flex-nowrap justify-center items-start px-10">
+      <div class="flex flex-nowrap pt-32 pb-20 gap-12.5 xl:gap-25 w-full max-w-[1140px] min-h-full">
+        <section class="flex w-min sticky top-32 self-start">
           <div class="flex flex-1 flex-col justify-between gap-5 py-7 px-5 h-fit w-85 bg-surface rounded-2xl card-pattern-overlay">
             <div class="flex flex-col justify-center items-center gap-5">
               <img 
@@ -139,7 +139,7 @@ const currentSeo: SeoData = seoData[lang];
                             
               <div class="flex flex-col justify-center items-center gap-2">
                 <p class="flex flex-row gap-2 justify-center items-center !text-background !opacity-100">
-                  <Icons name="map-pin" size={20} />
+                  <Icons name="map-pin" size={20} class="text-primary" />
                   {t.location}
                 </p>
                 <a 
@@ -148,7 +148,7 @@ const currentSeo: SeoData = seoData[lang];
                   class="flex flex-row gap-2 justify-center items-center !text-background hover:underline"
                   aria-label={t.mailLabel}
                 >
-                  <Icons name="mail" size={20} />
+                  <Icons name="mail" size={20} class="text-primary" />
                   aarxnmendezz@gmail.com
                 </a>
               </div>
