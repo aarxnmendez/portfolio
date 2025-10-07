@@ -30,6 +30,7 @@ const t = {
     navExperience: "Experience",
     navProjects: "Projects",
     navEducation: "Education",
+    navLanguage: "Switch to Spanish",
     jsonJobTitle: "Web Developer",
     jsonAlumniOf: "Associate Degree in Web Application Development",
     jsonKnowsAbout: ["JavaScript", "PHP", "CSS", "Tailwind CSS", "MySQL", "Git", "Web Development"],
@@ -51,6 +52,7 @@ const t = {
     navExperience: "Experiencia", 
     navProjects: "Proyectos",
     navEducation: "Educación",
+    navLanguage: "Cambiar a inglés",
     jsonJobTitle: "Desarrollador Web", 
     jsonAlumniOf: "Técnico Superior en Desarrollo de Aplicaciones Web",
     jsonKnowsAbout: ["JavaScript", "PHP", "CSS", "Tailwind CSS", "MySQL", "Git", "Desarrollo Web"],
@@ -140,6 +142,7 @@ const currentSeo: SeoData = seoData[lang];
         <NavLink href="#experience" icon="experience" label={t.navExperience} />
         <NavLink href="#projects" icon="projects" label={t.navProjects} />
         <NavLink href="#education" icon="education" label={t.navEducation} />
+        <NavLink href="#" icon="language" label={t.navLanguage} id="lang-switch" />
       </nav>
     </header>
 
@@ -240,6 +243,28 @@ const currentSeo: SeoData = seoData[lang];
   }
 </script>
 
+<!-- Language Switch Functionality -->
+<script>
+  const langSwitch = document.getElementById('lang-switch');
+  const currentPath = window.location.pathname;
+  const isInSpanishPath = currentPath.startsWith('/es');
+  
+  if (langSwitch) {
+    langSwitch.addEventListener('click', (e) => {
+      e.preventDefault();
+      const newLang = isInSpanishPath ? 'en' : 'es';
+      localStorage.setItem('language', newLang);
+      
+      // Navigate to new language
+      if (newLang === 'es') {
+        window.location.href = '/es';
+      } else {
+        window.location.href = '/';
+      }
+    });
+  }
+</script>
+
 <!-- JSON-LD structured data for search engines -->
  <!-- Helps Google understand this is a Person's profile and may show rich snippets -->
 <script type="application/ld+json">
@@ -299,5 +324,7 @@ const currentSeo: SeoData = seoData[lang];
     }
   }
 
+  window.addEventListener('scroll', onScroll);
+</script>
   window.addEventListener('scroll', onScroll);
 </script>

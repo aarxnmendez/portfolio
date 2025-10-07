@@ -10,7 +10,8 @@ export interface Props {
     | "experience"
     | "projects"
     | "education"
-    | "arrow-right";
+    | "arrow-right"
+    | "language";
   size?: number;
   color?: string;
   class?: string;
@@ -43,6 +44,8 @@ const icons = {
   education: `<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />`,
 
   "arrow-right": `<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />`,
+
+  language: `<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6.371c0 4.418 -2.239 6.629 -5 6.629" /><path d="M4 6.371h7" /><path d="M5 9c0 2.144 2.252 3.908 6 4" /><path d="M12 20l4 -9l4 9" /><path d="M19.1 18h-6.2" /><path d="M6.694 3l.793 .582" />`,
 };
 
 const iconContent = icons[name];

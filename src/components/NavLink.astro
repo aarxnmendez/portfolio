@@ -3,14 +3,15 @@ import Icons from "@/components/Icons.astro";
 
 interface Props {
   href: string;
-  icon: "home" | "tools" | "experience" | "projects" | "education";
+  icon: "home" | "tools" | "experience" | "projects" | "education" | "language";
   label: string;
+  id?: string;
 }
 
-const { href, icon, label } = Astro.props;
+const { href, icon, label, id } = Astro.props;
 ---
 
-<a href={href} class="relative group">
+<a href={href} class="relative group" id={id}>
   <Icons name={icon} size={22} />
   <!-- Tooltip -->
   <span
