@@ -30,6 +30,9 @@ const t = {
     navExperience: "Experience",
     navProjects: "Projects",
     navEducation: "Education",
+    jsonJobTitle: "Web Developer",
+    jsonAlumniOf: "Associate Degree in Web Application Development",
+    jsonKnowsAbout: ["JavaScript", "PHP", "CSS", "Tailwind CSS", "MySQL", "Git", "Web Development"],
   },
   es: {
     header: "Este es el header", 
@@ -48,6 +51,9 @@ const t = {
     navExperience: "Experiencia", 
     navProjects: "Proyectos",
     navEducation: "Educación",
+    jsonJobTitle: "Desarrollador Web", 
+    jsonAlumniOf: "Técnico Superior en Desarrollo de Aplicaciones Web",
+    jsonKnowsAbout: ["JavaScript", "PHP", "CSS", "Tailwind CSS", "MySQL", "Git", "Desarrollo Web"],
   }
 }[lang];
 
@@ -235,16 +241,16 @@ const currentSeo: SeoData = seoData[lang];
 </script>
 
 <!-- JSON-LD structured data for search engines -->
-<!-- Helps Google understand this is a Person's profile and may show rich snippets -->
+ <!-- Helps Google understand this is a Person's profile and may show rich snippets -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Aaron Mendez",
-  "jobTitle": {lang === "es" ? "Desarrollador Web" : "Web Developer"},
+  "name": {t.name},
+  "jobTitle": {t.jsonJobTitle},
   "url": {currentSeo.canonical},
-  "knowsAbout": ["JavaScript", "PHP", "React", "Web Development"],
-  "alumniOf": {lang === "es" ? "Técnico Superior en Desarrollo de Aplicaciones Web" : "Associate Degree in Web Development"}
+  "knowsAbout": {JSON.stringify(t.jsonKnowsAbout)},
+  "alumniOf": {t.jsonAlumniOf}
 }
 </script>
 
