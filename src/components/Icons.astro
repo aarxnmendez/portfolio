@@ -9,7 +9,8 @@ export interface Props {
     | "tools"
     | "experience"
     | "projects"
-    | "education";
+    | "education"
+    | "arrow-right";
   size?: number;
   color?: string;
   class?: string;
@@ -40,6 +41,8 @@ const icons = {
   projects: `<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />`,
 
   education: `<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6" /><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4" />`,
+
+  "arrow-right": `<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />`,
 };
 
 const iconContent = icons[name];
