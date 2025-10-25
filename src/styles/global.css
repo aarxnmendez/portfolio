@@ -64,12 +64,11 @@ h3 {
 }
 
 p {
-  color: var(--color-surface);
+  color: rgb(from var(--color-surface) r g b / 0.5);
   font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.4;
-  opacity: 0.5;
 }
 
 .text-secondary {
