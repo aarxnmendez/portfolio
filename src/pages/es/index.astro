@@ -17,24 +17,22 @@ import macbookImage from "@/assets/projects/macbook-landing.png";
     </p>
     <nav class="flex flex-row flex-wrap mt-8 gap-4">
       <a
-        href="https://www.linkedin.com/in/aaronmendezz/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visitar perfil de LinkedIn"
-        class="flex flex-row gap-2 justify-center items-center px-4 py-1 text-surface hover:text-background bg-none hover:bg-surface rounded-full border border-surface/50"
+        href="#contact"
+        class="relative flex flex-row gap-2 justify-center items-center px-3 py-2 text-white text-lg bg-primary rounded-xl overflow-hidden group z-0"
+        aria-label="Ir a la sección de contacto"
       >
-        <Icons name="linkedin" size={18} />
-        LinkedIn
-      </a>
-      <a
-        href="/Aaron_Mendez_CV_ES.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="flex flex-row gap-2 justify-center items-center px-4 py-1 text-surface hover:text-background bg-none hover:bg-surface rounded-full border border-surface/50"
-        aria-label="Abrir currículum en PDF"
-      >
-        <Icons name="cv" size={18} />
-        Currículum
+        <span
+          class="absolute inset-0 bg-surface scale-0 group-hover:scale-150 transition-transform duration-300 ease-out origin-top-left -z-10"
+        ></span>
+        <span
+          class="relative z-10 group-hover:text-background transition-colors duration-300"
+        >
+          <Icons name="message" size={18} />
+        </span>
+        <span
+          class="relative z-10 group-hover:text-background transition-colors duration-300"
+          >Contacto</span
+        >
       </a>
     </nav>
   </article>
@@ -861,6 +859,15 @@ import macbookImage from "@/assets/projects/macbook-landing.png";
           class="text-surface/70 hover:text-primary transition-colors duration-200"
         >
           <Icons name="mail" size={24} />
+        </a>
+        <a
+          href="/Aaron_Mendez_CV_ES.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Abrir currículum en PDF"
+          class="text-surface/70 hover:text-primary transition-colors duration-200"
+        >
+          <Icons name="cv" size={24} />
         </a>
       </div>
     </div>
