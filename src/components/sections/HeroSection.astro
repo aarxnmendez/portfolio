@@ -1,0 +1,44 @@
+---
+import Icons from "@/components/ui/Icons.astro";
+
+interface Props {
+  lang: "en" | "es";
+}
+
+const { lang } = Astro.props;
+
+const content =
+  lang === "en"
+    ? (await import("@/content/en/hero")).heroContent
+    : (await import("@/content/es/hero")).heroContent;
+---
+
+<!-- Hero Section -->
+<article id="home" class="flex flex-col scroll-mt-25">
+  <h1>
+    {content.title}<br /><span class="opacity-15">{content.subtitle}</span>
+  </h1>
+  <p class="mt-5 max-w-lg !text-lg">
+    {content.description}
+  </p>
+  <nav class="flex flex-row flex-wrap mt-8 gap-4">
+    <a
+      href="#contact"
+      class="relative flex flex-row gap-2 justify-center items-center px-3 py-2 text-white text-lg bg-primary rounded-xl overflow-hidden group z-0"
+      aria-label={content.cta.ariaLabel}
+    >
+      <span
+        class="absolute inset-0 bg-surface scale-0 group-hover:scale-150 transition-transform duration-300 ease-out origin-top-left -z-10"
+      ></span>
+      <span
+        class="relative z-10 group-hover:text-background transition-colors duration-300"
+      >
+        <Icons name="message" size={18} />
+      </span>
+      <span
+        class="relative z-10 group-hover:text-background transition-colors duration-300"
+        >{content.cta.text}</span
+      >
+    </a>
+  </nav>
+</article>
