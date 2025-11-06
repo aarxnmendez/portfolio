@@ -1,0 +1,38 @@
+---
+interface Props {
+  lang: "en" | "es";
+}
+
+const { lang } = Astro.props;
+
+const content =
+  lang === "en"
+    ? (await import("@/content/en/about")).content
+    : (await import("@/content/es/about")).content;
+---
+
+<!-- About Section -->
+<article id="about" class="flex flex-col gap-5 scroll-mt-25">
+  <h2>
+    {content.title}<br /><span class="opacity-15">{content.subtitle}</span>
+  </h2>
+  <div class="flex flex-col gap-4">
+    {
+      content.paragraphs.map((paragraph) => (
+        <p>
+          {typeof paragraph === "string" ? (
+            paragraph
+          ) : (
+            <>
+              {paragraph.text}
+              <span class="text-primary">{paragraph.highlight}</span>
+              {paragraph.text2}
+              <span class="text-primary">{paragraph.highlight2}</span>
+              {paragraph.text3}
+            </>
+          )}
+        </p>
+      ))
+    }
+  </div>
+</article>
