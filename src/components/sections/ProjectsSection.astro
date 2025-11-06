@@ -1,0 +1,92 @@
+---
+import Icons from "@/components/ui/Icons.astro";
+import TechIcon from "@/components/ui/TechIcon.astro";
+import shaImage from "@/assets/projects/shawellness.png";
+import basquetImage from "@/assets/projects/basquetcoruna.png";
+import macbookImage from "@/assets/projects/macbook-landing.png";
+
+interface Props {
+  lang: "en" | "es";
+}
+
+const { lang } = Astro.props;
+
+const content =
+  lang === "en"
+    ? (await import("@/content/en/projects")).projectsContent
+    : (await import("@/content/es/projects")).projectsContent;
+
+// Map image names to actual imports
+const imageMap: Record<string, any> = {
+  shawellness: shaImage,
+  basquetcoruna: basquetImage,
+  "macbook-landing": macbookImage,
+};
+---
+
+<!-- Projects Section -->
+<article id="projects" class="flex flex-col gap-5 scroll-mt-25">
+  <h2>
+    {content.title}<br /><span class="opacity-15">{content.subtitle}</span>
+  </h2>
+  <div class="flex flex-col">
+    {
+      content.projects.map((project) => (
+        <div class="group flex flex-row gap-5 py-6 px-4">
+          <div class="relative h-50 bg-surface rounded-xl aspect-[3/2] overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out">
+            <img
+              src={imageMap[project.image].src}
+              alt={project.imageAlt}
+              class="w-full h-full object-cover"
+              loading="lazy"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+            />
+            <div
+              class="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/50 to-transparent"
+              style="display: none;"
+            >
+              <Icons name="image" size={32} color="var(--color-primary)" />
+            </div>
+          </div>
+          <div class="flex-1 flex flex-col gap-2">
+            <div class="flex flex-row w-full">
+              <h3>{project.name}</h3>
+            </div>
+            <div class="flex flex-col justify-between h-full w-full">
+              <ul class="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <li>
+                    <span class="flex items-center gap-1.5 rounded-full bg-surface/20 text-[11px] text-surface/70 py-1 px-2">
+                      <TechIcon tech={tech} />
+                      {tech}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p>{project.description}</p>
+              <ul class="flex flex-wrap gap-2">
+                {project.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visitar ${link.label}`}
+                      class="flex flex-row gap-2 justify-center items-center px-3 py-2 text-surface bg-none rounded-xl border border-surface/30"
+                    >
+                      <Icons
+                        name={link.type === "demo" ? "link" : link.type}
+                        size={18}
+                      />
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</article>
