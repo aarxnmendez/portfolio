@@ -8,7 +8,7 @@ export const content = {
       institution: "Universidad de A Coruña",
       description:
         "Grado universitario en ingeniería informática con enfoque en desarrollo de software y tecnologías de la información.",
-      position: "right", // right = period on left, content on right
+      position: "right",
     },
     {
       period: "Sep 2023 - Jun 2025",
@@ -16,7 +16,7 @@ export const content = {
       institution: "IES Fernando Wirtz",
       description:
         "Ciclo formativo de grado superior especializado en desarrollo web full stack, incluyendo frontend, backend y bases de datos.",
-      position: "left", // left = content on left, period on right
+      position: "left",
     },
   ],
 } as const;

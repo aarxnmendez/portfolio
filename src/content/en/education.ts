@@ -8,7 +8,7 @@ export const content = {
       institution: "University of A Coruña",
       description:
         "University degree in computer engineering with a focus on software development and information technologies.",
-      position: "right", // right = period on left, content on right
+      position: "right",
     },
     {
       period: "Sep 2023 - Jun 2025",
@@ -16,7 +16,7 @@ export const content = {
       institution: "IES Fernando Wirtz",
       description:
         "Higher education cycle specialized in full stack web development, including frontend, backend and databases.",
-      position: "left", // left = content on left, period on right
+      position: "left",
     },
   ],
 } as const;
