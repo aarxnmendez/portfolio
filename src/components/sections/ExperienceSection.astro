@@ -27,41 +27,58 @@ const content =
     </div>
 
     {
-      content.experiences.map((experience) => (
-        <div class="relative grid grid-cols-2 gap-12 items-start group">
-          <div class="flex flex-col items-end pr-4">
-            <p class="!text-sm">{experience.period}</p>
+      content.experiences.map((experience) => {
+        const isRight = experience.position === "right";
+        return (
+          <div class="relative grid grid-cols-2 gap-12 items-start group">
+            {isRight ? (
+              <>
+                <div class="flex flex-col items-end pr-4">
+                  <p class="!text-sm">{experience.period}</p>
+                </div>
+                <a
+                  href={experience.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group/cta flex flex-col gap-3 bg-none hover:bg-surface/5 rounded-2xl p-4 transition-colors duration-300 ease-in-out -translate-y-4"
+                >
+                  <h3 class="flex items-center gap-2">
+                    <span aria-hidden="true" class="inline-flex">
+                      <Icons name="experience" size={20} />
+                    </span>
+                    {experience.company}
+                  </h3>
+                  <p class="text-left">{experience.description}</p>
+                </a>
+              </>
+            ) : (
+              <>
+                <a
+                  href={experience.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group/cta flex flex-col gap-3 bg-none hover:bg-surface/5 rounded-2xl p-4 transition-colors duration-300 ease-in-out -translate-y-4"
+                >
+                  <h3 class="flex items-center gap-2 justify-end text-right">
+                    {experience.company}
+                    <span aria-hidden="true" class="inline-flex">
+                      <Icons name="experience" size={20} />
+                    </span>
+                  </h3>
+                  <p class="text-right">{experience.description}</p>
+                </a>
+                <div class="flex flex-col items-start pl-4">
+                  <p class="!text-sm">{experience.period}</p>
+                </div>
+              </>
+            )}
+            <div
+              class="absolute left-1/2 top-1 w-3 h-3 rounded-full bg-primary ring-4 ring-background -translate-x-1/2 transition-transform duration-300 group-hover:scale-125"
+              aria-hidden="true"
+            />
           </div>
-          <a
-            href={experience.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group/cta flex flex-col gap-3 bg-none hover:bg-surface/5 rounded-2xl p-4 transition-colors duration-300 ease-in-out -translate-y-4"
-          >
-            <div class="flex flex-row justify-between items-center w-full">
-              <h3 class="flex items-center gap-2">
-                <span aria-hidden="true" class="inline-flex">
-                  <Icons name="experience" size={20} />
-                </span>
-                {experience.company}
-              </h3>
-              <span>
-                <Icons
-                  name="arrow-right"
-                  size={25}
-                  color="var(--color-primary)"
-                  class="transform -rotate-45 transition-transform duration-300 ease-out group-hover/cta:translate-x-1.5 group-hover/cta:-translate-y-1.5"
-                />
-              </span>
-            </div>
-            <p>{experience.description}</p>
-          </a>
-          <div
-            class="absolute left-1/2 top-1 w-3 h-3 rounded-full bg-primary ring-4 ring-background -translate-x-1/2 transition-transform duration-300 group-hover:scale-125"
-            aria-hidden="true"
-          />
-        </div>
-      ))
+        );
+      })
     }
   </div>
 </article>

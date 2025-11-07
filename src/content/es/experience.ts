@@ -8,6 +8,7 @@ export const experienceContent = {
       url: "https://clink.es/",
       description:
         "Desarrollo y mantenimiento de sitios web para diversos sectores. Mejora de experiencias de usuario y colaboración en proyectos de alcance global.",
+      position: "right",
     },
   ],
 } as const;
