@@ -18,21 +18,21 @@ const content =
   </h2>
   <div class="flex flex-col gap-4">
     {
-      content.paragraphs.map((paragraph) => (
-        <p>
-          {typeof paragraph === "string" ? (
-            paragraph
-          ) : (
-            <>
-              {paragraph.text}
-              <span class="text-primary">{paragraph.highlight}</span>
-              {paragraph.text2}
-              <span class="text-primary">{paragraph.highlight2}</span>
-              {paragraph.text3}
-            </>
-          )}
-        </p>
-      ))
+      content.paragraphs.map((paragraph) => {
+        const parts = paragraph.split("**");
+        return (
+          <p>
+            {parts.map((part, index) => {
+              const isHighlight = index % 2 === 1;
+              return isHighlight ? (
+                <span class="text-primary">{part}</span>
+              ) : (
+                part
+              );
+            })}
+          </p>
+        );
+      })
     }
   </div>
 </article>
