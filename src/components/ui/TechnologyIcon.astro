@@ -1,0 +1,12 @@
+---
+interface Props {
+  icon: string;
+}
+
+const { icon } = Astro.props;
+---
+
+<div
+  class="w-15 h-15 bg-surface rounded-xl flex items-center justify-center"
+  set:html={icon}
+/>
