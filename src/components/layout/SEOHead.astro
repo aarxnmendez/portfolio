@@ -1,0 +1,106 @@
+---
+interface Props {
+  lang: "en" | "es";
+  siteUrl: string;
+}
+
+const { lang, siteUrl }: Props = Astro.props;
+
+const t =
+  lang === "en"
+    ? (await import("@/content/en/layout")).layoutContent
+    : (await import("@/content/es/layout")).layoutContent;
+
+interface SeoData {
+  title: string;
+  description: string;
+  keywords: string;
+  canonical: string;
+}
+
+const seoData: Record<"en" | "es", SeoData> = {
+  en: {
+    title: "Aaron Mendez - Web Developer",
+    description:
+      "Web Developer with expertise in PHP, JavaScript, React, and modern web technologies. Currently studying Computer Engineering and building innovative web solutions.",
+    keywords:
+      "web developer, javascript, php, react, html, css, mysql, tailwind, astro, typescript, wordpress, git, portfolio",
+    canonical: siteUrl,
+  },
+  es: {
+    title: "Aarón Méndez - Desarrollador Web",
+    description:
+      "Desarrollador Web con experiencia en PHP, JavaScript, React y tecnologías web modernas. Estudiante de Ingeniería Informática creando soluciones web innovadoras.",
+    keywords:
+      "desarrollador web, javascript, php, react, html, css, mysql, tailwind, astro, typescript, wordpress, git, portfolio",
+    canonical: siteUrl + "/es",
+  },
+};
+
+const currentSeo: SeoData = seoData[lang];
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="Aaron M" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Google Fonts - Inter Variable and Alan Sans -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&family=Alan+Sans:wght@300;400;500;600;700;800&display=swap"
+  rel="stylesheet"
+/>
+
+<meta name="generator" content={Astro.generator} />
+
+<!-- Dynamic SEO Meta Tags -->
+<title>{currentSeo.title}</title>
+<meta name="description" content={currentSeo.description} />
+<meta name="keywords" content={currentSeo.keywords} />
+<meta name="robots" content="index,follow" />
+<meta name="author" content="Aaron Mendez" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={currentSeo.canonical} />
+
+<!-- Hreflang for multilingual -->
+<link rel="alternate" hreflang="en" href={siteUrl} />
+<link rel="alternate" hreflang="es" href={siteUrl + "/es"} />
+<link rel="alternate" hreflang="x-default" href={siteUrl} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:site_name" content="Aaron Mendez Portfolio" />
+<meta property="og:title" content={currentSeo.title} />
+<meta property="og:description" content={currentSeo.description} />
+<meta property="og:url" content={currentSeo.canonical} />
+<meta property="og:type" content="website" />
+<!-- <meta property="og:image" content={siteUrl + "/og-image.jpg"} /> -->
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content={currentSeo.title} />
+<meta property="twitter:description" content={currentSeo.description} />
+<!-- <meta property="twitter:image" content={siteUrl + "/og-image.jpg"} /> -->
+
+<!-- JSON-LD structured data for search engines -->
+<!-- Helps Google understand this is a Person's profile and may show rich snippets -->
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: t.name,
+    jobTitle: t.jsonJobTitle,
+    url: currentSeo.canonical,
+    knowsAbout: t.jsonKnowsAbout,
+    alumniOf: t.jsonAlumniOf,
+  })}
+/>

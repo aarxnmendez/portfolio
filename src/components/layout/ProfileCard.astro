@@ -1,0 +1,59 @@
+---
+import Icons from "@/components/ui/Icons.astro";
+
+interface Props {
+  lang: "en" | "es";
+}
+
+const { lang }: Props = Astro.props;
+
+const t =
+  lang === "en"
+    ? (await import("@/content/en/layout")).layoutContent
+    : (await import("@/content/es/layout")).layoutContent;
+---
+
+<section class="flex w-min sticky top-25 self-start">
+  <div
+    class="flex flex-1 flex-col justify-between gap-5 py-7 px-5 h-fit w-85 bg-surface rounded-2xl"
+  >
+    <div class="flex flex-col justify-center items-center gap-5">
+      <img
+        src="/aaron-profile.webp"
+        alt={t.profileAlt}
+        class="w-60 h-70 rounded-2xl object-cover"
+        loading="lazy"
+      />
+      <div class="flex flex-col justify-center items-center gap-2">
+        <h2 class="!text-background text-center !text-4xl">
+          {t.name}
+        </h2>
+        <p
+          class="!text-background/70 !opacity-100 !text-lg text-center !font-medium"
+        >
+          {t.cardDescription}
+        </p>
+      </div>
+
+      <div class="w-20 h-px bg-background/30"></div>
+
+      <div class="flex flex-col justify-center items-center gap-2">
+        <p
+          class="flex flex-row gap-2 justify-center items-center !text-background !opacity-100"
+        >
+          <Icons name="map-pin" size={20} class="text-primary" />
+          {t.location}
+        </p>
+        <a
+          href="mailto:aarxnmendezz@gmail.com"
+          title={t.mailTitle}
+          class="flex flex-row gap-2 justify-center items-center !text-background hover:underline"
+          aria-label={t.mailLabel}
+        >
+          <Icons name="mail" size={20} class="text-primary" />
+          aarxnmendezz@gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

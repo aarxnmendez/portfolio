@@ -1,0 +1,106 @@
+---
+import NavLink from "@/components/ui/NavLink.astro";
+
+interface Props {
+  lang: "en" | "es";
+}
+
+const { lang }: Props = Astro.props;
+
+const t =
+  lang === "en"
+    ? (await import("@/content/en/layout")).layoutContent
+    : (await import("@/content/es/layout")).layoutContent;
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm transition-transform duration-300 ease-out"
+  id="navbar"
+>
+  <div class="flex justify-center items-center py-7.5 px-10">
+    <div class="relative w-full max-w-[1140px]">
+      <div
+        class="absolute left-0 top-1/2 -translate-y-1/2 flex items-center gap-4"
+      >
+        <a href="/" class="flex items-center">
+          <img
+            src="/logo-white.svg"
+            alt="Aaron Mendez Logo"
+            class="h-7 w-auto"
+          />
+        </a>
+
+        <div class="h-5 w-px bg-surface/30"></div>
+
+        <a
+          href="#"
+          id="lang-switch"
+          class="text-primary hover:text-surface transition-colors duration-200"
+          title={t.navLanguage}
+        >
+          {lang === "es" ? "ES" : "EN"}
+        </a>
+      </div>
+
+      <div class="flex justify-center items-center">
+        <nav
+          class="flex gap-6 px-8 py-2 rounded-full bg-background border border-surface/10"
+        >
+          <NavLink href="#tools" icon="tools" label={t.navTools} />
+          <NavLink
+            href="#experience"
+            icon="experience"
+            label={t.navExperience}
+          />
+          <NavLink href="#projects" icon="projects" label={t.navProjects} />
+          <NavLink href="#education" icon="education" label={t.navEducation} />
+          <NavLink href="#about" icon="user" label={t.navAbout} />
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  let lastScrollY = window.scrollY;
+  let isNavVisible = true;
+  const navbar = document.getElementById("navbar") as HTMLElement | null;
+  const threshold = 50;
+
+  function updateNavbar() {
+    if (!navbar) return;
+
+    const currentScrollY = window.scrollY;
+    const scrollDifference = Math.abs(currentScrollY - lastScrollY);
+
+    if (scrollDifference < threshold) return;
+
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      if (isNavVisible) {
+        navbar.style.transform = "translateY(-100%)";
+        isNavVisible = false;
+      }
+    } else if (currentScrollY < lastScrollY) {
+      if (!isNavVisible) {
+        navbar.style.transform = "translateY(0)";
+        isNavVisible = true;
+      }
+    }
+
+    lastScrollY = currentScrollY;
+  }
+
+  // Throttle scroll events for better performance
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        updateNavbar();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }
+
+  window.addEventListener("scroll", onScroll);
+</script>

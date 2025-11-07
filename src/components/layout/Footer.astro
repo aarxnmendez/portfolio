@@ -1,0 +1,26 @@
+---
+interface Props {
+  lang: "en" | "es";
+}
+
+const { lang }: Props = Astro.props;
+
+const t =
+  lang === "en"
+    ? (await import("@/content/en/layout")).layoutContent
+    : (await import("@/content/es/layout")).layoutContent;
+---
+
+<footer class="flex justify-center items-center py-20">
+  <small class="text-[1rem]">
+    <span class="opacity-50">2025 | {t.footerPoweredBy}</span>
+    <a
+      href="https://astro.build/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-primary hover:underline"
+    >
+      Astro
+    </a>
+  </small>
+</footer>
