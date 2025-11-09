@@ -9,8 +9,8 @@ const { lang } = Astro.props;
 
 const content =
   lang === "en"
-    ? (await import("@/content/en/education")).content
-    : (await import("@/content/es/education")).content;
+    ? (await import("@/data/en/education")).content
+    : (await import("@/data/es/education")).content;
 ---
 
 <!-- Education Section -->

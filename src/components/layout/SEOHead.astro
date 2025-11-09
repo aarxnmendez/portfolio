@@ -8,8 +8,8 @@ const { lang, siteUrl }: Props = Astro.props;
 
 const t =
   lang === "en"
-    ? (await import("@/content/en/layout")).layoutContent
-    : (await import("@/content/es/layout")).layoutContent;
+    ? (await import("@/data/en/layout")).layoutContent
+    : (await import("@/data/es/layout")).layoutContent;
 
 interface SeoData {
   title: string;

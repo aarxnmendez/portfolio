@@ -9,8 +9,8 @@ const { lang } = Astro.props;
 
 const content =
   lang === "en"
-    ? (await import("@/content/en/experience")).experienceContent
-    : (await import("@/content/es/experience")).experienceContent;
+    ? (await import("@/data/en/experience")).experienceContent
+    : (await import("@/data/es/experience")).experienceContent;
 ---
 
 <!-- Experience Section -->

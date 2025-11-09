@@ -13,8 +13,8 @@ const { lang } = Astro.props;
 
 const content =
   lang === "en"
-    ? (await import("@/content/en/projects")).projectsContent
-    : (await import("@/content/es/projects")).projectsContent;
+    ? (await import("@/data/en/projects")).projectsContent
+    : (await import("@/data/es/projects")).projectsContent;
 
 // Map image names to actual imports
 const imageMap: Record<string, any> = {
