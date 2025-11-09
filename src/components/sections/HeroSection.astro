@@ -15,16 +15,20 @@ const content =
 
 <!-- Hero Section -->
 <article id="home" class="flex flex-col">
-  <h1>
+  <h1 class="text-center lg:text-left">
     {content.title}<br /><span class="opacity-15">{content.subtitle}</span>
   </h1>
-  <p class="mt-5 max-w-lg !text-lg">
+  <p
+    class="mt-5 max-w-lg !text-base lg:!text-lg text-center lg:text-left mx-auto lg:mx-0"
+  >
     {content.description}
   </p>
-  <nav class="flex flex-row flex-wrap mt-8 gap-4">
+  <nav
+    class="flex flex-row flex-wrap mt-8 gap-4 justify-center lg:justify-start"
+  >
     <a
       href="#contact"
-      class="relative flex flex-row gap-2 justify-center items-center px-3 py-2 text-white text-lg bg-primary rounded-xl overflow-hidden group z-0"
+      class="relative flex flex-row gap-2 justify-center items-center px-3 py-2 text-white text-base lg:text-lg bg-primary rounded-xl overflow-hidden group z-0"
       aria-label={content.cta.ariaLabel}
     >
       <span

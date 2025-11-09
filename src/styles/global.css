@@ -24,9 +24,13 @@ body {
 h1 {
   color: var(--color-surface);
   font-family: var(--font-display);
-  font-size: 5.75rem;
+  font-size: 5.25rem;
   font-weight: 700;
   line-height: 1;
+
+  @media (min-width: 1080px) {
+    font-size: 5.75rem;
+  }
 
   @media (min-width: 1280px) {
     font-size: 7rem;
@@ -36,17 +40,25 @@ h1 {
 h2 {
   color: var(--color-surface);
   font-family: var(--font-display);
-  font-size: 5.5rem;
+  font-size: 4.5rem;
   font-weight: 700;
   line-height: 1;
+
+  @media (min-width: 1080px) {
+    font-size: 5.5rem;
+  }
 }
 
 h3 {
   color: var(--color-surface);
   font-family: var(--font-display);
-  font-size: 1.625rem;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1;
+
+  @media (min-width: 1080px) {
+    font-size: 1.625rem;
+  }
 }
 
 p {

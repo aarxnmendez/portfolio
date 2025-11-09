@@ -13,9 +13,11 @@ const t =
     : (await import("@/data/es/layout")).layoutContent;
 ---
 
-<section class="flex w-min sticky top-25 self-start">
+<section
+  class="flex w-full lg:w-min lg:sticky lg:top-25 lg:self-start justify-center"
+>
   <div
-    class="flex flex-1 flex-col justify-between gap-5 py-7 px-5 h-fit w-85 bg-surface rounded-2xl"
+    class="flex flex-1 flex-col justify-between gap-5 py-7 px-5 h-fit w-full lg:w-85 bg-surface rounded-2xl"
   >
     <div class="flex flex-col justify-center items-center gap-5">
       <img
@@ -29,7 +31,7 @@ const t =
           {t.name}
         </h2>
         <p
-          class="!text-background/70 !opacity-100 !text-lg text-center !font-medium"
+          class="!text-background/70 !opacity-100 !text-lg text-center !font-medium max-w-2xs lg:max-w-none"
         >
           {t.cardDescription}
         </p>

@@ -15,10 +15,10 @@ const content =
 
 <!-- Technologies Section -->
 <article id="tools" class="flex flex-col gap-5">
-  <h2>
+  <h2 class="text-center lg:text-left">
     {content.title}<br /><span class="opacity-15">{content.subtitle}</span>
   </h2>
-  <div class="grid grid-cols-2 gap-2.5">
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 gap-2.5">
     {
       content.technologies.map((tech) => (
         <div class="flex flex-row flex-nowrap items-center justify-start gap-4 p-4">
