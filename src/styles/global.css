@@ -10,6 +10,11 @@
   --color-warning: #f6ae2d;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(from var(--color-surface) r g b / 0.3) var(--color-background);
+}
+
 body {
   font-family: var(--font-sans);
 }
