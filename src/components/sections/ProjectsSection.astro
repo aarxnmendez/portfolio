@@ -33,7 +33,7 @@ const imageMap: Record<string, any> = {
     {
       content.projects.map((project) => (
         <div class="group flex flex-row gap-5 py-6 px-4">
-          <div class="relative h-50 bg-surface rounded-xl aspect-[3/2] overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out">
+          <div class="relative h-40 xl:h-50 bg-surface rounded-xl aspect-[3/2] overflow-hidden hover:scale-105 transition-transform duration-300 ease-in-out">
             <img
               src={imageMap[project.image].src}
               alt={project.imageAlt}
@@ -53,7 +53,7 @@ const imageMap: Record<string, any> = {
               <h3>{project.name}</h3>
             </div>
             <div class="flex flex-col justify-between h-full w-full">
-              <ul class="flex flex-wrap gap-2">
+              <ul class="hidden xl:flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
                   <li>
                     <span class="flex items-center gap-1.5 rounded-full bg-surface/20 text-[11px] text-surface/70 py-1 px-2">

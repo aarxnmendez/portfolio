@@ -8,6 +8,8 @@
   --color-surface: #fafffd;
   --color-secondary: #23ce6b;
   --color-warning: #f6ae2d;
+  --breakpoint-lg: 1080px;
+  --breakpoint-2xl: 1440px;
 }
 
 * {
@@ -22,9 +24,13 @@ body {
 h1 {
   color: var(--color-surface);
   font-family: var(--font-display);
-  font-size: 7rem;
+  font-size: 5.75rem;
   font-weight: 700;
   line-height: 1;
+
+  @media (min-width: 1280px) {
+    font-size: 7rem;
+  }
 }
 
 h2 {
