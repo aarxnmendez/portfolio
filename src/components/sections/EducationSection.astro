@@ -14,28 +14,30 @@ const content =
 ---
 
 <!-- Education Section -->
-<article id="education" class="flex flex-col gap-5">
+<article id="education" class="flex flex-col gap-5 pl-2 md:pl-0">
   <h2 class="text-center lg:text-left">
     {content.title}<br /><span class="opacity-15">{content.subtitle}</span>
   </h2>
-  <div class="relative flex flex-col gap-20 mt-6 pt-8">
+  <div
+    class="relative flex flex-col gap-12 md:gap-20 mt-6 pt-8 max-w-lg md:max-w-none mx-auto md:mx-0"
+  >
     <!-- Timeline Line -->
     <div
-      class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-surface/20 -translate-x-1/2"
+      class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-surface/20 md:-translate-x-1/2"
       aria-hidden="true"
     >
     </div>
 
     {
       content.education.map((edu) => (
-        <div class="relative grid grid-cols-2 gap-12 items-start group">
+        <div class="relative md:grid md:grid-cols-2 md:gap-12 md:items-start group">
           {edu.position === "right" ? (
             <>
-              <div class="flex flex-col items-end pr-4">
+              <div class="hidden md:flex flex-col items-end pr-4">
                 <p class="!text-sm">{edu.period}</p>
               </div>
-              <div class="flex flex-col gap-3 pl-4">
-                <div class="flex flex-col gap-1">
+              <div class="flex flex-col gap-2 md:gap-3 pl-6 md:pl-4 py-4 md:py-0">
+                <div class="flex flex-col gap-1 md:gap-2">
                   <h3>{edu.degree}</h3>
                   <div class="flex items-center gap-1.5">
                     <Icons name="education" size={14} class="opacity-50" />
@@ -43,27 +45,29 @@ const content =
                   </div>
                 </div>
                 <p>{edu.description}</p>
+                <p class="!text-sm md:hidden">{edu.period}</p>
               </div>
             </>
           ) : (
             <>
-              <div class="flex flex-col gap-3 text-right pr-4">
-                <div class="flex flex-col gap-1">
+              <div class="flex flex-col gap-2 md:gap-3 pl-6 md:pl-0 md:pr-4 md:text-right py-4 md:py-0">
+                <div class="flex flex-col gap-1 md:gap-2">
                   <h3>{edu.degree}</h3>
-                  <div class="flex items-center gap-1.5 justify-end">
-                    <p class="!text-sm">{edu.institution}</p>
+                  <div class="flex items-center gap-1.5 md:justify-end">
                     <Icons name="education" size={14} class="opacity-50" />
+                    <p class="!text-sm md:order-first">{edu.institution}</p>
                   </div>
                 </div>
                 <p>{edu.description}</p>
+                <p class="!text-sm md:hidden">{edu.period}</p>
               </div>
-              <div class="flex flex-col pl-4">
+              <div class="hidden md:flex flex-col items-start pl-4">
                 <p class="!text-sm">{edu.period}</p>
               </div>
             </>
           )}
           <div
-            class="absolute left-1/2 top-1 w-3 h-3 rounded-full bg-primary ring-4 ring-background -translate-x-1/2 transition-transform duration-300 group-hover:scale-125"
+            class="absolute -left-[4.5px] md:left-1/2 top-5 md:top-1 w-3 h-3 rounded-full bg-primary ring-4 ring-background md:-translate-x-1/2 transition-transform duration-300 group-hover:scale-125"
             aria-hidden="true"
           />
         </div>

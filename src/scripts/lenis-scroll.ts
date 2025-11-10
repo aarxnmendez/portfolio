@@ -2,7 +2,10 @@ import Lenis from "lenis";
 import "lenis/dist/lenis.css";
 
 const getOffset = () => {
-  return window.innerWidth >= 1080 ? -100 : -80;
+  const width = window.innerWidth;
+  if (width < 768) return -60; // Móvil
+  if (width < 1080) return -80; // Tablet
+  return -100; // Desktop
 };
 
 let lenis = new Lenis({

@@ -13,7 +13,8 @@ export interface Props {
     | "github"
     | "link"
     | "user"
-    | "message";
+    | "message"
+    | "arrow-right";
   size?: number;
   color?: string;
   class?: string;
@@ -52,6 +53,8 @@ const icons = {
   user: `<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />`,
 
   message: `<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 9h8" /><path d="M8 13h6" /><path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z" />`,
+
+  "arrow-right": `<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M13 18l6 -6" /><path d="M13 6l6 6" />`,
 };
 
 const iconContent = icons[name];
