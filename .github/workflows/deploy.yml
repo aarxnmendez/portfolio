@@ -7,11 +7,14 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -34,4 +37,4 @@ jobs:
           cp -r dist/* .
           git add .
           git commit -m "Deploy: ${{ github.sha }}"
-          git push origin temp-production:production --force
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/aarxnmendez/portfolio.git temp-production:production --force
