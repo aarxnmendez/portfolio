@@ -34,7 +34,12 @@ jobs:
           git config --global user.email "actions@github.com"
           git checkout --orphan temp-production
           git rm -rf .
-          cp -r dist/* .
+          # Mover TODO de dist/ a raíz
+          mv dist/* .
+          # Eliminar explícitamente lo que NO queremos
+          rm -rf .astro
+          rm -rf node_modules
+          rm -rf dist
           git add .
           git commit -m "Deploy: ${{ github.sha }}"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/aarxnmendez/portfolio.git temp-production:production --force
