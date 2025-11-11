@@ -2,7 +2,7 @@ export const content = {
   title: "CONTACT",
   description:
     "Always looking for opportunities to make an impact. If you've got something in mind or just want to chat, drop me a line.",
-  email: "aarxnmendezz@gmail.com",
+  email: "info@aaronmendez.es",
   socialLinks: [
     {
       name: "linkedin",

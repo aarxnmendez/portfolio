@@ -2,7 +2,7 @@ export const content = {
   title: "CONTACTO",
   description:
     "Siempre buscando oportunidades donde pueda aportar valor. Si tienes algo en mente o simplemente quieres charlar, escríbeme.",
-  email: "aarxnmendezz@gmail.com",
+  email: "info@aaronmendez.es",
   socialLinks: [
     {
       name: "linkedin",
