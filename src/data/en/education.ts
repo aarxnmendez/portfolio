@@ -7,7 +7,7 @@ export const content = {
       degree: "Computer Engineering",
       institution: "University of A Coruña",
       description:
-        "University degree in computer engineering with a focus on software development and information technologies.",
+        "University degree focused on software development, data structures, databases, and core computer engineering principles.",
       position: "right",
     },
     {
@@ -15,7 +15,7 @@ export const content = {
       degree: "Web Development",
       institution: "IES Fernando Wirtz",
       description:
-        "Higher education cycle specialized in full stack web development, including frontend, backend and databases.",
+        "Higher vocational training specialized in full stack web development, including frontend, backend and database management.",
       position: "left",
     },
   ],

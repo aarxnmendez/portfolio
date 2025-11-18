@@ -3,11 +3,11 @@ export const experienceContent = {
   subtitle: "LABORAL",
   experiences: [
     {
-      period: "Abr 2025 - Presente",
-      company: "Clink Web Value",
+      period: "Abr 2025 - Jun 2025",
+      company: "Click Web Value SL",
       url: "https://clink.es/",
       description:
-        "Desarrollo y mantenimiento de sitios web para diversos sectores. Mejora de experiencias de usuario y colaboración en proyectos de alcance global.",
+        "Prácticas profesionales desarrollando páginas corporativas, landings y funcionalidades a medida. Trabajo con WordPress/Elementor, PHP, JavaScript, HTML/CSS y metodologías ágiles.",
       position: "right",
     },
   ],

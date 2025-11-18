@@ -1,7 +1,4 @@
 export const layoutContent = {
-  header: "This is the header",
-  footerMadeBy: "Made by",
-  footerName: "Aaron Mendez",
   footerPoweredBy: "Powered by",
   footerTech: "Astro",
   profileAlt: "Aaron Mendez - Web Developer",
@@ -25,6 +22,10 @@ export const layoutContent = {
     "Tailwind CSS",
     "MySQL",
     "Git",
-    "Web Development",
+    "Web Depelopment",
+    "React",
+    "WordPress",
+    "Elementor",
+    "Figma",
   ],
 } as const;

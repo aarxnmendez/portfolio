@@ -6,9 +6,9 @@ export const projectsContent = {
       name: "SHA Wellness Clinic",
       image: "shawellness",
       imageAlt: "Captura de pantalla de la página de SHA Wellness Clinic",
-      technologies: ["Wordpress", "PHP", "JavaScript"],
+      technologies: ["WordPress", "PHP", "JavaScript"],
       description:
-        "Sitio web oficial de SHA Wellness Clinic, centro de bienestar líder internacional con presencia en España, México y Arabia Saudí.",
+        "Mantenimiento y mejoras del sitio oficial de SHA Wellness Clinic, un referente internacional en bienestar con sedes en España, México y Arabia Saudí.",
       links: [
         {
           type: "demo",
@@ -21,9 +21,9 @@ export const projectsContent = {
       name: "Leyma Basquet Coruña",
       image: "basquetcoruna",
       imageAlt: "Captura de pantalla de la página de Leyma Basquet Coruña",
-      technologies: ["Wordpress", "Elementor", "WPML"],
+      technologies: ["WordPress", "Elementor", "WPML"],
       description:
-        "Sitio web oficial del equipo de baloncesto Leyma Coruña con diseño moderno y contenido multiidioma.",
+        "Rediseño completo del sitio oficial del Leyma Básquet Coruña, creando una web más moderna, rápida y visualmente atractiva para mejorar la experiencia de los aficionados.",
       links: [
         {
           type: "demo",
@@ -38,7 +38,7 @@ export const projectsContent = {
       imageAlt: "Captura de pantalla de la página de Macbook",
       technologies: ["Tailwind", "React", "ThreeJS", "GSAP"],
       description:
-        "Landing page del MacBook Pro 2024 desarrollada con React, Three.js y GSAP para aprender animaciones y renderizado 3D.",
+        "Landing 3D del MacBook Pro 2024 creada con React, Three.js y GSAP como proyecto de aprendizaje en animación y renderizado 3D.",
       links: [
         {
           type: "github",

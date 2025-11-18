@@ -3,11 +3,11 @@ export const experienceContent = {
   subtitle: "PATH",
   experiences: [
     {
-      period: "Apr 2025 - Present",
-      company: "Clink Web Value",
+      period: "Apr 2025 - Jun 2025",
+      company: "Click Web Value SL",
       url: "https://clink.es/",
       description:
-        "Web development and maintenance across diverse industries. Enhancing user experiences, implementing custom solutions, and collaborating on global projects.",
+        "Internship focused on developing corporate websites, landing pages, and custom features. Worked with WordPress/Elementor, PHP, JavaScript, HTML/CSS, and agile methodologies.",
       position: "right",
     },
   ],

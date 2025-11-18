@@ -7,7 +7,7 @@ export const content = {
       degree: "Ingeniería Informática",
       institution: "Universidad de A Coruña",
       description:
-        "Grado universitario en ingeniería informática con enfoque en desarrollo de software y tecnologías de la información.",
+        "Grado universitario orientado al desarrollo de software, estructuras de datos, bases de datos y fundamentos de ingeniería informática.",
       position: "right",
     },
     {
@@ -15,7 +15,7 @@ export const content = {
       degree: "Desarrollo Web",
       institution: "IES Fernando Wirtz",
       description:
-        "Ciclo formativo de grado superior especializado en desarrollo web full stack, incluyendo frontend, backend y bases de datos.",
+        "Ciclo formativo de grado superior especializado en desarrollo web full stack, incluyendo frontend, backend y gestión de bases de datos.",
       position: "left",
     },
   ],

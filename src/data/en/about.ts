@@ -2,8 +2,8 @@ export const content = {
   title: "WHO AM I?",
   subtitle: "MY STORY",
   paragraphs: [
-    "I'm Aarón Méndez, born in A Coruña, Galicia. I've been in front of a computer since I was young. I started with Excel, organizing schoolwork. I've always liked having everything well structured, order is something that defines me. Later, in high school, the ICT subject introduced me to Scratch and programming. It was the only subject where I'd lose track of time. That's when I knew this was my thing.",
-    "Now I'm studying **Computer Engineering** and I've already completed a higher vocational training in Web Application Development. What excites me most is **modern, interactive frontend**: creating interfaces that not only work well, but hook you in.",
-    "I work with total focus on one thing at a time. No multitasking. Just focus and persistence until I get the result. About the future, I stay flexible: right now it's frontend, tomorrow it might be something else. And I like that uncertainty.",
+    "I'm Aarón Méndez, a web developer from A Coruña. I've been drawn to technology and structure from a young age, and programming became the place where both came together. In high school, the ICT class introduced me to Scratch — it was the only class where time seemed to fly.",
+    "I'm currently studying **Computer Engineering** and have completed a higher vocational degree in Web Application Development. I'm especially interested in **modern, interactive frontend**, where design and functionality meet.",
+    "I work with strong focus and clarity, tackling one task at a time and enjoying both the process and the result. I'm always learning and staying flexible—today it's frontend, tomorrow it might be a new challenge within development.",
   ],
 } as const;

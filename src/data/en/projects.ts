@@ -8,7 +8,7 @@ export const projectsContent = {
       imageAlt: "Screenshot of SHA Wellness Clinic website",
       technologies: ["Wordpress", "PHP", "JavaScript"],
       description:
-        "Official website of SHA Wellness Clinic, leading international wellness center with presence in Spain, Mexico, and Saudi Arabia.",
+        "Maintenance and improvements of the official SHA Wellness Clinic website, a leading international wellness center with locations in Spain, Mexico, and Saudi Arabia.",
       links: [
         {
           type: "demo",
@@ -23,7 +23,7 @@ export const projectsContent = {
       imageAlt: "Screenshot of Leyma Basquet Coruña website",
       technologies: ["Wordpress", "Elementor", "WPML"],
       description:
-        "Official website of Leyma Coruña basketball team with modern design and multilingual content.",
+        "Complete redesign of the official Leyma Básquet Coruña website, delivering a more modern, faster, and visually engaging experience for fans.",
       links: [
         {
           type: "demo",
@@ -38,7 +38,7 @@ export const projectsContent = {
       imageAlt: "Screenshot of MacBook landing page",
       technologies: ["Tailwind", "React", "ThreeJS", "GSAP"],
       description:
-        "MacBook Pro 2024 landing page built with React, Three.js, and GSAP to learn 3D animations and rendering.",
+        "3D landing page for the MacBook Pro 2024 built with React, Three.js, and GSAP created as a learning project to explore animation and real-time 3D rendering.",
       links: [
         {
           type: "github",

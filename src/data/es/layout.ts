@@ -1,7 +1,4 @@
 export const layoutContent = {
-  header: "Este es el header",
-  footerMadeBy: "Hecho por",
-  footerName: "Aarón Méndez",
   footerPoweredBy: "Desarrollado con",
   footerTech: "Astro",
   profileAlt: "Aarón Méndez - Desarrollador Web",
@@ -26,5 +23,9 @@ export const layoutContent = {
     "MySQL",
     "Git",
     "Desarrollo Web",
+    "React",
+    "WordPress",
+    "Elementor",
+    "Figma",
   ],
 } as const;
