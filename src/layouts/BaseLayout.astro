@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import type { Lang } from '../data/portfolioData';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+
+const siteBase = Astro.site ?? Astro.url;
+
+function getLocaleAbsoluteUrl(locale: Lang): string {
+  const path = getRelativeLocaleUrl(locale);
+  return new URL(path, siteBase).href;
+}
+
+const esUrl = getLocaleAbsoluteUrl('es');
+const enUrl = getLocaleAbsoluteUrl('en');
+const canonicalUrl = lang === 'en' ? enUrl : esUrl;
+const ogImage = new URL('/favicon.svg', siteBase).href;
+---
+
+<html class="light" lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={esUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500&family=Courier+Prime&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-body-md text-on-surface text-base max-w-full overflow-x-hidden">
+    <a
+      href="#hero"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-black focus:text-white focus:px-4 focus:py-2 focus:font-label-mono focus:text-xs focus:uppercase"
+    >
+      {lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}
+    </a>
+    <div class="max-w-7xl mx-auto w-full min-w-0 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
+      <slot />
+    </div>
+  </body>
+</html>

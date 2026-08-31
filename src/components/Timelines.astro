@@ -1,0 +1,37 @@
+---
+import { getContent, type Lang } from '../data/portfolioData';
+import TimelineItem from './TimelineItem.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getContent(lang).timelines;
+---
+
+<section id="timelines" class="pt-8 pb-section-padding border-t border-black">
+  <h2 class="section-title border-b-2 border-black mb-6 pb-2">{t.sectionTitle}</h2>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-black">
+    <div class="p-6 sm:p-8 lg:border-r border-black">
+      <h3 class="section-subtitle border-b border-black mb-6 pb-2">{t.educationTitle}</h3>
+      <div class="relative">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-black ml-4" aria-hidden="true"></div>
+        <div class="space-y-8">
+          {t.education.map((entry) => <TimelineItem entry={entry} />)}
+        </div>
+      </div>
+    </div>
+
+    <div class="p-6 sm:p-8 border-t lg:border-t-0 border-black">
+      <h3 class="section-subtitle border-b border-black mb-6 pb-2">{t.workTitle}</h3>
+      <div class="relative">
+        <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-black ml-4" aria-hidden="true"></div>
+        <div class="space-y-8">
+          {t.work.map((entry) => <TimelineItem entry={entry} />)}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

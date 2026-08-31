@@ -1,0 +1,89 @@
+---
+import { getContent, type Lang } from '../data/portfolioData';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getContent(lang).works;
+---
+
+<section id="works" class="border-double-thick pt-8 pb-section-padding">
+  <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-2 mb-6">
+    <h2 class="section-title">{t.title}</h2>
+    <span class="font-label-mono uppercase text-xs">{t.pageLabel}</span>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border border-black">
+    {
+      t.projects.map((project, index) => (
+        <article
+          class:list={[
+            'group flex flex-col border-black hover:bg-black/[0.03] transition-colors',
+            index === 0 && 'border-b md:border-b-0 md:border-r',
+            index > 1 && index % 2 === 0 && 'md:border-r border-t md:border-t-0',
+            index > 1 && 'border-t',
+          ]}
+        >
+          <div class="project-preview aspect-[16/10] border-b border-black bg-black/[0.04] overflow-hidden">
+            {
+              project.imageUrl ? (
+                <img
+                  alt=""
+                  class="project-preview__media w-full h-full object-cover"
+                  src={project.imageUrl}
+                  loading="lazy"
+                />
+              ) : (
+                <div class="project-preview__media w-full h-full flex flex-col items-center justify-center p-6 text-center">
+                  <span class="font-label-mono text-[10px] uppercase mb-2 opacity-60">{project.number}</span>
+                  <span class="font-headline-md text-xl md:text-2xl uppercase leading-tight opacity-40">{project.category}</span>
+                </div>
+              )
+            }
+          </div>
+
+          <div class="p-5 sm:p-6 flex flex-col flex-1">
+            <span class="font-label-mono text-[10px] mb-3 block">{project.number}</span>
+            <h3 class="font-headline-md text-xl sm:text-2xl leading-tight mb-3 group-hover:underline">{project.title}</h3>
+            <p class="font-body-md text-secondary mb-5 text-pretty flex-1">{project.description}</p>
+
+            <div class="flex flex-wrap gap-1 mb-5">
+              {project.tags.map((tag) => (
+                <span class="px-1.5 py-0.5 border border-black font-label-mono text-[9px] uppercase">{tag}</span>
+              ))}
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-2 border-t border-black pt-4 mt-auto">
+              {
+                project.demoUrl && (
+                  <a
+                    class="btn-vintage btn-vintage--sm flex-1 text-center"
+                    href={project.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t.viewDemo}
+                  </a>
+                )
+              }
+              {
+                project.githubUrl && (
+                  <a
+                    class="btn-vintage btn-vintage--sm flex-1 text-center"
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t.codeGithub}
+                  </a>
+                )
+              }
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

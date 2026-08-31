@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import SelectedWorks from '../../components/SelectedWorks.astro';
+import Classifieds from '../../components/Classifieds.astro';
+import Timelines from '../../components/Timelines.astro';
+import EditorialExtra from '../../components/EditorialExtra.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import { getContent } from '../../data/portfolioData';
+
+const lang = 'en';
+const t = getContent(lang);
+---
+
+<BaseLayout lang={lang} title={t.meta.title} description={t.meta.description}>
+  <Header lang={lang} />
+  <main class="w-full min-w-0 mt-6 sm:mt-8">
+    <Hero lang={lang} />
+    <SelectedWorks lang={lang} />
+    <Classifieds lang={lang} />
+    <Timelines lang={lang} />
+    <EditorialExtra lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

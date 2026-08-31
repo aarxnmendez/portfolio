@@ -1,0 +1,35 @@
+---
+import { getContent, type Lang } from '../data/portfolioData';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getContent(lang).classifieds;
+---
+
+<section id="classifieds" class="border-double-thick pt-8 pb-section-padding">
+  <h2 class="section-title border-b-2 border-black mb-6 pb-2">{t.title}</h2>
+
+  <div class="border border-black bg-black/[0.03]">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+      {
+        t.categories.map((category, index) => (
+          <div
+            class:list={[
+              'p-5 sm:p-6 font-label-mono text-[12px] leading-snug',
+              index < t.categories.length - 1 && 'border-b md:border-b-0 md:border-r border-black',
+            ]}
+          >
+            <span class="font-black underline block mb-2 text-sm">{category.title}</span>
+            <p class="text-secondary">{category.description}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div class="border-t-2 border-black px-6 py-4 text-center">
+      <span class="font-label-mono text-[11px] font-black uppercase tracking-widest italic">{t.inquireRates}</span>
+    </div>
+  </div>
+</section>

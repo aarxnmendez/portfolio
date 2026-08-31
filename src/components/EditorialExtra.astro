@@ -1,0 +1,62 @@
+---
+import { getContent, type Lang } from '../data/portfolioData';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const editorial = getContent(lang).editorial;
+const extra = getContent(lang).extra;
+---
+
+<section id="editorial" class="border-t-2 border-black pt-8 pb-section-padding">
+  <h2 class="section-title border-b-2 border-black mb-8 pb-2">
+    {editorial.sectionTitle}
+  </h2>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-black">
+    <div class="p-6 sm:p-8 lg:border-r border-black lg:v-rule">
+      <h3 class="section-subtitle border-b-2 border-black mb-6 pb-2">{editorial.title}</h3>
+      <div class="space-y-4">
+        {
+          editorial.paragraphs.map((paragraph, index) => (
+            <p
+              class:list={[
+                'font-body-md text-secondary leading-relaxed text-pretty',
+                index === 0 && 'drop-cap text-on-surface',
+              ]}
+            >
+              {paragraph}
+            </p>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="p-6 sm:p-8 border-t lg:border-t-0 border-black">
+      <h3 class="section-subtitle border-b-2 border-black mb-6 pb-2">{extra.title}</h3>
+      <div class="space-y-6">
+        {
+          extra.items.map((item, index) => (
+            <div class:list={['flex gap-4', index < extra.items.length - 1 && 'border-b border-black/40 pb-4']}>
+              <span class="font-headline-lg text-4xl text-black/10 shrink-0">{item.number}</span>
+              <div>
+                <span
+                  class:list={[
+                    'font-label-mono text-[10px] px-2 py-0.5 uppercase mb-2 inline-block',
+                    item.badgeStyle === 'filled' ? 'bg-black text-white' : 'border border-black',
+                  ]}
+                >
+                  {item.badge}
+                </span>
+                <h4 class="font-headline-md text-lg sm:text-xl leading-tight mb-1 uppercase">{item.title}</h4>
+                <p class="font-caption text-secondary text-pretty">{item.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,273 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #eae6dc;
+  --color-background: #eae6dc;
+  --color-primary: #000000;
+  --color-secondary: #2d2d2d;
+  --color-on-surface: #1a1a1a;
+  --color-on-surface-variant: #404040;
+
+  --radius-DEFAULT: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-full: 9999px;
+
+  --spacing-gutter: 24px;
+  --spacing-section-padding: 80px;
+  --spacing-margin-edge: 40px;
+  --spacing-column-gap: 32px;
+  --spacing-unit: 4px;
+
+  --font-headline-lg: "Playfair Display", serif;
+  --font-caption: Inter, sans-serif;
+  --font-display-xl-mobile: "Playfair Display", serif;
+  --font-body-md: Inter, sans-serif;
+  --font-body-lg: Inter, sans-serif;
+  --font-headline-md: "Playfair Display", serif;
+  --font-display-xl: "Playfair Display", serif;
+  --font-label-mono: "Courier Prime", monospace;
+  --font-headline-lg-mobile: "Playfair Display", serif;
+
+  --text-headline-lg: 48px;
+  --text-headline-lg--line-height: 52px;
+  --text-headline-lg--font-weight: 900;
+  --text-headline-lg--letter-spacing: -0.02em;
+
+  --text-caption: 13px;
+  --text-caption--line-height: 18px;
+  --text-caption--font-weight: 400;
+
+  --text-display-xl-mobile: 42px;
+  --text-display-xl-mobile--line-height: 44px;
+  --text-display-xl-mobile--letter-spacing: -0.03em;
+  --text-display-xl-mobile--font-weight: 900;
+
+  --text-body-md: 15px;
+  --text-body-md--line-height: 22px;
+  --text-body-md--font-weight: 400;
+
+  --text-body-lg: 17px;
+  --text-body-lg--line-height: 24px;
+  --text-body-lg--font-weight: 400;
+
+  --text-headline-md: 28px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--font-weight: 900;
+  --text-headline-md--letter-spacing: -0.01em;
+
+  --text-display-xl: 92px;
+  --text-display-xl--line-height: 88px;
+  --text-display-xl--letter-spacing: -0.04em;
+  --text-display-xl--font-weight: 900;
+
+  --text-label-mono: 12px;
+  --text-label-mono--line-height: 16px;
+  --text-label-mono--letter-spacing: 0.02em;
+  --text-label-mono--font-weight: 500;
+
+  --text-headline-lg-mobile: 36px;
+  --text-headline-lg-mobile--line-height: 40px;
+  --text-headline-lg-mobile--font-weight: 900;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.hero-headline {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: clamp(1.75rem, 4.5vw, 3.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.section-subtitle {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+body {
+  background-color: #eae6dc;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Newsprint Texture Overlay — inline SVG, no external requests */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* Halftone / newsprint photo treatment */
+.halftone-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #eae6dc;
+  isolation: isolate;
+}
+
+.halftone-container .halftone-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.halftone-photo {
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.35) brightness(0.92);
+}
+
+.halftone-photo--subtle {
+  mix-blend-mode: normal;
+  filter: grayscale(0.15) contrast(1.05) brightness(1);
+}
+
+.halftone-photo--newsprint {
+  mix-blend-mode: multiply;
+  filter: grayscale(1) contrast(1.2) brightness(0.95);
+}
+
+.halftone-container--subtle::after {
+  opacity: 0.12;
+}
+
+.halftone-container--newsprint::after {
+  opacity: 0.4;
+}
+
+.halftone-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.5) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+/* Broadsheet Borders */
+.border-double-thick {
+  border-top: 6px double #000;
+}
+
+.border-double-bottom {
+  border-bottom: 4px double #000;
+}
+
+.border-dotted-custom {
+  border: 1px dotted #000;
+}
+
+.v-rule {
+  border-right: 1px solid rgba(0, 0, 0, 1);
+}
+
+/* Drop Cap */
+.drop-cap::first-letter {
+  float: left;
+  font-family: "Playfair Display", serif;
+  font-size: 4.5rem;
+  line-height: 0.85;
+  padding-right: 12px;
+  font-weight: 900;
+  color: #000;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::selection {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #eae6dc;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.btn-vintage {
+  display: inline-block;
+  font-family: "Courier Prime", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0.625rem 1rem;
+  border: 1px solid #000;
+  color: #000;
+  background-color: transparent;
+  transition: background-color 0.2s, color 0.2s;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.btn-vintage:hover {
+  background-color: #000;
+  color: #eae6dc;
+}
+
+.btn-vintage--primary {
+  background-color: #000;
+  color: #eae6dc;
+}
+
+.btn-vintage--primary:hover {
+  background-color: transparent;
+  color: #000;
+}
+
+.btn-vintage--sm {
+  font-size: 10px;
+  padding: 0.5rem 0.75rem;
+}
+
+.project-preview__media {
+  filter: grayscale(100%) contrast(120%);
+  opacity: 0.9;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+
+.group:hover .project-preview__media {
+  filter: none;
+  opacity: 1;
+}

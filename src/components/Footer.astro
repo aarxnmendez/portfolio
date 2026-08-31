@@ -1,0 +1,35 @@
+---
+import { getContent, type Lang } from '../data/portfolioData';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getContent(lang).footer;
+---
+
+<footer class="w-full bg-background border-t-4 border-black border-double pt-8 pb-12 md:pb-16 overflow-x-hidden">
+  <div class="w-full min-w-0 grid grid-cols-1 md:grid-cols-2 gap-gutter items-end">
+    <div>
+      <div class="font-headline-md font-black text-3xl text-primary mb-2 uppercase">{t.name}</div>
+      <p class="font-label-mono text-[10px] text-on-surface-variant max-w-sm">
+        {t.copyright}
+      </p>
+    </div>
+    <div class="flex flex-wrap gap-6 md:justify-end">
+      {
+        t.links.map((link) => (
+          <a
+            class="font-label-mono text-label-mono text-primary hover:underline uppercase font-bold"
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</footer>

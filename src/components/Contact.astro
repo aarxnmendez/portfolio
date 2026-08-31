@@ -1,0 +1,60 @@
+---
+import { getContent, type Lang } from '../data/portfolioData';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getContent(lang).contact;
+---
+
+<section id="contact" class="border-double-thick pt-8 pb-12">
+  <div class="mb-8">
+    <h2 class="section-title mb-2">{t.title}</h2>
+    <p class="font-body-lg text-secondary italic">
+      {t.subtitle}
+    </p>
+  </div>
+  <div class="flex flex-col items-center text-center py-12 border-y-4 border-black border-double">
+    <div class="mb-8">
+      <h3 class="font-label-mono text-[12px] font-black uppercase tracking-widest mb-4">{t.officeLabel}</h3>
+      <a
+        class="font-headline-md text-4xl md:text-6xl mb-6 tracking-tight block hover:underline"
+        href={`mailto:${t.email}`}
+      >
+        {t.email}
+      </a>
+      <button
+        type="button"
+        id="copy-email-btn"
+        class="px-8 py-3 border border-black font-label-mono text-[12px] uppercase font-bold hover:bg-black hover:text-white transition-all"
+        data-email={t.email}
+        data-success={t.copySuccess}
+      >
+        {t.copyButton}
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const btn = document.getElementById('copy-email-btn');
+  if (btn instanceof HTMLButtonElement) {
+    const email = btn.dataset.email ?? '';
+    const successLabel = btn.dataset.success ?? 'OK';
+    const defaultLabel = btn.textContent ?? '';
+
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        btn.textContent = successLabel;
+        window.setTimeout(() => {
+          btn.textContent = defaultLabel;
+        }, 2000);
+      } catch {
+        window.location.href = `mailto:${email}`;
+      }
+    });
+  }
+</script>
