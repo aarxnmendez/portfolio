@@ -5,6 +5,7 @@ dist/
 
 # dependencies
 node_modules/
+.pnpm-store/
 
 # logs
 npm-debug.log*
@@ -20,5 +21,7 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# jetbrains setting folder
-.idea/
+# Personal assets (use local copies, not committed)
+public/aaron-mendez.jpeg
+src/assets/aaron-mendez.jpeg
+public/cv-aaron-mendez.pdf
