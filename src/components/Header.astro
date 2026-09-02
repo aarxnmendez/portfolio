@@ -9,7 +9,7 @@ const { lang } = Astro.props;
 const t = getContent(lang).header;
 ---
 
-<header class="w-full bg-background pt-4 sm:pt-6 md:pt-8 overflow-x-hidden">
+<header class="w-full bg-background pt-4 sm:pt-6 md:pt-8">
   <div class="w-full min-w-0">
     <div class="flex justify-between items-center gap-3 border-b border-black pb-1 mb-1 font-label-mono text-[10px] uppercase min-w-0">
       <span class="shrink-0">{t.vol}</span>
@@ -84,27 +84,209 @@ const t = getContent(lang).header;
         <p class="font-label-mono text-xs uppercase leading-snug">{t.location}</p>
       </div>
     </div>
-
-    <nav class="py-2 border-b-4 border-black border-double w-full min-w-0" aria-label="Main navigation">
-      <div class="w-full min-w-0 -mx-1 px-1 overflow-x-auto no-scrollbar md:overflow-visible">
-        <div class="flex gap-4 md:gap-gutter items-center whitespace-nowrap md:flex-wrap">
-          {
-            t.nav.map((item, index) => (
-              <a
-                class:list={[
-                  'font-label-mono text-label-mono py-1 uppercase shrink-0 transition-colors duration-200',
-                  index === 0
-                    ? 'text-primary font-bold border-b-2 border-black hover:bg-primary hover:text-background'
-                    : 'text-secondary hover:text-primary',
-                ]}
-                href={item.href}
-              >
-                {item.label}
-              </a>
-            ))
-          }
-        </div>
-      </div>
-    </nav>
   </div>
 </header>
+
+<nav
+  class="site-nav sticky top-0 z-[60] bg-background py-2 border-b-4 border-black border-double w-full min-w-0"
+  aria-label="Main navigation"
+>
+  <div class="w-full min-w-0 -mx-1 px-1 overflow-x-auto no-scrollbar md:overflow-visible">
+    <div class="flex gap-4 md:gap-gutter items-center whitespace-nowrap md:flex-wrap">
+      {
+        t.nav.map((item) => (
+          <a
+            class="site-nav__link shrink-0"
+            href={item.href}
+            data-nav-link
+            data-section={item.href.replace('#', '')}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>
+
+<script>
+  const sectionIds = ['works', 'classifieds', 'timelines', 'editorial', 'contact'];
+  const contactSectionId = 'contact';
+  const scrollMarginExtra = 20;
+
+  let isClickScrolling = false;
+  let clickScrollTimer: ReturnType<typeof setTimeout> | undefined;
+  let scrollSpyInitialized = false;
+
+  function getNavHeight(): number {
+    const nav = document.querySelector('.site-nav');
+    return nav?.getBoundingClientRect().height ?? 48;
+  }
+
+  function updateNavMetrics(): void {
+    const navHeight = getNavHeight();
+    document.documentElement.style.setProperty('--site-nav-height', `${navHeight}px`);
+  }
+
+  function getNavOffset(): number {
+    return getNavHeight() + scrollMarginExtra;
+  }
+
+  function isAtPageBottom(): boolean {
+    return window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 10;
+  }
+
+  function setActiveSection(id: string): void {
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]').forEach((link) => {
+      const isActive = link.dataset.section === id;
+      link.classList.toggle('is-active', isActive);
+      if (isActive) {
+        link.setAttribute('aria-current', 'true');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  function waitForScrollEnd(onComplete: () => void): void {
+    if ('onscrollend' in window) {
+      const handleScrollEnd = () => {
+        window.removeEventListener('scrollend', handleScrollEnd);
+        onComplete();
+      };
+      window.addEventListener('scrollend', handleScrollEnd, { once: true });
+      return;
+    }
+
+    let lastScrollY = window.scrollY;
+    let stableFrames = 0;
+
+    const poll = window.setInterval(() => {
+      if (window.scrollY === lastScrollY) {
+        stableFrames += 1;
+        if (stableFrames >= 3) {
+          window.clearInterval(poll);
+          onComplete();
+        }
+        return;
+      }
+
+      stableFrames = 0;
+      lastScrollY = window.scrollY;
+    }, 50);
+
+    window.setTimeout(() => {
+      window.clearInterval(poll);
+      onComplete();
+    }, 1200);
+  }
+
+  function initNavScrollSpy(): void {
+    if (scrollSpyInitialized) return;
+
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (sections.length === 0) return;
+
+    scrollSpyInitialized = true;
+    updateNavMetrics();
+
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+
+    const updateActiveFromScroll = (): void => {
+      if (isClickScrolling) return;
+
+      if (isAtPageBottom()) {
+        setActiveSection(contactSectionId);
+        return;
+      }
+
+      const offset = getNavOffset();
+      let currentId = sectionIds[0];
+
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= offset) {
+          currentId = section.id;
+        }
+      }
+
+      setActiveSection(currentId);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (isClickScrolling) return;
+
+        if (isAtPageBottom()) {
+          setActiveSection(contactSectionId);
+          return;
+        }
+
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id);
+          return;
+        }
+
+        updateActiveFromScroll();
+      },
+      {
+        rootMargin: `-${getNavOffset()}px 0px -55% 0px`,
+        threshold: [0, 0.15, 0.35, 0.55, 0.75, 1],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        const sectionId = link.dataset.section;
+        if (!sectionId) return;
+
+        isClickScrolling = true;
+        setActiveSection(sectionId);
+
+        if (clickScrollTimer) window.clearTimeout(clickScrollTimer);
+
+        waitForScrollEnd(() => {
+          isClickScrolling = false;
+          if (isAtPageBottom()) {
+            setActiveSection(contactSectionId);
+          } else {
+            updateActiveFromScroll();
+          }
+        });
+
+        clickScrollTimer = window.setTimeout(() => {
+          isClickScrolling = false;
+        }, 1500);
+      });
+    });
+
+    const hash = window.location.hash.replace('#', '');
+    if (hash && sectionIds.includes(hash)) {
+      setActiveSection(hash);
+    } else {
+      updateActiveFromScroll();
+    }
+
+    window.addEventListener('scroll', updateActiveFromScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      updateNavMetrics();
+      observer.disconnect();
+      sections.forEach((section) => observer.observe(section));
+      updateActiveFromScroll();
+    });
+  }
+
+  initNavScrollSpy();
+  document.addEventListener('astro:page-load', () => {
+    scrollSpyInitialized = false;
+    initNavScrollSpy();
+  });
+</script>
