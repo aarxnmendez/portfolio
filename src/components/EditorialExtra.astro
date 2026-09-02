@@ -10,14 +10,14 @@ const editorial = getContent(lang).editorial;
 const extra = getContent(lang).extra;
 ---
 
-<section id="editorial" class="border-t-2 border-black pt-8 pb-section-padding">
-  <h2 class="section-title border-b-2 border-black mb-8 pb-2">
+<section id="editorial" class="section-block">
+  <h2 class="section-title section-heading">
     {editorial.sectionTitle}
   </h2>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-black">
     <div class="p-6 sm:p-8 lg:border-r border-black lg:v-rule">
-      <h3 class="section-subtitle border-b-2 border-black mb-6 pb-2">{editorial.title}</h3>
+      <h3 class="section-subtitle section-subtitle-rule">{editorial.title}</h3>
       <div class="space-y-4">
         {
           editorial.paragraphs.map((paragraph, index) => (
@@ -35,7 +35,7 @@ const extra = getContent(lang).extra;
     </div>
 
     <div class="p-6 sm:p-8 border-t lg:border-t-0 border-black">
-      <h3 class="section-subtitle border-b-2 border-black mb-6 pb-2">{extra.title}</h3>
+      <h3 class="section-subtitle section-subtitle-rule">{extra.title}</h3>
       <div class="space-y-6">
         {
           extra.items.map((item, index) => (

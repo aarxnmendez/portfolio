@@ -9,8 +9,8 @@ const { lang } = Astro.props;
 const t = getContent(lang).classifieds;
 ---
 
-<section id="classifieds" class="border-double-thick pt-8 pb-section-padding">
-  <h2 class="section-title border-b-2 border-black mb-6 pb-2">{t.title}</h2>
+<section id="classifieds" class="section-block">
+  <h2 class="section-title section-heading">{t.title}</h2>
 
   <div class="border border-black bg-black/[0.03]">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-0">

@@ -6,25 +6,18 @@ interface Props {
 }
 
 const { entry } = Astro.props;
+const isCurrent = /presente|present/i.test(entry.period);
 ---
 
-<div class="relative pl-12">
+<div class="timeline-item relative pl-12">
   <div
-    class="absolute left-0 top-1.5 w-8 h-8 bg-background border-2 border-black flex items-center justify-center"
+    class="timeline-item__node absolute left-0 top-1.5 w-8 h-8 bg-background border-2 border-black flex items-center justify-center"
     aria-hidden="true"
   >
-    <div class="w-2 h-2 bg-black rotate-45"></div>
+    {isCurrent && <div class="w-2 h-2 bg-black rotate-45"></div>}
   </div>
-  <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+  <div class="mb-2">
     <span class="font-label-mono text-[11px] font-black uppercase tracking-tighter">{entry.period}</span>
-    <span
-      class:list={[
-        'px-2 py-0.5 font-label-mono text-[9px] uppercase tracking-widest w-fit',
-        entry.tagStyle === 'filled' ? 'bg-black text-white' : 'border border-black',
-      ]}
-    >
-      {entry.tag}
-    </span>
   </div>
   <h4 class="font-headline-md text-lg sm:text-xl leading-tight mb-1">{entry.title}</h4>
   {entry.company && <p class="font-label-mono text-[11px] uppercase text-secondary mb-2">{entry.company}</p>}
