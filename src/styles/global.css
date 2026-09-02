@@ -218,6 +218,26 @@ body {
   scroll-margin-top: calc(var(--site-nav-height, 3rem) + 1.25rem);
 }
 
+.contact-section {
+  border-top: 4px double #000;
+  border-bottom: 4px double #000;
+}
+
+.classifieds-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 768px) {
+  .classifieds-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .classifieds-column {
+    min-height: 100%;
+  }
+}
+
 /* Newsprint Texture Overlay — inline SVG, no external requests */
 body::before {
   content: "";

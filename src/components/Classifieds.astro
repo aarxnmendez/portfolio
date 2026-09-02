@@ -12,13 +12,13 @@ const t = getContent(lang).classifieds;
 <section id="classifieds" class="section-block">
   <h2 class="section-title section-heading">{t.title}</h2>
 
-  <div class="border border-black bg-black/[0.03]">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-0">
+  <div class="classifieds-table border border-black bg-black/[0.03]">
+    <div class="classifieds-grid">
       {
         t.categories.map((category, index) => (
           <div
             class:list={[
-              'p-5 sm:p-6 font-label-mono text-[12px] leading-snug',
+              'classifieds-column p-5 sm:p-6 font-label-mono text-[12px] leading-snug min-w-0',
               index < t.categories.length - 1 && 'border-b md:border-b-0 md:border-r border-black',
             ]}
           >
@@ -27,9 +27,6 @@ const t = getContent(lang).classifieds;
           </div>
         ))
       }
-    </div>
-    <div class="border-t-2 border-black px-6 py-4 text-center">
-      <span class="font-label-mono text-[11px] font-black uppercase tracking-widest italic">{t.inquireRates}</span>
     </div>
   </div>
 </section>

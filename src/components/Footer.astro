@@ -9,7 +9,7 @@ const { lang } = Astro.props;
 const t = getContent(lang).footer;
 ---
 
-<footer class="w-full bg-background border-t-4 border-black border-double pt-8 pb-12 md:pb-16 overflow-x-hidden">
+<footer class="w-full bg-background pt-8 pb-12 md:pb-16 overflow-x-hidden">
   <div class="w-full min-w-0 grid grid-cols-1 md:grid-cols-2 gap-gutter items-end">
     <div>
       <div class="font-headline-md font-black text-3xl text-primary mb-2 uppercase">{t.name}</div>
