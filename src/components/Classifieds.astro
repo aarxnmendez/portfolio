@@ -22,8 +22,16 @@ const t = getContent(lang).classifieds;
               index < t.categories.length - 1 && 'border-b md:border-b-0 md:border-r border-black',
             ]}
           >
-            <span class="font-black underline block mb-2 text-sm">{category.title}</span>
-            <p class="text-secondary">{category.description}</p>
+            <span class="font-black underline block mb-3 text-sm">{category.title}</span>
+            <ul class="classifieds-skills flex flex-wrap gap-1.5 list-none">
+              {category.skills.map((skill) => (
+                <li>
+                  <span class="classifieds-skill-badge inline-block px-1.5 py-0.5 border border-black text-[10px] uppercase text-secondary bg-background">
+                    {skill}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         ))
       }
