@@ -40,11 +40,8 @@ const t = getContent(lang).hero;
       {t.lead}
     </p>
 
-    <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-4 mt-6">
-      <div class="flex flex-wrap gap-2 sm:gap-3">
-        <a class="btn-vintage btn-vintage--primary" href={personal.cvUrl} download>{t.cta.downloadCv}</a>
-        <a class="btn-vintage" href="#contact">{t.cta.contact}</a>
-      </div>
+    <div class="flex flex-wrap items-center gap-3 sm:gap-4 mt-6">
+      <a class="btn-vintage btn-vintage--primary" href={personal.cvUrl} download>{t.cta.downloadCv}</a>
       <div class="flex items-center gap-3 font-label-mono text-[11px] uppercase text-secondary">
         <a class="hover:text-primary hover:underline transition-colors" href={personal.github} target="_blank" rel="noopener noreferrer">{t.cta.github}</a>
         <span class="text-black/30" aria-hidden="true">|</span>
