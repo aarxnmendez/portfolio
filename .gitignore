@@ -23,5 +23,6 @@ pnpm-debug.log*
 
 # Personal assets (use local copies, not committed)
 public/aaron-mendez.jpeg
+public/images/aaron-mendez.jpeg
 src/assets/aaron-mendez.jpeg
 public/cv-aaron-mendez.pdf

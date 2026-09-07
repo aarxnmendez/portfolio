@@ -20,19 +20,25 @@ const isCurrent = /presente|present/i.test(entry.period);
     <span class="font-label-mono text-[11px] font-black uppercase tracking-tighter">{entry.period}</span>
   </div>
   <h4 class="font-headline-md text-lg sm:text-xl leading-tight mb-1">{entry.title}</h4>
-  {entry.company && <p class="font-label-mono text-[11px] uppercase text-secondary mb-2">{entry.company}</p>}
   {
-    entry.highlights && entry.highlights.length > 0 ? (
-      <ul class="font-body-md text-secondary leading-relaxed text-pretty space-y-1.5 list-none">
-        {entry.highlights.map((point) => (
-          <li class="flex gap-2">
-            <span class="font-label-mono text-[10px] shrink-0 mt-0.5">-</span>
-            <span>{point}</span>
-          </li>
-        ))}
-      </ul>
-    ) : (
-      entry.description && <p class="font-body-md text-secondary leading-relaxed text-pretty">{entry.description}</p>
+    entry.company && (
+      <p class="font-label-mono text-[11px] uppercase text-secondary mb-2">
+        {entry.url ? (
+          <a
+            class="timeline-company-link text-secondary hover:text-primary hover:underline transition-colors"
+            href={entry.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {entry.company}
+          </a>
+        ) : (
+          entry.company
+        )}
+      </p>
     )
   }
+  {entry.description && (
+    <p class="font-body-md text-secondary leading-relaxed text-pretty">{entry.description}</p>
+  )}
 </div>

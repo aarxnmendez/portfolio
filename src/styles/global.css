@@ -197,6 +197,7 @@ body {
   left: 1rem;
   top: 0;
   bottom: 0;
+  height: 100%;
   width: 2px;
   margin-left: -1px;
   background-color: #000;
@@ -236,6 +237,21 @@ body {
   .classifieds-column {
     min-height: 100%;
   }
+}
+
+.lead-story__frame {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.lead-story__figure-label {
+  letter-spacing: 0.08em;
+}
+
+.lead-story__image {
+  display: block;
+  filter: none;
+  opacity: 1;
+  image-rendering: auto;
 }
 
 /* Newsprint Texture Overlay — inline SVG, no external requests */

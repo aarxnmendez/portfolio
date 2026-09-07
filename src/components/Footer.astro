@@ -25,6 +25,7 @@ const t = getContent(lang).footer;
             href={link.href}
             target={link.href.startsWith('http') ? '_blank' : undefined}
             rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            aria-label={link.href.startsWith('http') ? `${link.label} (${lang === 'es' ? 'se abre en una nueva pestaña' : 'opens in a new tab'})` : undefined}
           >
             {link.label}
           </a>

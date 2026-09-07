@@ -13,22 +13,22 @@ const t = getContent(lang).timelines;
 <section id="timelines" class="section-block">
   <h2 class="section-title section-heading">{t.sectionTitle}</h2>
 
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-black">
-    <div class="p-6 sm:p-8 lg:border-r border-black">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-black lg:items-stretch">
+    <div class="p-6 sm:p-8 lg:border-r border-black flex flex-col min-h-full">
       <h3 class="section-subtitle section-subtitle-rule">{t.educationTitle}</h3>
-      <div class="relative">
+      <div class="relative flex-1 min-h-0">
         <div class="timeline-track" aria-hidden="true"></div>
-        <div class="space-y-8">
+        <div class="space-y-8 relative z-[1]">
           {t.education.map((entry) => <TimelineItem entry={entry} />)}
         </div>
       </div>
     </div>
 
-    <div class="p-6 sm:p-8 border-t lg:border-t-0 border-black">
+    <div class="p-6 sm:p-8 border-t lg:border-t-0 border-black flex flex-col min-h-full">
       <h3 class="section-subtitle section-subtitle-rule">{t.workTitle}</h3>
-      <div class="relative">
+      <div class="relative flex-1 min-h-0">
         <div class="timeline-track" aria-hidden="true"></div>
-        <div class="space-y-8">
+        <div class="space-y-8 relative z-[1]">
           {t.work.map((entry) => <TimelineItem entry={entry} />)}
         </div>
       </div>

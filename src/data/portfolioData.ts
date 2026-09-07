@@ -1,6 +1,5 @@
 /**
- * Mock portfolio data for development and public repository snapshots.
- * Replace with your real information in a local override or before deploying.
+ * Portfolio content and personal data.
  */
 
 export type Lang = 'es' | 'en';
@@ -19,21 +18,20 @@ export interface Project {
   githubUrl?: string;
   demoUrl?: string;
   imageUrl?: string;
+  imageAlt?: string;
 }
 
 export interface TimelineEntry {
   period: string;
-  tag: string;
-  tagStyle: 'filled' | 'outline';
   title: string;
   company?: string;
+  url?: string;
   description?: string;
-  highlights?: string[];
 }
 
 export interface SkillCategory {
   title: string;
-  description: string;
+  skills: string[];
 }
 
 export interface ExtraItem {
@@ -63,21 +61,25 @@ export interface PortfolioContent {
     name: string;
     location: string;
     nav: NavItem[];
+    navAriaLabel: string;
   };
   hero: {
     imageAlt: string;
+    imageUrl: string;
     headline: string;
     lead: string;
     cta: {
       downloadCv: string;
-      contact: string;
       github: string;
       linkedin: string;
+      downloadCvAriaLabel: string;
+      githubAriaLabel: string;
+      linkedinAriaLabel: string;
     };
   };
   works: {
     title: string;
-    pageLabel: string;
+    previewWatermark: string;
     projects: Project[];
     codeGithub: string;
     viewDemo: string;
@@ -85,7 +87,6 @@ export interface PortfolioContent {
   classifieds: {
     title: string;
     categories: SkillCategory[];
-    inquireRates: string;
   };
   timelines: {
     sectionTitle: string;
@@ -104,12 +105,11 @@ export interface PortfolioContent {
     items: ExtraItem[];
   };
   contact: {
-    title: string;
-    subtitle: string;
-    officeLabel: string;
     email: string;
     copyButton: string;
     copySuccess: string;
+    copyEmailAriaLabel: string;
+    emailAriaLabel: string;
   };
   footer: {
     name: string;
@@ -119,80 +119,86 @@ export interface PortfolioContent {
 }
 
 export const personal = {
-  name: 'John Doe',
-  email: 'contact@example.com',
-  github: 'https://github.com/johndoe',
-  linkedin: 'https://www.linkedin.com/in/johndoe',
-  cvUrl: '/cv-john-doe.pdf',
+  name: 'Aarón Méndez',
+  email: 'info@aaronmendez.es',
+  github: 'https://github.com/aarxnmendez',
+  linkedin: 'https://www.linkedin.com/in/aaronmendezz',
+  cvUrl: '/cv-aaron-mendez.pdf',
 };
 
 export const portfolioContent: Record<Lang, PortfolioContent> = {
   es: {
     meta: {
-      title: 'JOHN DOE | EL GACETILLA DE INGENIERÍA',
+      title: 'AARÓN MÉNDEZ | PORTFOLIO',
       description:
-        'Portfolio de John Doe, desarrollador web. Proyectos, trayectoria y contacto.',
+        'Portfolio de Aarón Méndez, estudiante de Ingeniería Informática y desarrollador web en A Coruña. Proyectos, trayectoria y contacto.',
     },
     header: {
       vol: 'VOL. 01 - NO. 01',
       est: 'EST. 2026',
       price: 'PRECIO: UNA LÍNEA DE CÓDIGO',
-      date: 'Marzo 2026',
+      date: 'Septiembre 2026',
       edition: 'Edición Inaugural',
-      name: 'JOHN DOE',
-      location: 'Ciudad Ejemplo, País',
+      name: 'AARÓN MÉNDEZ',
+      location: 'A Coruña, España',
       nav: [
         { label: 'PROYECTOS', href: '#works' },
         { label: 'TECNOLOGÍAS', href: '#classifieds' },
         { label: 'TRAYECTORIA', href: '#timelines' },
-        { label: 'EDITORIAL', href: '#editorial' },
+        { label: 'SOBRE MÍ', href: '#editorial' },
         { label: 'CONTACTO', href: '#contact' },
       ],
+      navAriaLabel: 'Navegación principal',
     },
     hero: {
-      imageAlt: 'Retrato de John Doe',
-      headline: 'DESARROLLADOR WEB & ESTUDIANTE DE INGENIERÍA',
-      lead: 'Desarrollador enfocado en proyectos full-stack, código mantenible y buenas prácticas. Abierto a colaboraciones y nuevas oportunidades.',
+      imageAlt: 'Retrato de Aarón Méndez',
+      imageUrl: '/images/aaron-mendez.jpeg',
+      headline: 'ESTUDIANTE DE INGENIERÍA INFORMÁTICA & DESARROLLADOR WEB',
+      lead: 'Desarrollador de software en A Coruña que compagina el grado en Ingeniería Informática con la creación de aplicaciones e interfaces web. Enfocado en la arquitectura de código, algoritmos eficientes y en construir software fiable y bien estructurado.',
       cta: {
         downloadCv: '[ DESCARGAR CV ]',
-        contact: '[ CONTACTAR ]',
         github: 'GitHub',
         linkedin: 'LinkedIn',
+        downloadCvAriaLabel: 'Descargar currículum en PDF',
+        githubAriaLabel: 'Abrir perfil de GitHub en una nueva pestaña',
+        linkedinAriaLabel: 'Abrir perfil de LinkedIn en una nueva pestaña',
       },
     },
     works: {
-      title: 'OBRAS SELECCIONADAS',
-      pageLabel: 'PÁGINA 01 - PROYECTOS',
+      title: 'PROYECTOS DESTACADOS',
+      previewWatermark: 'DSAVISION PREVIEW',
       projects: [
         {
-          number: 'NO. 001 / DESARROLLO WEB',
-          category: 'DESARROLLO WEB',
-          title: 'Proyecto Uno',
-          description: 'Sitio web estático de alto rendimiento con i18n, SEO y estética editorial.',
-          tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
-          githubUrl: personal.github,
-          demoUrl: 'https://example.com',
-        },
-        {
-          number: 'NO. 002 / DESARROLLO WEB',
-          category: 'DESARROLLO WEB',
-          title: 'Proyecto Dos',
-          description: 'Aplicación web con enfoque en accesibilidad, rendimiento y experiencia de usuario.',
-          tags: ['React', 'Node.js', 'PostgreSQL'],
-          githubUrl: personal.github,
+          number: 'NO. 001 / ALGORITMOS & WEB',
+          category: 'CIENCIAS DE LA COMPUTACIÓN',
+          title: 'DSAVision - Visualizador de Estructuras de Datos & Algoritmos',
+          description:
+            'Herramienta web interactiva para visualizar estructuras de datos y algoritmos en tiempo real. Construida para facilitar la comprensión visual de conceptos complejos con renderizado reactivo y flujo CI/CD automatizado.',
+          tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel', 'CI/CD'],
+          imageUrl: '/images/dsavision-cover.png',
+          imageAlt: 'Captura de pantalla de DSAVision, visualizador de estructuras de datos y algoritmos',
+          demoUrl: 'https://dsavision.vercel.app/',
         },
       ],
-      codeGithub: '[ GITHUB REPO ]',
-      viewDemo: '[ LIVE DEMO ]',
+      codeGithub: '[ REPO GITHUB ]',
+      viewDemo: '[ DEMO EN VIVO ]',
     },
     classifieds: {
-      title: 'LOS CLASIFICADOS',
+      title: 'TECNOLOGÍAS',
       categories: [
-        { title: 'FRONTEND', description: 'React, TypeScript, Tailwind CSS, HTML5/CSS3' },
-        { title: 'BACKEND', description: 'Node.js, Express, PostgreSQL' },
-        { title: 'HERRAMIENTAS', description: 'Git, GitHub, Docker, pnpm' },
+        {
+          title: 'LENGUAJES & FUNDAMENTOS',
+          skills: ['TypeScript', 'JavaScript', 'PHP', 'SQL'],
+        },
+        {
+          title: 'DESARROLLO WEB',
+          skills: ['React', 'Astro', 'Tailwind CSS', 'WordPress', 'HTML5', 'CSS3'],
+        },
+        {
+          title: 'INFRAESTRUCTURA & BASES DE DATOS',
+          skills: ['MySQL', 'Docker', 'Git', 'GitHub'],
+        },
       ],
-      inquireRates: 'ABIERTO A COLABORACIONES Y NUEVOS PROYECTOS',
     },
     timelines: {
       sectionTitle: 'TRAYECTORIA',
@@ -200,83 +206,76 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
       workTitle: 'EXPERIENCIA LABORAL',
       education: [
         {
-          period: 'Sep 2022 – Jun 2026',
-          tag: '[EDUCACIÓN]',
-          tagStyle: 'filled',
+          period: 'Sep 2025 - Presente',
           title: 'Grado en Ingeniería Informática',
-          company: 'Universidad Ejemplo',
-          description: 'Formación en desarrollo de software y fundamentos de computación.',
+          company: 'Universidade da Coruña (UDC)',
         },
         {
-          period: 'Sep 2020 – Jun 2022',
-          tag: '[EDUCACIÓN]',
-          tagStyle: 'outline',
-          title: 'Ciclo Formativo en Desarrollo Web',
-          company: 'Centro de Formación Ejemplo',
-          description: 'Especialización en desarrollo web full-stack.',
+          period: 'Sep 2023 - Jun 2025',
+          title: 'Técnico Superior en Desarrollo de Aplicaciones Web (DAW)',
+          company: 'IES Fernando Wirtz Suárez',
         },
       ],
       work: [
         {
-          period: 'Ene 2024 – Presente',
-          tag: '[EXPERIENCIA]',
-          tagStyle: 'filled',
-          title: 'Software Engineer',
-          company: 'Tech Company',
-          highlights: [
-            'Desarrollo de APIs REST con Node.js y TypeScript',
-            'Construcción de interfaces con React y Tailwind CSS',
-            'Integración continua y despliegue con GitHub Actions',
-          ],
+          period: 'Mar 2026 - Presente',
+          title: 'Web Developer',
+          company: 'Clink Web Value',
+          url: 'https://clink.es/',
+          description:
+            'Análisis de requisitos y participación en reuniones con clientes. Desarrollo de funcionalidades dinámicas con foco en la estructura y mantenibilidad del código.',
+        },
+        {
+          period: 'Abr 2025 - Jun 2025',
+          title: 'Web Developer Intern',
+          company: 'Clink Web Value',
+          url: 'https://clink.es/',
+          description:
+            'Construcción de sitios web a medida desde cero y resolución de incidencias en proyectos activos de clientes.',
         },
       ],
     },
     editorial: {
-      sectionTitle: 'EDITORIAL',
-      title: 'NOTA DEL EDITOR',
+      sectionTitle: 'SOBRE MÍ',
+      title: 'TRAYECTORIA & PERSPECTIVA',
       paragraphs: [
-        'Empecé en el mundo de la programación con proyectos personales y curiosidad por entender cómo funcionan las aplicaciones web.',
-        'Me interesa el equilibrio entre entregar valor rápido y mantener una base de código sólida y escalable.',
-        'Fuera del código, disfruto aprendiendo cosas nuevas y aplicándolas en proyectos reales.',
+        'Mi primer contacto real con la informática empezó en casa, creando hojas de cálculo en Excel para gestionar mis pequeños gastos. Poco después, descubrir Scratch en el instituto me hizo clic: no solo quería utilizar la tecnología, quería construirla. Hoy, esa misma curiosidad por entender cómo funcionan las cosas por dentro es lo que mueve mi día a día.',
+        'Actualmente compagino el desarrollo web profesional con el grado en Ingeniería Informática en la UDC. Me apasiona el equilibrio entre hacer que algo funcione y asegurar que esté bien construido, buscando siempre soluciones robustas y escalables.',
+        'Hoy en día, mi objetivo principal es comprender cómo funcionan los sistemas a gran escala, explorando la infraestructura cloud y la arquitectura de software para construir aplicaciones de alto rendimiento.',
       ],
     },
     extra: {
-      title: '¡EXTRA! ¡EXTRA!',
+      title: 'DATOS CLAVE',
       items: [
         {
           number: '01',
-          badge: 'Certificaciones',
+          badge: 'CERTIFICACIONES',
           badgeStyle: 'filled',
-          title: 'LANGUAGES & CERTIFICATIONS',
-          description: 'Español nativo. Inglés B2. Certificación de ejemplo en curso.',
+          title: 'CAMBRIDGE ENGLISH C1 ADVANCED',
+          description:
+            'Certificación oficial para comunicación técnica internacional, reuniones con clientes y documentación de sistemas.',
         },
         {
           number: '02',
-          badge: 'Filosofía',
+          badge: 'APRENDIZAJE',
           badgeStyle: 'outline',
-          title: 'Aprender construyendo',
-          description: 'Prefiero entender el porqué de cada decisión técnica antes de aplicarla.',
-        },
-        {
-          number: '03',
-          badge: 'Intereses',
-          badgeStyle: 'outline',
-          title: 'Open source',
-          description: 'Sigo la comunidad y contribuyo en proyectos personales cuando puedo.',
+          title: 'AWS E INFRAESTRUCTURA CLOUD',
+          description:
+            'Profundizando actualmente en servicios de AWS y arquitectura cloud para el diseño de sistemas escalables.',
         },
       ],
     },
     contact: {
-      title: 'Carta al Editor',
-      subtitle: 'Si tienes un proyecto o una oportunidad, escríbeme.',
-      officeLabel: 'OFICINA EDITORIAL Y CORRESPONDENCIA DIRECTA',
       email: personal.email,
       copyButton: '[ COPIAR EMAIL ]',
       copySuccess: 'COPIADO',
+      copyEmailAriaLabel: 'Copiar dirección de correo electrónico',
+      emailAriaLabel: `Enviar correo a ${personal.email}`,
     },
     footer: {
-      name: 'JOHN DOE',
-      copyright: '© 2026 JOHN DOE. TODOS LOS DERECHOS RESERVADOS. IMPRESO EN CÓDIGO.',
+      name: 'AARÓN MÉNDEZ',
+      copyright:
+        '© 2026 AARÓN MÉNDEZ. TODOS LOS DERECHOS RESERVADOS. IMPRESO EN CÓDIGO. CONSTRUIDO CON INTENCIÓN.',
       links: [
         { label: 'GITHUB', href: personal.github },
         { label: 'LINKEDIN', href: personal.linkedin },
@@ -286,153 +285,153 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
   },
   en: {
     meta: {
-      title: 'JOHN DOE | THE ENGINEERING GAZETTE',
-      description: 'Portfolio of John Doe, web developer. Projects, experience, and contact.',
+      title: 'AARÓN MÉNDEZ | PORTFOLIO',
+      description:
+        'Portfolio of Aarón Méndez, Computer Engineering student and web developer based in A Coruña, Spain. Projects, experience, and contact.',
     },
     header: {
       vol: 'VOL. 01 - NO. 01',
       est: 'EST. 2026',
       price: 'PRICE: ONE LINE OF CODE',
-      date: 'March 2026',
+      date: 'September 2026',
       edition: 'Inaugural Edition',
-      name: 'JOHN DOE',
-      location: 'Example City, Country',
+      name: 'AARÓN MÉNDEZ',
+      location: 'A Coruña, Spain',
       nav: [
         { label: 'PROJECTS', href: '#works' },
         { label: 'TECHNOLOGIES', href: '#classifieds' },
         { label: 'TIMELINE', href: '#timelines' },
-        { label: 'EDITORIAL', href: '#editorial' },
+        { label: 'ABOUT', href: '#editorial' },
         { label: 'CONTACT', href: '#contact' },
       ],
+      navAriaLabel: 'Main navigation',
     },
     hero: {
-      imageAlt: 'Portrait of John Doe',
-      headline: 'WEB DEVELOPER & COMPUTER ENGINEERING STUDENT',
-      lead: 'Developer focused on full-stack projects, maintainable code, and solid engineering practices. Open to collaborations and new opportunities.',
+      imageAlt: 'Portrait of Aarón Méndez',
+      imageUrl: '/images/aaron-mendez.jpeg',
+      headline: 'COMPUTER ENGINEERING STUDENT & WEB DEVELOPER',
+      lead: 'Software developer based in A Coruña, balancing a Computer Engineering degree with building web applications and interfaces. Focused on code architecture, efficient algorithms, and writing reliable, well-structured software.',
       cta: {
         downloadCv: '[ DOWNLOAD CV ]',
-        contact: '[ CONTACT ]',
         github: 'GitHub',
         linkedin: 'LinkedIn',
+        downloadCvAriaLabel: 'Download resume as PDF',
+        githubAriaLabel: 'Open GitHub profile in a new tab',
+        linkedinAriaLabel: 'Open LinkedIn profile in a new tab',
       },
     },
     works: {
       title: 'SELECTED WORKS',
-      pageLabel: 'PAGE 01 - PROJECTS',
+      previewWatermark: 'DSAVISION PREVIEW',
       projects: [
         {
-          number: 'NO. 001 / WEB DEVELOPMENT',
-          category: 'WEB DEVELOPMENT',
-          title: 'Project One',
-          description: 'High-performance static website with i18n, SEO, and editorial newspaper aesthetic.',
-          tags: ['Astro', 'TypeScript', 'Tailwind CSS'],
-          githubUrl: personal.github,
-          demoUrl: 'https://example.com',
-        },
-        {
-          number: 'NO. 002 / WEB DEVELOPMENT',
-          category: 'WEB DEVELOPMENT',
-          title: 'Project Two',
-          description: 'Web application focused on accessibility, performance, and user experience.',
-          tags: ['React', 'Node.js', 'PostgreSQL'],
-          githubUrl: personal.github,
+          number: 'NO. 001 / ALGORITHMS & WEB',
+          category: 'COMPUTER SCIENCE',
+          title: 'DSAVision - Interactive DSA Visualizer',
+          description:
+            'Interactive web tool built to visualize data structures and algorithms in real time. Focused on performance, smooth animations, and automated deployment pipelines.',
+          tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel', 'CI/CD'],
+          imageUrl: '/images/dsavision-cover.png',
+          imageAlt: 'Screenshot of DSAVision, interactive data structures and algorithms visualizer',
+          demoUrl: 'https://dsavision.vercel.app/',
         },
       ],
       codeGithub: '[ GITHUB REPO ]',
       viewDemo: '[ LIVE DEMO ]',
     },
     classifieds: {
-      title: 'THE CLASSIFIEDS',
+      title: 'TECHNOLOGIES',
       categories: [
-        { title: 'FRONTEND', description: 'React, TypeScript, Tailwind CSS, HTML5/CSS3' },
-        { title: 'BACKEND', description: 'Node.js, Express, PostgreSQL' },
-        { title: 'TOOLS', description: 'Git, GitHub, Docker, pnpm' },
+        {
+          title: 'LANGUAGES & CORE',
+          skills: ['TypeScript', 'JavaScript', 'PHP', 'SQL'],
+        },
+        {
+          title: 'WEB DEVELOPMENT',
+          skills: ['React', 'Astro', 'Tailwind CSS', 'WordPress', 'HTML5', 'CSS3'],
+        },
+        {
+          title: 'INFRASTRUCTURE & DATABASES',
+          skills: ['MySQL', 'Docker', 'Git', 'GitHub'],
+        },
       ],
-      inquireRates: 'OPEN TO COLLABORATIONS AND NEW PROJECTS',
     },
     timelines: {
-      sectionTitle: 'TIMELINE',
+      sectionTitle: 'EXPERIENCE & EDUCATION',
       educationTitle: 'EDUCATION',
       workTitle: 'WORK EXPERIENCE',
       education: [
         {
-          period: 'Sep 2022 – Jun 2026',
-          tag: '[EDUCATION]',
-          tagStyle: 'filled',
-          title: "Bachelor's Degree in Computer Science",
-          company: 'Example University',
-          description: 'Software development and computer science fundamentals.',
+          period: 'Sep 2025 - Present',
+          title: "Bachelor's Degree in Computer Engineering",
+          company: 'Universidade da Coruña (UDC)',
         },
         {
-          period: 'Sep 2020 – Jun 2022',
-          tag: '[EDUCATION]',
-          tagStyle: 'outline',
-          title: 'Web Development Vocational Program',
-          company: 'Example Training Center',
-          description: 'Full-stack web development specialization.',
+          period: 'Sep 2023 - Jun 2025',
+          title: 'Higher National Diploma in Web Application Development (DAW)',
+          company: 'IES Fernando Wirtz Suárez',
         },
       ],
       work: [
         {
-          period: 'Jan 2024 – Present',
-          tag: '[WORK]',
-          tagStyle: 'filled',
-          title: 'Software Engineer',
-          company: 'Tech Company',
-          highlights: [
-            'Built REST APIs with Node.js and TypeScript',
-            'Developed UI with React and Tailwind CSS',
-            'CI/CD pipelines and deployment with GitHub Actions',
-          ],
+          period: 'Mar 2026 - Present',
+          title: 'Web Developer',
+          company: 'Clink Web Value',
+          url: 'https://clink.es/',
+          description:
+            'Requirements analysis and participation in client meetings. Implementing dynamic features with a strong focus on code structure and maintainability.',
+        },
+        {
+          period: 'Apr 2025 - Jun 2025',
+          title: 'Web Developer Intern',
+          company: 'Clink Web Value',
+          url: 'https://clink.es/',
+          description:
+            'Built custom websites from scratch and resolved technical issues across active client projects.',
         },
       ],
     },
     editorial: {
-      sectionTitle: 'EDITORIAL',
-      title: "EDITOR'S NOTE",
+      sectionTitle: 'ABOUT',
+      title: 'BACKGROUND & PERSPECTIVE',
       paragraphs: [
-        'I started in programming through personal projects and curiosity about how web applications work.',
-        'I care about balancing fast delivery with a solid and scalable codebase.',
-        'Outside of code, I enjoy learning new things and applying them in real projects.',
+        "My first real contact with computing started at home, building Excel sheets to track my small expenses. Shortly after, discovering Scratch in high school clicked for me: I didn't just want to use technology, I wanted to build it. Today, that curiosity to understand how things work under the hood is what drives my day-to-day.",
+        "I currently balance professional Web Development with my Computer Engineering degree at UDC. I'm fascinated by the balance between making something work and making sure it's well-built, always aiming for robust and scalable solutions.",
+        'Today, my main goal is to understand how large-scale systems work, exploring cloud infrastructure and software architecture to build high-performance applications.',
       ],
     },
     extra: {
-      title: 'EXTRA! EXTRA!',
+      title: 'HIGHLIGHTS',
       items: [
         {
           number: '01',
-          badge: 'Certifications',
+          badge: 'CERTIFICATIONS',
           badgeStyle: 'filled',
-          title: 'LANGUAGES & CERTIFICATIONS',
-          description: 'Native Spanish. English B2. Sample certification in progress.',
+          title: 'CAMBRIDGE ENGLISH C1 ADVANCED',
+          description:
+            'Certified English level for international technical communication, client meetings, and system documentation.',
         },
         {
           number: '02',
-          badge: 'Philosophy',
+          badge: 'LEARNING',
           badgeStyle: 'outline',
-          title: 'Learn by building',
-          description: 'I prefer understanding the why behind each technical decision.',
-        },
-        {
-          number: '03',
-          badge: 'Interests',
-          badgeStyle: 'outline',
-          title: 'Open source',
-          description: 'I follow the community and contribute through personal projects.',
+          title: 'AWS & CLOUD INFRASTRUCTURE',
+          description:
+            'Currently expanding knowledge in AWS services and cloud architecture to design scalable systems.',
         },
       ],
     },
     contact: {
-      title: 'Letter to the Editor',
-      subtitle: 'If you have a project or an opportunity, drop me a line.',
-      officeLabel: 'EDITORIAL OFFICE & DIRECT CORRESPONDENCE',
       email: personal.email,
       copyButton: '[ COPY EMAIL ]',
       copySuccess: 'COPIED',
+      copyEmailAriaLabel: 'Copy email address',
+      emailAriaLabel: `Send email to ${personal.email}`,
     },
     footer: {
-      name: 'JOHN DOE',
-      copyright: '© 2026 JOHN DOE. ALL RIGHTS RESERVED. PRINTED IN CODE.',
+      name: 'AARÓN MÉNDEZ',
+      copyright:
+        '© 2026 AARÓN MÉNDEZ. ALL RIGHTS RESERVED. PRINTED IN CODE. BUILT WITH INTENTION.',
       links: [
         { label: 'GITHUB', href: personal.github },
         { label: 'LINKEDIN', href: personal.linkedin },

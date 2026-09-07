@@ -16,6 +16,7 @@ const t = getContent(lang).contact;
   <a
     class="font-headline-md text-3xl sm:text-5xl md:text-6xl tracking-tight leading-none block hover:underline break-all"
     href={`mailto:${t.email}`}
+    aria-label={t.emailAriaLabel}
   >
     {t.email}
   </a>
@@ -25,6 +26,7 @@ const t = getContent(lang).contact;
     class="mt-8 px-8 py-3 border border-black font-label-mono text-[12px] uppercase font-bold hover:bg-black hover:text-white transition-all"
     data-email={t.email}
     data-success={t.copySuccess}
+    aria-label={t.copyEmailAriaLabel}
   >
     {t.copyButton}
   </button>
