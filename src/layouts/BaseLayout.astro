@@ -1,15 +1,16 @@
 ---
 import '../styles/global.css';
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import type { Lang } from '../data/portfolioData';
+import { personStructuredData, personal, type Lang } from '../data/portfolioData';
 
 interface Props {
   lang: Lang;
   title: string;
   description: string;
+  keywords?: string;
 }
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, keywords } = Astro.props;
 
 const siteBase = Astro.site ?? Astro.url;
 
@@ -21,7 +22,19 @@ function getLocaleAbsoluteUrl(locale: Lang): string {
 const esUrl = getLocaleAbsoluteUrl('es');
 const enUrl = getLocaleAbsoluteUrl('en');
 const canonicalUrl = lang === 'en' ? enUrl : esUrl;
-const ogImage = new URL('/aaron-mendez.jpeg', siteBase).href;
+const ogImage = new URL('/og-image.png', siteBase).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: personStructuredData.name,
+  jobTitle: personStructuredData.jobTitle,
+  alumniOf: personStructuredData.alumniOf,
+  knowsAbout: personStructuredData.knowsAbout,
+  url: canonicalUrl,
+  email: personal.email,
+  sameAs: [personal.github, personal.linkedin],
+};
 ---
 
 <html class="light" lang={lang}>
@@ -31,6 +44,7 @@ const ogImage = new URL('/aaron-mendez.jpeg', siteBase).href;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang="es" href={esUrl} />
     <link rel="alternate" hreflang="en" href={enUrl} />
@@ -41,10 +55,12 @@ const ogImage = new URL('/aaron-mendez.jpeg', siteBase).href;
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_ES'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500&family=Courier+Prime&display=swap"
       rel="stylesheet"

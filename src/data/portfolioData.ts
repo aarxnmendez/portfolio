@@ -51,6 +51,7 @@ export interface PortfolioContent {
   meta: {
     title: string;
     description: string;
+    keywords: string;
   };
   header: {
     vol: string;
@@ -126,12 +127,30 @@ export const personal = {
   cvUrl: '/cv-aaron-mendez.pdf',
 };
 
+export const personStructuredData = {
+  name: personal.name,
+  jobTitle: 'Web Developer & Computer Engineering Student',
+  alumniOf: 'Universidade da Coruña (UDC)',
+  knowsAbout: [
+    'Web Development',
+    'Computer Engineering',
+    'TypeScript',
+    'React',
+    'PHP',
+    'MySQL',
+    'Docker',
+    'AWS',
+  ],
+};
+
 export const portfolioContent: Record<Lang, PortfolioContent> = {
   es: {
     meta: {
-      title: 'AARÓN MÉNDEZ | PORTFOLIO',
+      title: 'Aarón Méndez | Estudiante de Ingeniería Informática & Desarrollador Web',
       description:
-        'Portfolio de Aarón Méndez, estudiante de Ingeniería Informática y desarrollador web en A Coruña. Proyectos, trayectoria y contacto.',
+        'Desarrollador web en A Coruña compaginando el grado en Ingeniería Informática en la UDC con el desarrollo web profesional. Enfocado en software mantenible y arquitectura de código.',
+      keywords:
+        'desarrollador web, ingenieria informatica udc, typescript, react, php, mysql, docker, astro, a coruna, portfolio',
     },
     header: {
       vol: 'VOL. 01 - NO. 01',
@@ -285,9 +304,11 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
   },
   en: {
     meta: {
-      title: 'AARÓN MÉNDEZ | PORTFOLIO',
+      title: 'Aarón Méndez | Computer Engineering Student & Web Developer',
       description:
-        'Portfolio of Aarón Méndez, Computer Engineering student and web developer based in A Coruña, Spain. Projects, experience, and contact.',
+        'Software developer based in A Coruña balancing a Computer Engineering degree at UDC with professional web development. Focused on maintainable software and code architecture.',
+      keywords:
+        'web developer, computer engineering udc, typescript, react, php, mysql, docker, astro, a coruna, portfolio',
     },
     header: {
       vol: 'VOL. 01 - NO. 01',
