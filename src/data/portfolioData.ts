@@ -129,19 +129,46 @@ export const personal = {
 
 export const personStructuredData = {
   name: personal.name,
-  jobTitle: 'Web Developer & Computer Engineering Student',
   alumniOf: 'Universidade da Coruña (UDC)',
-  knowsAbout: [
-    'Web Development',
-    'Computer Engineering',
-    'TypeScript',
-    'React',
-    'PHP',
-    'MySQL',
-    'Docker',
-    'AWS',
-  ],
+  byLang: {
+    es: {
+      jobTitle: 'Estudiante de Ingeniería Informática y Desarrollador Web',
+      knowsAbout: [
+        'Desarrollo web',
+        'Ingeniería informática',
+        'TypeScript',
+        'React',
+        'PHP',
+        'MySQL',
+        'Docker',
+        'AWS',
+      ],
+    },
+    en: {
+      jobTitle: 'Web Developer & Computer Engineering Student',
+      knowsAbout: [
+        'Web Development',
+        'Computer Engineering',
+        'TypeScript',
+        'React',
+        'PHP',
+        'MySQL',
+        'Docker',
+        'AWS',
+      ],
+    },
+  },
 };
+
+export function getPersonStructuredData(lang: Lang) {
+  const localized = personStructuredData.byLang[lang];
+  return {
+    name: personStructuredData.name,
+    alumniOf: personStructuredData.alumniOf,
+    jobTitle: localized.jobTitle,
+    knowsAbout: localized.knowsAbout,
+  };
+}
 
 export const portfolioContent: Record<Lang, PortfolioContent> = {
   es: {

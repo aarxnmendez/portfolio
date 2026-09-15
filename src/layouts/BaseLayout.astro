@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { personStructuredData, personal, type Lang } from '../data/portfolioData';
+import { getPersonStructuredData, personal, type Lang } from '../data/portfolioData';
 
 interface Props {
   lang: Lang;
@@ -24,13 +24,15 @@ const enUrl = getLocaleAbsoluteUrl('en');
 const canonicalUrl = lang === 'en' ? enUrl : esUrl;
 const ogImage = new URL('/og-image.png', siteBase).href;
 
+const personSchema = getPersonStructuredData(lang);
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: personStructuredData.name,
-  jobTitle: personStructuredData.jobTitle,
-  alumniOf: personStructuredData.alumniOf,
-  knowsAbout: personStructuredData.knowsAbout,
+  name: personSchema.name,
+  jobTitle: personSchema.jobTitle,
+  alumniOf: personSchema.alumniOf,
+  knowsAbout: personSchema.knowsAbout,
   url: canonicalUrl,
   email: personal.email,
   sameAs: [personal.github, personal.linkedin],

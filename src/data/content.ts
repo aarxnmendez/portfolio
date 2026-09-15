@@ -4,7 +4,9 @@
  */
 export {
   getContent,
+  getPersonStructuredData,
   personal,
+  personStructuredData,
   portfolioContent,
   type ExtraItem,
   type FooterLink,
