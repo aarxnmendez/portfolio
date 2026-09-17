@@ -92,7 +92,7 @@ portfolio/
 |--------|------|
 | `portfolioContent` | `Record<Lang, PortfolioContent>` with full `es` and `en` trees |
 | `getContent(lang)` | Returns the content object for a locale |
-| `personal` | Shared email, GitHub, LinkedIn, CV path |
+| `personal` | Shared email, GitHub, LinkedIn |
 | `personStructuredData` | Shared name, `alumniOf`, plus `byLang` for localized JSON-LD fields |
 | `getPersonStructuredData(lang)` | `jobTitle` and `knowsAbout` per locale for Schema.org |
 | Types (`Lang`, `Project`, `PortfolioContent`, …) | Enforce structure when adding fields |
@@ -123,7 +123,7 @@ New code should import from `portfolioData.ts` directly.
 |-----|---------|-----------|
 | `meta` | `<title>`, description, keywords | Pages / `BaseLayout` |
 | `header` | Masthead, nav labels, `navAriaLabel` | `Header.astro` |
-| `hero` | Portrait, headline, lead, CTA labels | `Hero.astro` |
+| `hero` | Portrait, headline, lead, GitHub/LinkedIn labels and aria labels | `Hero.astro` |
 | `works` | Featured projects | `SelectedWorks.astro` |
 | `classifieds` | Technology columns | `Classifieds.astro` |
 | `timelines` | Education + work history | `Timelines.astro`, `TimelineItem.astro` |
@@ -290,7 +290,7 @@ Google Fonts in `BaseLayout`: Playfair Display, Inter, Courier Prime.
 | Component | Section | Content keys in `portfolioData.ts` |
 |-----------|---------|----------------------------------|
 | `Header.astro` | Masthead + nav | `header` |
-| `Hero.astro` | Hero | `hero` |
+| `Hero.astro` | Hero (social links only, no CV download) | `hero` |
 | `SelectedWorks.astro` | Featured project | `works` |
 | `Classifieds.astro` | Technologies | `classifieds` |
 | `Timelines.astro` | Education + experience | `timelines` |

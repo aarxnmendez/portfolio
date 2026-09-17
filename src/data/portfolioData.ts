@@ -70,10 +70,8 @@ export interface PortfolioContent {
     headline: string;
     lead: string;
     cta: {
-      downloadCv: string;
       github: string;
       linkedin: string;
-      downloadCvAriaLabel: string;
       githubAriaLabel: string;
       linkedinAriaLabel: string;
     };
@@ -124,7 +122,6 @@ export const personal = {
   email: 'info@aaronmendez.es',
   github: 'https://github.com/aarxnmendez',
   linkedin: 'https://www.linkedin.com/in/aaronmendezz',
-  cvUrl: '/cv-aaron-mendez.pdf',
 };
 
 export const personStructuredData = {
@@ -202,10 +199,8 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
       headline: 'ESTUDIANTE DE INGENIERÍA INFORMÁTICA & DESARROLLADOR WEB',
       lead: 'Desarrollador de software en A Coruña que compagina el grado en Ingeniería Informática con la creación de aplicaciones e interfaces web. Enfocado en la arquitectura de código, algoritmos eficientes y en construir software fiable y bien estructurado.',
       cta: {
-        downloadCv: '[ DESCARGAR CV ]',
         github: 'GitHub',
         linkedin: 'LinkedIn',
-        downloadCvAriaLabel: 'Descargar currículum en PDF',
         githubAriaLabel: 'Abrir perfil de GitHub en una nueva pestaña',
         linkedinAriaLabel: 'Abrir perfil de LinkedIn en una nueva pestaña',
       },
@@ -360,10 +355,8 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
       headline: 'COMPUTER ENGINEERING STUDENT & WEB DEVELOPER',
       lead: 'Software developer based in A Coruña, balancing a Computer Engineering degree with building web applications and interfaces. Focused on code architecture, efficient algorithms, and writing reliable, well-structured software.',
       cta: {
-        downloadCv: '[ DOWNLOAD CV ]',
         github: 'GitHub',
         linkedin: 'LinkedIn',
-        downloadCvAriaLabel: 'Download resume as PDF',
         githubAriaLabel: 'Open GitHub profile in a new tab',
         linkedinAriaLabel: 'Open LinkedIn profile in a new tab',
       },
