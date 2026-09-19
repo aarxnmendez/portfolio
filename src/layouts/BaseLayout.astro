@@ -72,15 +72,33 @@ const jsonLd = {
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500&family=Courier+Prime&display=swap"
       rel="stylesheet"
     />
+    <style is:global>
+      body.site-vintage-newsprint {
+        background-color: #eae6dc;
+        min-height: 100vh;
+      }
+
+      body.site-vintage-newsprint::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none;
+        z-index: 999;
+        background: radial-gradient(ellipse at center, transparent 30%, rgba(130, 105, 70, 0.35) 100%);
+      }
+    </style>
   </head>
-  <body class="font-body-md text-on-surface text-base max-w-full overflow-x-clip">
+  <body class="site-vintage-newsprint font-body-md text-on-surface text-base max-w-full overflow-x-clip bg-background min-h-screen">
     <a
       href="#hero"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-black focus:text-white focus:px-4 focus:py-2 focus:font-label-mono focus:text-xs focus:uppercase"
     >
       {lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}
     </a>
-    <div class="max-w-7xl mx-auto w-full min-w-0 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto w-full min-w-0 min-h-screen px-4 sm:px-6 lg:px-8 bg-background">
       <slot />
     </div>
   </body>
