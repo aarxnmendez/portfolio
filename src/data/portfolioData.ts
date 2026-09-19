@@ -129,7 +129,7 @@ export const personStructuredData = {
   alumniOf: 'Universidade da Coruña (UDC)',
   byLang: {
     es: {
-      jobTitle: 'Estudiante de Ingeniería Informática y Desarrollador Web',
+      jobTitle: 'Ingeniero Informático y Desarrollador Web',
       knowsAbout: [
         'Desarrollo web',
         'Ingeniería informática',
@@ -142,7 +142,7 @@ export const personStructuredData = {
       ],
     },
     en: {
-      jobTitle: 'Web Developer & Computer Engineering Student',
+      jobTitle: 'Computer Engineer & Web Developer',
       knowsAbout: [
         'Web Development',
         'Computer Engineering',
@@ -196,7 +196,7 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
     hero: {
       imageAlt: 'Retrato de Aarón Méndez',
       imageUrl: '/images/aaron-mendez.jpeg',
-      headline: 'ESTUDIANTE DE INGENIERÍA INFORMÁTICA & DESARROLLADOR WEB',
+      headline: 'INGENIERO INFORMÁTICO & DESARROLLADOR WEB',
       lead: 'Desarrollador de software en A Coruña que compagina el grado en Ingeniería Informática con la creación de aplicaciones e interfaces web. Enfocado en la arquitectura de código, algoritmos eficientes y en construir software fiable y bien estructurado.',
       cta: {
         github: 'GitHub',
@@ -229,11 +229,11 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
       categories: [
         {
           title: 'LENGUAJES & FUNDAMENTOS',
-          skills: ['TypeScript', 'JavaScript', 'PHP', 'SQL'],
+          skills: ['C', 'Java', 'TypeScript', 'JavaScript', 'SQL'],
         },
         {
           title: 'DESARROLLO WEB',
-          skills: ['React', 'Astro', 'Tailwind CSS', 'WordPress', 'HTML5', 'CSS3'],
+          skills: ['React', 'Astro', 'Tailwind CSS', 'PHP', 'WordPress'],
         },
         {
           title: 'INFRAESTRUCTURA & BASES DE DATOS',
@@ -352,7 +352,7 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
     hero: {
       imageAlt: 'Portrait of Aarón Méndez',
       imageUrl: '/images/aaron-mendez.jpeg',
-      headline: 'COMPUTER ENGINEERING STUDENT & WEB DEVELOPER',
+      headline: 'COMPUTER ENGINEER & WEB DEVELOPER',
       lead: 'Software developer based in A Coruña, balancing a Computer Engineering degree with building web applications and interfaces. Focused on code architecture, efficient algorithms, and writing reliable, well-structured software.',
       cta: {
         github: 'GitHub',
@@ -385,11 +385,11 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
       categories: [
         {
           title: 'LANGUAGES & CORE',
-          skills: ['TypeScript', 'JavaScript', 'PHP', 'SQL'],
+          skills: ['C', 'Java', 'TypeScript', 'JavaScript', 'SQL'],
         },
         {
           title: 'WEB DEVELOPMENT',
-          skills: ['React', 'Astro', 'Tailwind CSS', 'WordPress', 'HTML5', 'CSS3'],
+          skills: ['React', 'Astro', 'Tailwind CSS', 'PHP', 'WordPress'],
         },
         {
           title: 'INFRASTRUCTURE & DATABASES',
