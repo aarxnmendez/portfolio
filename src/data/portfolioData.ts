@@ -195,7 +195,7 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
     },
     hero: {
       imageAlt: 'Retrato de Aarón Méndez',
-      imageUrl: '/images/aaron-mendez.jpeg',
+      imageUrl: '/images/aaron-mendez.png',
       headline: 'INGENIERO INFORMÁTICO & DESARROLLADOR WEB',
       lead: 'Desarrollador de software en A Coruña que compagina el grado en Ingeniería Informática con la creación de aplicaciones e interfaces web. Enfocado en la arquitectura de código, algoritmos eficientes y en construir software fiable y bien estructurado.',
       cta: {
@@ -351,7 +351,7 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
     },
     hero: {
       imageAlt: 'Portrait of Aarón Méndez',
-      imageUrl: '/images/aaron-mendez.jpeg',
+      imageUrl: '/images/aaron-mendez.png',
       headline: 'COMPUTER ENGINEER & WEB DEVELOPER',
       lead: 'Software developer based in A Coruña, balancing a Computer Engineering degree with building web applications and interfaces. Focused on code architecture, efficient algorithms, and writing reliable, well-structured software.',
       cta: {
