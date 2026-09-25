@@ -10,11 +10,16 @@ export interface NavItem {
 }
 
 export interface Project {
+  id: string;
   number: string;
   category: string;
+  client: string;
   title: string;
   description: string;
+  highlight: string;
   tags: string[];
+  landingUrl: string;
+  appUrl: string;
   githubUrl?: string;
   demoUrl?: string;
   imageUrl?: string;
@@ -210,12 +215,36 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
       previewWatermark: 'DSAVISION PREVIEW',
       projects: [
         {
-          number: 'NO. 001 / ALGORITMOS & WEB',
+          id: 'ecocompaneiros',
+          number: 'NO. 001 / INSTITUCIONAL & IMPACTO',
+          category: 'SECTOR PÚBLICO',
+          client: 'Xunta de Galicia',
+          title: 'Ecocompañeiros',
+          description:
+            'Plataforma web de gamificación ambiental promovida por la Xunta de Galicia. Promueve el reciclaje entre 1.000 estudiantes universitarios en 250 pisos compartidos de Santiago mediante retos interactivos durante 9 meses.',
+          highlight:
+            'Programa de gamificación para unos 1.000 estudiantes universitarios en Santiago de Compostela.',
+          tags: ['Laravel', 'JavaScript', 'MariaDB', 'CSS3', 'HTML5'],
+          landingUrl: 'https://www.ecocompaneiros.gal',
+          appUrl: 'https://app.ecocompaneiros.gal',
+          demoUrl: 'https://www.ecocompaneiros.gal',
+          imageUrl: '/images/ecocompaneiros-cover.png',
+          imageAlt:
+            'Captura de pantalla de Ecocompañeiros, plataforma de gamificación ambiental de la Xunta de Galicia',
+        },
+        {
+          id: 'dsavision',
+          number: 'NO. 002 / ALGORITMOS & WEB',
           category: 'CIENCIAS DE LA COMPUTACIÓN',
+          client: 'Proyecto personal',
           title: 'DSAVision - Visualizador de Estructuras de Datos & Algoritmos',
           description:
             'Herramienta web interactiva para visualizar estructuras de datos y algoritmos en tiempo real. Construida para facilitar la comprensión visual de conceptos complejos con renderizado reactivo y flujo CI/CD automatizado.',
+          highlight:
+            'Visualización interactiva en tiempo real con despliegue continuo y foco en rendimiento en el cliente.',
           tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel', 'CI/CD'],
+          landingUrl: 'https://dsavision.dev',
+          appUrl: 'https://dsavision.dev',
           imageUrl: '/images/dsavision-cover.png',
           imageAlt: 'Captura de pantalla de DSAVision, visualizador de estructuras de datos y algoritmos',
           demoUrl: 'https://dsavision.dev',
@@ -366,12 +395,36 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
       previewWatermark: 'DSAVISION PREVIEW',
       projects: [
         {
-          number: 'NO. 001 / ALGORITHMS & WEB',
+          id: 'ecocompaneiros',
+          number: 'NO. 001 / INSTITUTIONAL & IMPACT',
+          category: 'PUBLIC SECTOR',
+          client: 'Xunta de Galicia',
+          title: 'Ecocompañeiros',
+          description:
+            'Environmental gamification web platform promoted by the Xunta de Galicia. It encourages recycling among 1,000 university students across 250 shared flats in Santiago through interactive challenges over 9 months.',
+          highlight:
+            'Gamification program for around 1,000 university students in Santiago de Compostela.',
+          tags: ['Laravel', 'JavaScript', 'MariaDB', 'CSS3', 'HTML5'],
+          landingUrl: 'https://www.ecocompaneiros.gal',
+          appUrl: 'https://app.ecocompaneiros.gal',
+          demoUrl: 'https://www.ecocompaneiros.gal',
+          imageUrl: '/images/ecocompaneiros-cover.png',
+          imageAlt:
+            'Screenshot of Ecocompañeiros, environmental gamification platform for the Xunta de Galicia',
+        },
+        {
+          id: 'dsavision',
+          number: 'NO. 002 / ALGORITHMS & WEB',
           category: 'COMPUTER SCIENCE',
+          client: 'Personal project',
           title: 'DSAVision - Interactive DSA Visualizer',
           description:
             'Interactive web tool built to visualize data structures and algorithms in real time. Focused on performance, smooth animations, and automated deployment pipelines.',
+          highlight:
+            'Real time interactive visualization with continuous deployment and a strong client side performance focus.',
           tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel', 'CI/CD'],
+          landingUrl: 'https://dsavision.dev',
+          appUrl: 'https://dsavision.dev',
           imageUrl: '/images/dsavision-cover.png',
           imageAlt: 'Screenshot of DSAVision, interactive data structures and algorithms visualizer',
           demoUrl: 'https://dsavision.dev',
