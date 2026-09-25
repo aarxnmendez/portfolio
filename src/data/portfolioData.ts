@@ -262,11 +262,11 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
         },
         {
           title: 'DESARROLLO WEB',
-          skills: ['React', 'Astro', 'Tailwind CSS', 'PHP', 'WordPress'],
+          skills: ['React', 'PHP', 'Laravel'],
         },
         {
           title: 'INFRAESTRUCTURA & BASES DE DATOS',
-          skills: ['MySQL', 'Docker', 'Git', 'GitHub'],
+          skills: ['MySQL', 'Docker', 'Git'],
         },
       ],
     },
@@ -442,11 +442,11 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
         },
         {
           title: 'WEB DEVELOPMENT',
-          skills: ['React', 'Astro', 'Tailwind CSS', 'PHP', 'WordPress'],
+          skills: ['React', 'PHP', 'Laravel'],
         },
         {
           title: 'INFRASTRUCTURE & DATABASES',
-          skills: ['MySQL', 'Docker', 'Git', 'GitHub'],
+          skills: ['MySQL', 'Docker', 'Git'],
         },
       ],
     },
