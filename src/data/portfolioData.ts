@@ -175,7 +175,7 @@ export function getPersonStructuredData(lang: Lang) {
 export const portfolioContent: Record<Lang, PortfolioContent> = {
   es: {
     meta: {
-      title: 'Aarón Méndez | Estudiante de Ingeniería Informática & Desarrollador Web',
+      title: 'Aarón Méndez | Ingeniero Informático & Desarrollador Web',
       description:
         'Desarrollador web en A Coruña compaginando el grado en Ingeniería Informática en la UDC con el desarrollo web profesional. Enfocado en software mantenible y arquitectura de código.',
       keywords:
@@ -355,7 +355,7 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
   },
   en: {
     meta: {
-      title: 'Aarón Méndez | Computer Engineering Student & Web Developer',
+      title: 'Aarón Méndez | Computer Engineer & Web Developer',
       description:
         'Software developer based in A Coruña balancing a Computer Engineering degree at UDC with professional web development. Focused on maintainable software and code architecture.',
       keywords:
