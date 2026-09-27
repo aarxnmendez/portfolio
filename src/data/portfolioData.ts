@@ -22,7 +22,6 @@ export interface Project {
   appUrl: string;
   githubUrl?: string;
   demoUrl?: string;
-  imageUrl?: string;
   imageAlt?: string;
 }
 
@@ -71,7 +70,6 @@ export interface PortfolioContent {
   };
   hero: {
     imageAlt: string;
-    imageUrl: string;
     headline: string;
     lead: string;
     cta: {
@@ -200,7 +198,6 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
     },
     hero: {
       imageAlt: 'Retrato de Aarón Méndez',
-      imageUrl: '/images/aaron-mendez.png',
       headline: 'INGENIERO INFORMÁTICO & DESARROLLADOR WEB',
       lead: 'Desarrollador de software en A Coruña que compagina el grado en Ingeniería Informática con la creación de aplicaciones e interfaces web. Enfocado en la arquitectura de código, algoritmos eficientes y en construir software fiable y bien estructurado.',
       cta: {
@@ -228,7 +225,6 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
           landingUrl: 'https://www.ecocompaneiros.gal',
           appUrl: 'https://app.ecocompaneiros.gal',
           demoUrl: 'https://www.ecocompaneiros.gal',
-          imageUrl: '/images/ecocompaneiros-cover.png',
           imageAlt:
             'Captura de pantalla de Ecocompañeiros, plataforma de gamificación ambiental de la Xunta de Galicia',
         },
@@ -245,7 +241,6 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
           tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel', 'CI/CD'],
           landingUrl: 'https://dsavision.dev',
           appUrl: 'https://dsavision.dev',
-          imageUrl: '/images/dsavision-cover.png',
           imageAlt: 'Captura de pantalla de DSAVision, visualizador de estructuras de datos y algoritmos',
           demoUrl: 'https://dsavision.dev',
         },
@@ -380,7 +375,6 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
     },
     hero: {
       imageAlt: 'Portrait of Aarón Méndez',
-      imageUrl: '/images/aaron-mendez.png',
       headline: 'COMPUTER ENGINEER & WEB DEVELOPER',
       lead: 'Software developer based in A Coruña, balancing a Computer Engineering degree with building web applications and interfaces. Focused on code architecture, efficient algorithms, and writing reliable, well-structured software.',
       cta: {
@@ -408,7 +402,6 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
           landingUrl: 'https://www.ecocompaneiros.gal',
           appUrl: 'https://app.ecocompaneiros.gal',
           demoUrl: 'https://www.ecocompaneiros.gal',
-          imageUrl: '/images/ecocompaneiros-cover.png',
           imageAlt:
             'Screenshot of Ecocompañeiros, environmental gamification platform for the Xunta de Galicia',
         },
@@ -425,7 +418,6 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
           tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel', 'CI/CD'],
           landingUrl: 'https://dsavision.dev',
           appUrl: 'https://dsavision.dev',
-          imageUrl: '/images/dsavision-cover.png',
           imageAlt: 'Screenshot of DSAVision, interactive data structures and algorithms visualizer',
           demoUrl: 'https://dsavision.dev',
         },

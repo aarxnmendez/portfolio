@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import { heroProfileImage } from '../assets/portfolioImages';
 import { getContent, personal, type Lang } from '../data/portfolioData';
 
 interface Props {
@@ -7,6 +9,9 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getContent(lang).hero;
+
+const heroImageQuality = 85;
+const heroWidths = [280, 320, 480, 640, heroProfileImage.width];
 ---
 
 <section
@@ -15,13 +20,18 @@ const t = getContent(lang).hero;
 >
   <div class="flex flex-col justify-center min-w-0 w-full md:max-w-[280px] lg:max-w-[320px] mx-auto md:mx-0">
     <div class="halftone-container halftone-container--subtle border border-black w-full aspect-square bg-background">
-      <img
+      <Image
         alt={t.imageAlt}
         class="halftone-photo halftone-photo--subtle w-full h-full object-cover object-center"
-        src={t.imageUrl}
-        width="480"
-        height="480"
+        src={heroProfileImage}
+        width={heroProfileImage.width}
+        height={heroProfileImage.height}
+        widths={heroWidths}
+        sizes="(max-width: 768px) min(100vw - 2rem, 480px), (max-width: 1024px) 280px, 320px"
+        format="webp"
+        quality={heroImageQuality}
         loading="eager"
+        fetchpriority="high"
         decoding="async"
       />
     </div>
