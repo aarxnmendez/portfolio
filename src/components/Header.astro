@@ -112,24 +112,46 @@ const t = getContent(lang).header;
 <script>
   const sectionIds = ['works', 'classifieds', 'timelines', 'editorial', 'contact'];
   const contactSectionId = 'contact';
-  const scrollMarginExtra = 20;
+  const mobileNavQuery = '(max-width: 767px)';
 
   let isClickScrolling = false;
-  let clickScrollTimer: ReturnType<typeof setTimeout> | undefined;
+  let clickScrollSafetyTimer: ReturnType<typeof setTimeout> | undefined;
+  let clickScrollTargetId: string | null = null;
   let scrollSpyInitialized = false;
+  let scrollSpyObserver: IntersectionObserver | null = null;
+
+  function isMobileViewport(): boolean {
+    return window.matchMedia(mobileNavQuery).matches;
+  }
 
   function getNavHeight(): number {
     const nav = document.querySelector('.site-nav');
     return nav?.getBoundingClientRect().height ?? 48;
   }
 
+  function getScrollMarginExtra(): number {
+    return isMobileViewport() ? 32 : 20;
+  }
+
   function updateNavMetrics(): void {
     const navHeight = getNavHeight();
+    const scrollOffset = navHeight + getScrollMarginExtra();
     document.documentElement.style.setProperty('--site-nav-height', `${navHeight}px`);
+    document.documentElement.style.setProperty('--site-scroll-offset', `${scrollOffset}px`);
   }
 
   function getNavOffset(): number {
-    return getNavHeight() + scrollMarginExtra;
+    return getNavHeight() + getScrollMarginExtra();
+  }
+
+  function getObserverRootMargin(): string {
+    const topInset = getNavOffset();
+    const bottomInset = isMobileViewport() ? '45%' : '55%';
+    return `-${topInset}px 0px -${bottomInset} 0px`;
+  }
+
+  function getObserverThreshold(): number[] {
+    return isMobileViewport() ? [0, 0.2, 0.45, 0.7] : [0, 0.15, 0.35, 0.55, 0.75, 1];
   }
 
   function isAtPageBottom(): boolean {
@@ -149,36 +171,55 @@ const t = getContent(lang).header;
   }
 
   function waitForScrollEnd(onComplete: () => void): void {
+    const fallbackMs = isMobileViewport() ? 2200 : 1400;
+    let completed = false;
+
+    const finish = () => {
+      if (completed) return;
+      completed = true;
+      if (poll !== undefined) window.clearInterval(poll);
+      window.clearTimeout(fallbackTimer);
+      onComplete();
+    };
+
+    let poll: ReturnType<typeof setInterval> | undefined;
+    let fallbackTimer: ReturnType<typeof setTimeout>;
+
     if ('onscrollend' in window) {
       const handleScrollEnd = () => {
         window.removeEventListener('scrollend', handleScrollEnd);
-        onComplete();
+        window.requestAnimationFrame(() => window.requestAnimationFrame(finish));
       };
       window.addEventListener('scrollend', handleScrollEnd, { once: true });
-      return;
+    } else {
+      let lastScrollY = window.scrollY;
+      let stableFrames = 0;
+      const stableFramesRequired = isMobileViewport() ? 6 : 3;
+
+      poll = window.setInterval(() => {
+        if (window.scrollY === lastScrollY) {
+          stableFrames += 1;
+          if (stableFrames >= stableFramesRequired) {
+            finish();
+          }
+          return;
+        }
+
+        stableFrames = 0;
+        lastScrollY = window.scrollY;
+      }, 50);
     }
 
-    let lastScrollY = window.scrollY;
-    let stableFrames = 0;
+    fallbackTimer = window.setTimeout(finish, fallbackMs);
+  }
 
-    const poll = window.setInterval(() => {
-      if (window.scrollY === lastScrollY) {
-        stableFrames += 1;
-        if (stableFrames >= 3) {
-          window.clearInterval(poll);
-          onComplete();
-        }
-        return;
-      }
+  function sectionAlignsWithNav(sectionId: string): boolean {
+    const section = document.getElementById(sectionId);
+    if (!section) return false;
 
-      stableFrames = 0;
-      lastScrollY = window.scrollY;
-    }, 50);
-
-    window.setTimeout(() => {
-      window.clearInterval(poll);
-      onComplete();
-    }, 1200);
+    const offset = getNavOffset();
+    const top = section.getBoundingClientRect().top;
+    return Math.abs(top - offset) <= (isMobileViewport() ? 72 : 48);
   }
 
   function initNavScrollSpy(): void {
@@ -215,33 +256,61 @@ const t = getContent(lang).header;
       setActiveSection(currentId);
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (isClickScrolling) return;
+    const finishClickScroll = (targetSectionId: string): void => {
+      isClickScrolling = false;
+      clickScrollTargetId = null;
 
-        if (isAtPageBottom()) {
-          setActiveSection(contactSectionId);
-          return;
-        }
+      if (isAtPageBottom()) {
+        setActiveSection(contactSectionId);
+        return;
+      }
 
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      if (sectionAlignsWithNav(targetSectionId)) {
+        setActiveSection(targetSectionId);
+        return;
+      }
 
-        if (visible.length > 0) {
-          setActiveSection(visible[0].target.id);
-          return;
-        }
+      updateActiveFromScroll();
+    };
 
-        updateActiveFromScroll();
-      },
-      {
-        rootMargin: `-${getNavOffset()}px 0px -55% 0px`,
-        threshold: [0, 0.15, 0.35, 0.55, 0.75, 1],
-      },
-    );
+    const connectScrollSpyObserver = (): void => {
+      scrollSpyObserver?.disconnect();
 
-    sections.forEach((section) => observer.observe(section));
+      scrollSpyObserver = new IntersectionObserver(
+        (entries) => {
+          if (isClickScrolling) return;
+
+          if (isAtPageBottom()) {
+            setActiveSection(contactSectionId);
+            return;
+          }
+
+          if (isMobileViewport()) {
+            updateActiveFromScroll();
+            return;
+          }
+
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+          if (visible.length > 0) {
+            setActiveSection(visible[0].target.id);
+            return;
+          }
+
+          updateActiveFromScroll();
+        },
+        {
+          rootMargin: getObserverRootMargin(),
+          threshold: getObserverThreshold(),
+        },
+      );
+
+      sections.forEach((section) => scrollSpyObserver?.observe(section));
+    };
+
+    connectScrollSpyObserver();
 
     navLinks.forEach((link) => {
       link.addEventListener('click', () => {
@@ -249,22 +318,21 @@ const t = getContent(lang).header;
         if (!sectionId) return;
 
         isClickScrolling = true;
+        clickScrollTargetId = sectionId;
         setActiveSection(sectionId);
 
-        if (clickScrollTimer) window.clearTimeout(clickScrollTimer);
+        if (clickScrollSafetyTimer) window.clearTimeout(clickScrollSafetyTimer);
 
-        waitForScrollEnd(() => {
-          isClickScrolling = false;
-          if (isAtPageBottom()) {
-            setActiveSection(contactSectionId);
-          } else {
-            updateActiveFromScroll();
-          }
-        });
+        const completeClickScroll = () => {
+          if (!isClickScrolling || clickScrollTargetId !== sectionId) return;
+          if (clickScrollSafetyTimer) window.clearTimeout(clickScrollSafetyTimer);
+          finishClickScroll(sectionId);
+        };
 
-        clickScrollTimer = window.setTimeout(() => {
-          isClickScrolling = false;
-        }, 1500);
+        waitForScrollEnd(completeClickScroll);
+
+        const safetyMs = isMobileViewport() ? 2800 : 1800;
+        clickScrollSafetyTimer = window.setTimeout(completeClickScroll, safetyMs);
       });
     });
 
@@ -278,14 +346,15 @@ const t = getContent(lang).header;
     window.addEventListener('scroll', updateActiveFromScroll, { passive: true });
     window.addEventListener('resize', () => {
       updateNavMetrics();
-      observer.disconnect();
-      sections.forEach((section) => observer.observe(section));
+      connectScrollSpyObserver();
       updateActiveFromScroll();
     });
   }
 
   initNavScrollSpy();
   document.addEventListener('astro:page-load', () => {
+    scrollSpyObserver?.disconnect();
+    scrollSpyObserver = null;
     scrollSpyInitialized = false;
     initNavScrollSpy();
   });

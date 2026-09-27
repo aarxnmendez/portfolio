@@ -210,13 +210,23 @@ body {
   background-color: #eae6dc;
 }
 
-/* Nav scroll targets: offset for sticky bar */
+/* Nav scroll targets: offset for sticky bar (synced via --site-scroll-offset in Header) */
 #works,
 #classifieds,
 #timelines,
 #editorial,
 #contact {
-  scroll-margin-top: calc(var(--site-nav-height, 3rem) + 1.25rem);
+  scroll-margin-top: var(--site-scroll-offset, 5rem);
+}
+
+@media (min-width: 768px) {
+  #works,
+  #classifieds,
+  #timelines,
+  #editorial,
+  #contact {
+    scroll-margin-top: var(--site-scroll-offset, calc(var(--site-nav-height, 3rem) + 1.25rem));
+  }
 }
 
 .contact-section {
