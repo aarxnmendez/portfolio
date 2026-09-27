@@ -11,7 +11,10 @@ const { lang } = Astro.props;
 const t = getContent(lang).hero;
 
 const heroImageQuality = 85;
-const heroWidths = [280, 320, 480, 640, heroProfileImage.width];
+/** Mobile LCP: cap decoded width ~350–400px; scale up for tablet/desktop columns. */
+const heroWidths = [350, 384, 400, 480, 640, heroProfileImage.width];
+const heroSizes =
+  '(max-width: 639px) min(calc(100vw - 2rem), 400px), (max-width: 1023px) 280px, 320px';
 ---
 
 <section
@@ -27,7 +30,7 @@ const heroWidths = [280, 320, 480, 640, heroProfileImage.width];
         width={heroProfileImage.width}
         height={heroProfileImage.height}
         widths={heroWidths}
-        sizes="(max-width: 768px) min(100vw - 2rem, 480px), (max-width: 1024px) 280px, 320px"
+        sizes={heroSizes}
         format="webp"
         quality={heroImageQuality}
         loading="eager"
