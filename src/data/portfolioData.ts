@@ -289,7 +289,7 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
       work: [
         {
           period: 'Mar 2026 - Presente',
-          title: 'Web Developer',
+          title: 'Desarrollador web',
           company: 'Clink Web Value',
           url: 'https://clink.es/',
           description:
@@ -297,7 +297,7 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
         },
         {
           period: 'Abr 2025 - Jun 2025',
-          title: 'Web Developer Intern',
+          title: 'Desarrollador web en prácticas',
           company: 'Clink Web Value',
           url: 'https://clink.es/',
           description:
