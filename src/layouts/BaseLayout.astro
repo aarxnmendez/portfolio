@@ -21,7 +21,7 @@ function getLocaleAbsoluteUrl(locale: Lang): string {
 
 const esUrl = getLocaleAbsoluteUrl('es');
 const enUrl = getLocaleAbsoluteUrl('en');
-const canonicalUrl = lang === 'en' ? enUrl : esUrl;
+const canonicalUrl = getLocaleAbsoluteUrl(lang);
 const ogImage = new URL('/og-image.png', siteBase).href;
 const ogImageAlt =
   lang === 'es'
