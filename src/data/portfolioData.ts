@@ -235,10 +235,10 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
           client: 'Proyecto personal',
           title: 'DSAVision - Visualizador de Estructuras de Datos & Algoritmos',
           description:
-            'Herramienta web interactiva para visualizar estructuras de datos y algoritmos en tiempo real. Construida para facilitar la comprensión visual de conceptos complejos con renderizado reactivo y flujo CI/CD automatizado.',
+            'Herramienta web interactiva para visualizar estructuras de datos y algoritmos en tiempo real. Construida para facilitar la comprensión visual de conceptos complejos con renderizado reactivo y buen rendimiento en el cliente.',
           highlight:
-            'Visualización interactiva en tiempo real con despliegue continuo y foco en rendimiento en el cliente.',
-          tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel', 'CI/CD'],
+            'Visualización interactiva en tiempo real con foco en rendimiento en el cliente.',
+          tags: ['React', 'TypeScript', 'Tailwind CSS'],
           landingUrl: 'https://dsavision.dev',
           appUrl: 'https://dsavision.dev',
           imageAlt: 'Captura de pantalla de DSAVision, visualizador de estructuras de datos y algoritmos',
@@ -412,10 +412,10 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
           client: 'Personal project',
           title: 'DSAVision - Interactive DSA Visualizer',
           description:
-            'Interactive web tool built to visualize data structures and algorithms in real time. Focused on performance, smooth animations, and automated deployment pipelines.',
+            'Interactive web tool built to visualize data structures and algorithms in real time. Focused on performance, smooth animations, and clear visual explanations of complex concepts.',
           highlight:
-            'Real time interactive visualization with continuous deployment and a strong client side performance focus.',
-          tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel', 'CI/CD'],
+            'Real-time interactive visualization with a strong client-side performance focus.',
+          tags: ['React', 'TypeScript', 'Tailwind CSS'],
           landingUrl: 'https://dsavision.dev',
           appUrl: 'https://dsavision.dev',
           imageAlt: 'Screenshot of DSAVision, interactive data structures and algorithms visualizer',
