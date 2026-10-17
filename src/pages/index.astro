@@ -31,9 +31,10 @@ const t = getContent(lang);
   localStorage.removeItem('portfolio-lang');
 
   const savedLang = localStorage.getItem('preferred-lang');
-  const browserLang = navigator.language || '';
 
-  if (savedLang === 'en' || (!savedLang && browserLang.startsWith('en'))) {
-    window.location.href = '/en';
+  // Only honour an explicit user choice. Never redirect by navigator.language:
+  // Googlebot renders with en-US and would treat / as a duplicate of /en/.
+  if (savedLang === 'en') {
+    window.location.replace('/en/');
   }
 </script>
