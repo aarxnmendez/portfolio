@@ -115,43 +115,25 @@ const t = getContent(lang).header;
   const mobileNavQuery = '(max-width: 767px)';
 
   let isClickScrolling = false;
-  let clickScrollSafetyTimer: ReturnType<typeof setTimeout> | undefined;
-  let clickScrollTargetId: string | null = null;
-  let scrollSpyInitialized = false;
-  let scrollSpyObserver: IntersectionObserver | null = null;
+  let clickScrollTimer: ReturnType<typeof setTimeout> | undefined;
+  let rafId = 0;
+  let currentId: string | null = null;
 
-  function isMobileViewport(): boolean {
-    return window.matchMedia(mobileNavQuery).matches;
-  }
+  const isMobileViewport = (): boolean => window.matchMedia(mobileNavQuery).matches;
 
   function getNavHeight(): number {
-    const nav = document.querySelector('.site-nav');
-    return nav?.getBoundingClientRect().height ?? 48;
+    return document.querySelector('.site-nav')?.getBoundingClientRect().height ?? 48;
   }
 
-  function getScrollMarginExtra(): number {
-    return isMobileViewport() ? 32 : 20;
+  function getNavOffset(): number {
+    return getNavHeight() + (isMobileViewport() ? 32 : 20);
   }
 
   function updateNavMetrics(): void {
     const navHeight = getNavHeight();
-    const scrollOffset = navHeight + getScrollMarginExtra();
-    document.documentElement.style.setProperty('--site-nav-height', `${navHeight}px`);
-    document.documentElement.style.setProperty('--site-scroll-offset', `${scrollOffset}px`);
-  }
-
-  function getNavOffset(): number {
-    return getNavHeight() + getScrollMarginExtra();
-  }
-
-  function getObserverRootMargin(): string {
-    const topInset = getNavOffset();
-    const bottomInset = isMobileViewport() ? '45%' : '55%';
-    return `-${topInset}px 0px -${bottomInset} 0px`;
-  }
-
-  function getObserverThreshold(): number[] {
-    return isMobileViewport() ? [0, 0.2, 0.45, 0.7] : [0, 0.15, 0.35, 0.55, 0.75, 1];
+    const root = document.documentElement.style;
+    root.setProperty('--site-nav-height', `${navHeight}px`);
+    root.setProperty('--site-scroll-offset', `${getNavOffset()}px`);
   }
 
   function isAtPageBottom(): boolean {
@@ -159,182 +141,107 @@ const t = getContent(lang).header;
   }
 
   function setActiveSection(id: string): void {
+    if (id === currentId) return;
+    currentId = id;
     document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]').forEach((link) => {
       const isActive = link.dataset.section === id;
       link.classList.toggle('is-active', isActive);
       if (isActive) {
         link.setAttribute('aria-current', 'true');
+        // Keep the active link visible in the horizontally scrollable mobile nav.
+        if (isMobileViewport()) link.scrollIntoView({ block: 'nearest', inline: 'center' });
       } else {
         link.removeAttribute('aria-current');
       }
     });
   }
 
-  function waitForScrollEnd(onComplete: () => void): void {
-    const fallbackMs = isMobileViewport() ? 2200 : 1400;
-    let completed = false;
+  // Single source of truth: the last section whose top has crossed the nav offset.
+  function updateActiveFromScroll(): void {
+    if (isClickScrolling) return;
 
-    const finish = () => {
-      if (completed) return;
-      completed = true;
-      if (poll !== undefined) window.clearInterval(poll);
-      window.clearTimeout(fallbackTimer);
-      onComplete();
-    };
-
-    let poll: ReturnType<typeof setInterval> | undefined;
-    let fallbackTimer: ReturnType<typeof setTimeout>;
-
-    if ('onscrollend' in window) {
-      const handleScrollEnd = () => {
-        window.removeEventListener('scrollend', handleScrollEnd);
-        window.requestAnimationFrame(() => window.requestAnimationFrame(finish));
-      };
-      window.addEventListener('scrollend', handleScrollEnd, { once: true });
-    } else {
-      let lastScrollY = window.scrollY;
-      let stableFrames = 0;
-      const stableFramesRequired = isMobileViewport() ? 6 : 3;
-
-      poll = window.setInterval(() => {
-        if (window.scrollY === lastScrollY) {
-          stableFrames += 1;
-          if (stableFrames >= stableFramesRequired) {
-            finish();
-          }
-          return;
-        }
-
-        stableFrames = 0;
-        lastScrollY = window.scrollY;
-      }, 50);
+    if (isAtPageBottom()) {
+      setActiveSection(contactSectionId);
+      return;
     }
 
-    fallbackTimer = window.setTimeout(finish, fallbackMs);
+    const offset = getNavOffset() + 1;
+    let activeId = sectionIds[0];
+    for (const id of sectionIds) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= offset) activeId = id;
+    }
+    setActiveSection(activeId);
   }
 
-  function sectionAlignsWithNav(sectionId: string): boolean {
-    const section = document.getElementById(sectionId);
-    if (!section) return false;
-
-    const offset = getNavOffset();
-    const top = section.getBoundingClientRect().top;
-    return Math.abs(top - offset) <= (isMobileViewport() ? 72 : 48);
-  }
-
-  function initNavScrollSpy(): void {
-    if (scrollSpyInitialized) return;
-
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((section): section is HTMLElement => section !== null);
-
-    if (sections.length === 0) return;
-
-    scrollSpyInitialized = true;
-    updateNavMetrics();
-
-    const navLinks = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
-
-    const updateActiveFromScroll = (): void => {
-      if (isClickScrolling) return;
-
-      if (isAtPageBottom()) {
-        setActiveSection(contactSectionId);
-        return;
-      }
-
-      const offset = getNavOffset();
-      let currentId = sectionIds[0];
-
-      for (const section of sections) {
-        if (section.getBoundingClientRect().top <= offset) {
-          currentId = section.id;
-        }
-      }
-
-      setActiveSection(currentId);
-    };
-
-    const finishClickScroll = (targetSectionId: string): void => {
-      isClickScrolling = false;
-      clickScrollTargetId = null;
-
-      if (isAtPageBottom()) {
-        setActiveSection(contactSectionId);
-        return;
-      }
-
-      if (sectionAlignsWithNav(targetSectionId)) {
-        setActiveSection(targetSectionId);
-        return;
-      }
-
+  function scheduleUpdate(): void {
+    if (rafId) return;
+    rafId = window.requestAnimationFrame(() => {
+      rafId = 0;
       updateActiveFromScroll();
-    };
+    });
+  }
 
-    const connectScrollSpyObserver = (): void => {
-      scrollSpyObserver?.disconnect();
+  function endClickScroll(): void {
+    window.clearTimeout(clickScrollTimer);
+    clickScrollTimer = undefined;
+    if (!isClickScrolling) return;
+    isClickScrolling = false;
+    updateActiveFromScroll();
+  }
 
-      scrollSpyObserver = new IntersectionObserver(
-        (entries) => {
-          if (isClickScrolling) return;
+  // Debounce: the click-scroll ends once the smooth scroll has stopped moving.
+  function armClickScrollEnd(ms: number): void {
+    window.clearTimeout(clickScrollTimer);
+    clickScrollTimer = window.setTimeout(endClickScroll, ms);
+  }
 
-          if (isAtPageBottom()) {
-            setActiveSection(contactSectionId);
-            return;
-          }
-
-          if (isMobileViewport()) {
-            updateActiveFromScroll();
-            return;
-          }
-
-          const visible = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-          if (visible.length > 0) {
-            setActiveSection(visible[0].target.id);
-            return;
-          }
-
-          updateActiveFromScroll();
-        },
-        {
-          rootMargin: getObserverRootMargin(),
-          threshold: getObserverThreshold(),
-        },
-      );
-
-      sections.forEach((section) => scrollSpyObserver?.observe(section));
-    };
-
-    connectScrollSpyObserver();
-
-    navLinks.forEach((link) => {
+  function bindNavLinks(): void {
+    document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]').forEach((link) => {
       link.addEventListener('click', () => {
         const sectionId = link.dataset.section;
         if (!sectionId) return;
 
         isClickScrolling = true;
-        clickScrollTargetId = sectionId;
         setActiveSection(sectionId);
-
-        if (clickScrollSafetyTimer) window.clearTimeout(clickScrollSafetyTimer);
-
-        const completeClickScroll = () => {
-          if (!isClickScrolling || clickScrollTargetId !== sectionId) return;
-          if (clickScrollSafetyTimer) window.clearTimeout(clickScrollSafetyTimer);
-          finishClickScroll(sectionId);
-        };
-
-        waitForScrollEnd(completeClickScroll);
-
-        const safetyMs = isMobileViewport() ? 2800 : 1800;
-        clickScrollSafetyTimer = window.setTimeout(completeClickScroll, safetyMs);
+        link.blur();
+        // Hard cap in case the page never scrolls (already at target).
+        armClickScrollEnd(2500);
       });
     });
+  }
+
+  function bindGlobalListeners(): void {
+    window.addEventListener('scroll', () => {
+      // While a click-scroll is animating, each scroll event postpones its end.
+      if (isClickScrolling) armClickScrollEnd(150);
+      scheduleUpdate();
+    }, { passive: true });
+
+    // Any manual input takes over from the click-scroll immediately.
+    const cancelOnUserInput = (): void => endClickScroll();
+    window.addEventListener('wheel', cancelOnUserInput, { passive: true });
+    window.addEventListener('touchstart', cancelOnUserInput, { passive: true });
+    window.addEventListener('keydown', (e) => {
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) {
+        endClickScroll();
+      }
+    });
+    // Scrollbar drag (desktop): pointerdown outside any element's content, on the root.
+    window.addEventListener('pointerdown', (e) => {
+      if (e.target === document.documentElement) endClickScroll();
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      updateNavMetrics();
+      scheduleUpdate();
+    });
+  }
+
+  function initNavScrollSpy(): void {
+    updateNavMetrics();
+    currentId = null;
+    bindNavLinks();
 
     const hash = window.location.hash.replace('#', '');
     if (hash && sectionIds.includes(hash)) {
@@ -343,19 +250,8 @@ const t = getContent(lang).header;
       updateActiveFromScroll();
     }
 
-    window.addEventListener('scroll', updateActiveFromScroll, { passive: true });
-    window.addEventListener('resize', () => {
-      updateNavMetrics();
-      connectScrollSpyObserver();
-      updateActiveFromScroll();
-    });
+    bindGlobalListeners();
   }
 
   initNavScrollSpy();
-  document.addEventListener('astro:page-load', () => {
-    scrollSpyObserver?.disconnect();
-    scrollSpyObserver = null;
-    scrollSpyInitialized = false;
-    initNavScrollSpy();
-  });
 </script>

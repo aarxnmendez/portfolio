@@ -171,13 +171,16 @@ body {
   transition: transform 0.3s ease;
 }
 
-.site-nav__link:not(.is-active):hover {
-  font-weight: 700;
-  color: #000000;
-}
+/* Hover only on real pointers: on touch, :hover sticks after a tap and looks like a second active link */
+@media (hover: hover) {
+  .site-nav__link:not(.is-active):hover {
+    font-weight: 700;
+    color: #000000;
+  }
 
-.site-nav__link:not(.is-active):hover::after {
-  transform: scaleX(1);
+  .site-nav__link:not(.is-active):hover::after {
+    transform: scaleX(1);
+  }
 }
 
 .site-nav__link.is-active {
