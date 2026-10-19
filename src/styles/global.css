@@ -440,19 +440,50 @@ body::before {
   line-height: 1.2;
 }
 
-.btn-vintage:hover {
-  background-color: #000;
-  color: #eae6dc;
+/* Hover: a fill slides in from the left, like ink being laid down (matches the link underlines) */
+.btn-vintage {
+  background-image: linear-gradient(#000, #000);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 0% 100%;
+  transition: background-size 0.32s cubic-bezier(0.45, 0, 0.25, 1), color 0.32s cubic-bezier(0.45, 0, 0.25, 1);
 }
 
 .btn-vintage--primary {
   background-color: #000;
   color: #eae6dc;
+  background-image: linear-gradient(#eae6dc, #eae6dc);
 }
 
-.btn-vintage--primary:hover {
-  background-color: transparent;
+.btn-vintage:active {
+  transform: translateY(1px);
+}
+
+@media (hover: hover) {
+  .btn-vintage:hover {
+    background-size: 100% 100%;
+    color: #eae6dc;
+  }
+
+  .btn-vintage--primary:hover {
+    color: #000;
+  }
+}
+
+.btn-vintage:focus-visible {
+  background-size: 100% 100%;
+  color: #eae6dc;
+}
+
+.btn-vintage--primary:focus-visible {
   color: #000;
+}
+
+.btn-vintage--lg {
+  font-size: 12px;
+  padding: 0.75rem 2rem;
+  /* Original timing the contact button was approved with */
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
 }
 
 .btn-vintage--sm {
