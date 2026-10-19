@@ -23,7 +23,7 @@ const t = getContent(lang).footer;
       {
         t.links.map((link) => (
           <a
-            class="font-label-mono text-label-mono text-primary hover:underline uppercase font-bold"
+            class="font-label-mono text-label-mono text-primary link-draw uppercase font-bold"
             href={link.href}
             target={link.href.startsWith('http') ? '_blank' : undefined}
             rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}

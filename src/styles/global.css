@@ -199,6 +199,41 @@ body {
   background-color: transparent;
 }
 
+/* Reusable "draw-in" underline, same left-to-right motion as the nav links.
+   Uses a background gradient so it also works on links that wrap onto several lines. */
+.link-draw {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 1px;
+  transition: background-size 0.3s ease, color 0.2s ease;
+}
+
+.link-draw--thick {
+  display: inline-block;
+  padding-bottom: 0.25em;
+  background-size: 0% 3px;
+}
+
+.link-draw:focus-visible {
+  background-size: 100% 1px;
+}
+
+.link-draw--thick:focus-visible {
+  background-size: 100% 3px;
+}
+
+@media (hover: hover) {
+  .link-draw:hover {
+    background-size: 100% 1px;
+  }
+
+  .link-draw--thick:hover {
+    background-size: 100% 3px;
+  }
+}
+
 /* Timeline: continuous vertical track with masked nodes */
 .timeline-track {
   position: absolute;
