@@ -46,6 +46,13 @@ const jsonLd = {
 <html class="light" lang={lang}>
   <head>
     <meta charset="utf-8" />
+    <script is:inline>
+      // Scroll-reveal is progressive enhancement: only hide content when JS can reveal it again
+      // and the user has not asked for reduced motion.
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js-reveal');
+      }
+    </script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="google-site-verification" content="Qs_mK84EuF4qQ5jpYhfTlWSWzGucJejz5ROCPqTx7Hc" />
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -107,5 +114,47 @@ const jsonLd = {
     <div class="max-w-7xl mx-auto w-full min-w-0 min-h-screen px-4 sm:px-6 lg:px-8 bg-background">
       <slot />
     </div>
+    <script>
+      const revealSelector = [
+        '.section-heading',
+        '.lead-story',
+        '.classifieds-table',
+        '.timeline-item',
+        '#editorial > div',
+        '.contact-section > *',
+      ].join(',');
+
+      if (document.documentElement.classList.contains('js-reveal')) {
+        const targets = document.querySelectorAll<HTMLElement>(revealSelector);
+        targets.forEach((el) => el.setAttribute('data-reveal', ''));
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            // Items entering together get a short stagger so they read like a page being laid out.
+            let order = 0;
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target as HTMLElement;
+              observer.unobserve(el);
+              el.style.transitionDelay = `${Math.min(order, 4) * 80}ms`;
+              order += 1;
+              el.classList.add('is-revealed');
+              // Drop the delay afterwards so hover transitions on the element are not delayed.
+              const cleanup = (event: TransitionEvent): void => {
+                // Ignore transitions bubbling up from children (buttons, links) inside the element.
+                if (event.target !== el || event.propertyName !== 'opacity') return;
+                el.removeEventListener('transitionend', cleanup);
+                el.style.transitionDelay = '';
+                el.removeAttribute('data-reveal');
+              };
+              el.addEventListener('transitionend', cleanup);
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+        );
+
+        targets.forEach((el) => observer.observe(el));
+      }
+    </script>
   </body>
 </html>
