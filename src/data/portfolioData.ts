@@ -175,7 +175,7 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
     meta: {
       title: 'Aarón Méndez | Ingeniero Informático & Desarrollador Web',
       description:
-        'Desarrollador web en A Coruña compaginando el grado en Ingeniería Informática en la UDC con el desarrollo web profesional. Enfocado en software mantenible y arquitectura de código.',
+        'Desarrollador web en A Coruña y estudiante de Ingeniería Informática en la UDC. Enfocado en software mantenible y arquitectura de código.',
       keywords:
         'desarrollador web, ingenieria informatica udc, typescript, react, php, mysql, docker, astro, a coruna, portfolio',
     },
@@ -352,7 +352,7 @@ export const portfolioContent: Record<Lang, PortfolioContent> = {
     meta: {
       title: 'Aarón Méndez | Computer Engineer & Web Developer',
       description:
-        'Software developer based in A Coruña balancing a Computer Engineering degree at UDC with professional web development. Focused on maintainable software and code architecture.',
+        'Web developer in A Coruña and Computer Engineering student at UDC. Focused on maintainable software and clean code architecture.',
       keywords:
         'web developer, computer engineering udc, typescript, react, php, mysql, docker, astro, a coruna, portfolio',
     },

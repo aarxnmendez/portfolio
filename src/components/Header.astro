@@ -53,35 +53,26 @@ const t = getContent(lang).header;
     </div>
 
     <div class="py-4 sm:py-5 md:py-6 border-b-4 border-black">
-      <div class="hidden md:grid md:grid-cols-3 md:gap-x-gutter md:items-center">
-        <div class="flex flex-col items-start leading-tight">
-          <span class="font-label-mono text-label-mono uppercase">{t.date}</span>
-          <span class="font-label-mono text-label-mono uppercase">{t.edition}</span>
-        </div>
-        <div class="flex flex-col items-center text-center min-w-0 px-2">
+      <div
+        class="flex flex-col items-center text-center gap-2 sm:gap-3 min-w-0 w-full md:grid md:grid-cols-3 md:gap-x-gutter md:gap-y-0 md:items-center"
+      >
+        <p
+          class="font-label-mono text-xs md:text-label-mono uppercase leading-snug md:leading-tight text-center md:text-left md:flex md:flex-col md:items-start"
+        >
+          <span>{t.date}</span>
+          <span class="mx-1 text-black/40 md:hidden" aria-hidden="true">/</span>
+          <span>{t.edition}</span>
+        </p>
+        <div class="flex flex-col items-center text-center min-w-0 max-w-full md:px-2">
           <h1
-            class="font-headline-lg font-black text-primary tracking-tighter uppercase leading-none whitespace-nowrap text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
+            class="font-headline-lg font-black text-primary tracking-tighter uppercase leading-none whitespace-nowrap max-w-full text-2xl sm:text-3xl md:text-5xl lg:text-6xl"
           >
             {t.name}
           </h1>
         </div>
-        <div class="flex flex-col items-end leading-tight text-right">
-          <span class="font-label-mono text-label-mono uppercase">{t.location}</span>
-        </div>
-      </div>
-
-      <div class="md:hidden flex flex-col items-center text-center gap-2 sm:gap-3 min-w-0 w-full">
-        <p class="font-label-mono text-xs uppercase leading-snug text-center">
-          <span>{t.date}</span>
-          <span class="mx-1 text-black/40">/</span>
-          <span>{t.edition}</span>
+        <p class="font-label-mono text-xs md:text-label-mono uppercase leading-snug md:leading-tight md:text-right">
+          {t.location}
         </p>
-        <h1
-          class="font-headline-lg font-black text-primary tracking-tighter uppercase leading-none whitespace-nowrap text-2xl sm:text-3xl max-w-full"
-        >
-          {t.name}
-        </h1>
-        <p class="font-label-mono text-xs uppercase leading-snug">{t.location}</p>
       </div>
     </div>
   </div>
